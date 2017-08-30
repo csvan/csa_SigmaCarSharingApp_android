@@ -3,6 +3,7 @@ package sigma.scsapp;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -323,8 +324,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     return pieces[1].equals(mPassword);
                 }
             }
-
+            Log.i("Findings", "Create a new account here");
             // TODO: register the new account here.
+            startActivity(new Intent(LoginActivity.this,ScrollingActivity.class));
+
             return true;
         }
 
@@ -335,9 +338,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 Log.i("Success stories", "Success with login -------------");
+               // Intent i = new Intent(context, ScrollingActivity.class );
+               //  context.startActivity(i);
 
-                finish();
+                // Finish will exit the app.
+                 finish();
             } else {
+                Log.i("Findings", "Incorrect password");
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
@@ -348,6 +355,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
+
     }
 }
 
