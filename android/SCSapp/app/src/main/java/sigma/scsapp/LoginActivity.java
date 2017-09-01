@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -68,6 +69,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -320,6 +324,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mEmail)) {
+                    Log.i("Database", "this user exist already ---------");
                     // Account exists, return true if the password matches.
                     return pieces[1].equals(mPassword);
                 }
@@ -340,9 +345,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Log.i("Success stories", "Success with login -------------");
                // Intent i = new Intent(context, ScrollingActivity.class );
                //  context.startActivity(i);
+                startActivity(new Intent(LoginActivity.this,DriverActivity.class));
 
                 // Finish will exit the app.
-                 finish();
+                //bar finish();
             } else {
                 Log.i("Findings", "Incorrect password");
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
