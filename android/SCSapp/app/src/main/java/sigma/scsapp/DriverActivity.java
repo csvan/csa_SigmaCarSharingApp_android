@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,8 +24,11 @@ public class DriverActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Avaliable buttons
         EditText getEmail;
         ImageView getImage;
+        Button booking;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
@@ -39,6 +43,19 @@ public class DriverActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });*/
+
+
+        booking = (Button) findViewById(R.id.button_booking);
+        booking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("Tag", "You pressed booking ------------------ ");
+                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //       .setAction("Action", null).show();
+                startActivity(new Intent(DriverActivity.this,BookingActivity.class));
+
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -61,16 +78,13 @@ public class DriverActivity extends AppCompatActivity
                 // Check Database for profile-info together with the inputted Email.
                 newString= extras.getString("extra_email");
                 Log.i("test", newString );
-                TextView txtView = (TextView)findViewById(R.id.text_profile_email);
-                txtView.setText(newString);
+                // TextView txtView = (TextView)findViewById(R.id.text_profile_email);
 
                 // Check database for profile-name
-                TextView txtView2 = (TextView)findViewById(R.id.text_profile_name);
-                txtView2.setText("Niklas Gustafsson");
+               // TextView txtView2 = (TextView)findViewById(R.id.text_profile_name);
 
                 // check database for profile-number
                 TextView txtView3 = (TextView)findViewById(R.id.text_profile_phone);
-                txtView3.setText("073 37 37 37 37");
 
 
 
@@ -78,6 +92,10 @@ public class DriverActivity extends AppCompatActivity
 
                 // query for databasecheck for picture
                 String imageURL = "http://www.seosmarty.com/wp-content/uploads/2011/08/profile-picture.jpg";
+
+
+                // BUTTONS
+
             }
         } else {
             newString= (String) savedInstanceState.getSerializable("extra_email");
@@ -112,6 +130,7 @@ public class DriverActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
