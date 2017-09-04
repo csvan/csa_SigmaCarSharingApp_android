@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -326,7 +327,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 if (pieces[0].equals(mEmail)) {
                     Log.i("Database", "this user exist already ---------");
                     // Account exists, return true if the password matches.
+
                     return pieces[1].equals(mPassword);
+
                 }
             }
             Log.i("Findings", "Create a new account here");
@@ -343,9 +346,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 Log.i("Success stories", "Success with login -------------");
-               // Intent i = new Intent(context, ScrollingActivity.class );
-               //  context.startActivity(i);
-                startActivity(new Intent(LoginActivity.this,DriverActivity.class));
+
+                // Sending the Email into the Driver profile setting
+                startActivity(new Intent(LoginActivity.this,DriverActivity.class).putExtra("extra_email", mEmail));
 
                 // Finish will exit the app.
                 //bar finish();

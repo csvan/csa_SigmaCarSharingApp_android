@@ -1,13 +1,10 @@
 package sigma.scsapp;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,31 +14,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import java.io.File;
-import java.io.IOException;
-import java.sql.Driver;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class DriverActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EditText getEmail;
+        ImageView getImage;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -51,7 +48,46 @@ public class DriverActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        // SET UP PROFILE
+        String newString;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                newString= null;
+            } else {
+
+                // Check Database for profile-info together with the inputted Email.
+                newString= extras.getString("extra_email");
+                Log.i("test", newString );
+                TextView txtView = (TextView)findViewById(R.id.text_profile_email);
+                txtView.setText(newString);
+
+                // Check database for profile-name
+                TextView txtView2 = (TextView)findViewById(R.id.text_profile_name);
+                txtView2.setText("Niklas Gustafsson");
+
+                // check database for profile-number
+                TextView txtView3 = (TextView)findViewById(R.id.text_profile_phone);
+                txtView3.setText("073 37 37 37 37");
+
+
+
+                // Check database for profile-picture
+
+                // query for databasecheck for picture
+                String imageURL = "http://www.seosmarty.com/wp-content/uploads/2011/08/profile-picture.jpg";
+            }
+        } else {
+            newString= (String) savedInstanceState.getSerializable("extra_email");
+        }
+
     }
+
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -95,11 +131,14 @@ public class DriverActivity extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_manage) {
+            // go back to profile-view
             startActivity(new Intent(DriverActivity.this,AdminActivity.class));
 
 
         } else if (id == R.id.nav_share) {
 
+        } else if (id == R.id.toolbar ) {
+            startActivity(new Intent(DriverActivity.this, DriverActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
