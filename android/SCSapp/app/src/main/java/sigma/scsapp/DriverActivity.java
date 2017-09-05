@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -29,6 +30,7 @@ public class DriverActivity extends AppCompatActivity
         EditText getEmail;
         ImageView getImage;
         Button booking;
+        CardView user_booking_car;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
@@ -57,9 +59,22 @@ public class DriverActivity extends AppCompatActivity
             }
         });
 
+        user_booking_car = (CardView) findViewById(R.id.card_view_2);
+        user_booking_car.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("Tag", "You pressed your own booking ------------------ ");
+                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //       .setAction("Action", null).show();
+             //   startActivity(new Intent(DriverActivity.this,Confirm_booking.class));
+
+            }
+        });
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                Log.i("Tag", "You pressed the naviagion drawer --------------");
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -69,16 +84,18 @@ public class DriverActivity extends AppCompatActivity
 
         // SET UP PROFILE
         String newString;
+
         if (savedInstanceState == null) {
+
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 newString= null;
             } else {
 
+
                 // Check Database for profile-info together with the inputted Email.
-                newString= extras.getString("extra_email");
-                Log.i("test", newString );
-                // TextView txtView = (TextView)findViewById(R.id.text_profile_email);
+                Log.i("test", "hi" );
+                // TextView  = (TextView)findViewById(R.id.string_profile_email);
 
                 // Check database for profile-name
                // TextView txtView2 = (TextView)findViewById(R.id.text_profile_name);

@@ -348,7 +348,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Log.i("Success stories", "Success with login -------------");
 
                 // Sending the Email into the Driver profile setting
-                startActivity(new Intent(LoginActivity.this,DriverActivity.class).putExtra("extra_email", mEmail));
+                startActivity(new Intent(LoginActivity.this,DriverActivity.class).putExtra("email", mEmail));
 
                 // Finish will exit the app.
                 //bar finish();
