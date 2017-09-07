@@ -25,7 +25,7 @@
     </string>
 
 
-    <!-- DriverActivity strings -->
+    <!-- UserProfileActivity strings -->
     <string name="action_settings">Settings</string>
     <string name="title_activity_driver">DriverActivity</string>
 

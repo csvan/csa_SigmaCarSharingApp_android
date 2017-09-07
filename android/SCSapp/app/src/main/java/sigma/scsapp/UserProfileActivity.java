@@ -2,8 +2,6 @@ package sigma.scsapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class DriverActivity extends AppCompatActivity
+public class UserProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -54,7 +52,7 @@ public class DriverActivity extends AppCompatActivity
                 Log.i("Tag", "You pressed booking ------------------ ");
                 // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //       .setAction("Action", null).show();
-                startActivity(new Intent(DriverActivity.this,BookingActivity.class));
+                startActivity(new Intent(UserProfileActivity.this,BookingActivity.class));
 
             }
         });
@@ -66,7 +64,7 @@ public class DriverActivity extends AppCompatActivity
                 Log.i("Tag", "You pressed your own booking ------------------ ");
                 // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //       .setAction("Action", null).show();
-             //   startActivity(new Intent(DriverActivity.this,Confirm_booking.class));
+             //   startActivity(new Intent(UserProfileActivity.this,Confirm_booking.class));
 
             }
         });
@@ -168,13 +166,13 @@ public class DriverActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_manage) {
             // go back to profile-view
-            startActivity(new Intent(DriverActivity.this,AdminActivity.class));
+          //  startActivity(new Intent(UserProfileActivity.this,AdminActivity.class));
 
 
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.toolbar ) {
-            startActivity(new Intent(DriverActivity.this, DriverActivity.class));
+            startActivity(new Intent(UserProfileActivity.this, UserProfileActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
