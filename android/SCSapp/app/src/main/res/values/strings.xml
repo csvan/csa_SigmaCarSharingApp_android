@@ -117,7 +117,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="title_activity_confirm_booking">confirm_booking</string>
+    <string name="title_activity_confirm_booking">confirm booking</string>
 
     <!-- Strings for the log activity -->
     <string name="string_car_info">example-data </string>

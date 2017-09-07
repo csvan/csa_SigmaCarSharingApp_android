@@ -42,6 +42,7 @@ public class CarActivity extends AppCompatActivity {
 
         // Create a CarList
         CarList = new ArrayList<>();
+
         // Generate the Listview with layout
         // TODO setup the list with cars
       //  lv = (ListView) findViewById(R.id.list);

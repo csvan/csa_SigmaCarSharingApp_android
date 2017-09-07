@@ -76,7 +76,7 @@ public class UserProfileActivity extends AppCompatActivity
         });
 
         map = (Button) findViewById(R.id.button_map);
-        log.setOnClickListener(new View.OnClickListener() {
+        map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("Tag", "You pressed your map ------------------ ");
@@ -89,14 +89,14 @@ public class UserProfileActivity extends AppCompatActivity
 
         // Fix the CardView on the car. Make it "stick" to all the classes.
         // TODO Rename the card_view_2 to something else.
-        user_booking_car = (CardView) findViewById(R.id.card_view_2);
+        user_booking_car = (CardView) findViewById(R.id.active_booking);
         user_booking_car.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("Tag", "You pressed your current booking ------------------ ");
                 // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //       .setAction("Action", null).show();
-                //   startActivity(new Intent(UserProfileActivity.this,Confirm_booking.class));
+                   startActivity(new Intent(UserProfileActivity.this,ConfirmBookingActivity.class));
 
             }
         });

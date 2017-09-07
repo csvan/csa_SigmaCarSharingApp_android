@@ -145,7 +145,6 @@
         android:layout_marginEnd="8dp" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_view_2"
         android:layout_width="367dp"
         android:layout_height="182dp"
         android:layout_margin="8dp"
@@ -165,7 +164,11 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:id="@+id/active_booking"
+            >
+
+            <!-- Locate picture of booked car and load it into the cardview from the DB -->
 
             <ImageView
                 android:id="@+id/thumbnail"
@@ -181,6 +184,8 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <!-- Keep confirm booking here (?) -->
             <TextView
                 android:id="@+id/title"
                 android:layout_width="284dp"
@@ -193,19 +198,20 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:drawableLeft="@drawable/ic_info_black_24dp"
+                android:drawableStart="@drawable/ic_info_black_24dp"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:text="Confirm your booking here"
-                android:textColor="#222"
-                android:textSize="14dp"
+                android:text="@string/title_activity_confirm_booking"
+                android:textColor="#757575"
+                android:textSize="14sp"
                 android:textStyle="bold"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/thumbnail"
                 app:layout_constraintVertical_bias="0.2" />
+
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
