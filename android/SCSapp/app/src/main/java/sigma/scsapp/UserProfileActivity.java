@@ -2,6 +2,7 @@ package sigma.scsapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +26,7 @@ public class UserProfileActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         // Avaliable text
-        EditText getEmail;
+        TextInputEditText getEmail;
         ImageView getImage;
 
         // Button in the menu
@@ -89,7 +90,7 @@ public class UserProfileActivity extends AppCompatActivity
 
         // Fix the CardView on the car. Make it "stick" to all the classes.
         // TODO Rename the card_view_2 to something else.
-        user_booking_car = (CardView) findViewById(R.id.active_booking);
+        user_booking_car = (CardView) findViewById( R.id.example_cardview);
         user_booking_car.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,7 +133,7 @@ public class UserProfileActivity extends AppCompatActivity
                // TextView txtView2 = (TextView)findViewById(R.id.text_profile_name);
 
                 // check database for profile-number
-                TextView txtView3 = (TextView)findViewById(R.id.text_profile_phone);
+                // TextView txtView3 = (TextView)findViewById(R.id.text_profile_phone);
 
 
 
