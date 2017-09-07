@@ -24,14 +24,20 @@ public class UserProfileActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        // Avaliable buttons
+        // Avaliable text
         EditText getEmail;
         ImageView getImage;
+
+        // Button in the menu
         Button booking;
+        Button log;
+        Button map;
+
+        // Card for current car
         CardView user_booking_car;
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver);
+        setContentView(R.layout.activity_user_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -44,7 +50,7 @@ public class UserProfileActivity extends AppCompatActivity
             }
         });*/
 
-
+        // Listener to the booking button
         booking = (Button) findViewById(R.id.button_booking);
         booking.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,19 +58,45 @@ public class UserProfileActivity extends AppCompatActivity
                 Log.i("Tag", "You pressed booking ------------------ ");
                 // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //       .setAction("Action", null).show();
-                startActivity(new Intent(UserProfileActivity.this,BookingActivity.class));
 
             }
         });
 
+        // Listener to the Log button
+        log = (Button) findViewById(R.id.button_log);
+        log.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("Tag", "You pressed your log ------------------ ");
+                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //       .setAction("Action", null).show();
+                startActivity(new Intent(UserProfileActivity.this,LogActivity.class));
+
+            }
+        });
+
+        map = (Button) findViewById(R.id.button_map);
+        log.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("Tag", "You pressed your map ------------------ ");
+                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //       .setAction("Action", null).show();
+                //   startActivity(new Intent(UserProfileActivity.this,Confirm_booking.class));
+
+            }
+        });
+
+        // Fix the CardView on the car. Make it "stick" to all the classes.
+        // TODO Rename the card_view_2 to something else.
         user_booking_car = (CardView) findViewById(R.id.card_view_2);
         user_booking_car.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("Tag", "You pressed your own booking ------------------ ");
+                Log.i("Tag", "You pressed your current booking ------------------ ");
                 // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //       .setAction("Action", null).show();
-             //   startActivity(new Intent(UserProfileActivity.this,Confirm_booking.class));
+                //   startActivity(new Intent(UserProfileActivity.this,Confirm_booking.class));
 
             }
         });
@@ -83,6 +115,7 @@ public class UserProfileActivity extends AppCompatActivity
         // SET UP PROFILE
         String newString;
 
+        // TODO Generate content based on Database
         if (savedInstanceState == null) {
 
             Bundle extras = getIntent().getExtras();
@@ -135,7 +168,7 @@ public class UserProfileActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.driver, menu);
+        getMenuInflater().inflate(R.menu.user_profile, menu);
         return true;
     }
 

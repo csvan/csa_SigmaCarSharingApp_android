@@ -52,8 +52,8 @@
             android:name=".AdminActivity"
             android:label="@string/title_activity_admin"></activity>
 
-        <!-- BookingActivity, where all the good stuff is located -->
-        <activity android:name=".BookingActivity"></activity>
+        <!-- LogActivity, where all the good stuff is located -->
+        <activity android:name=".LogActivity"></activity>
         <activity
             android:name=".ConfirmBookingActivity"
             android:label="@string/title_activity_confirm_booking"

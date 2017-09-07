@@ -104,7 +104,7 @@
     <string name="pref_title_vibrate">Vibrate</string>
 
 
-    <!-- Strings for Driver activity -->
+    <!-- Strings for UserProfile activity -->
     <string name="string_profile_name"> Your name here </string>
     <string name="string_profile_phone"> supercool phone# </string>
     <string name="string_profile_email"> robu </string>
@@ -118,5 +118,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_confirm_booking">confirm_booking</string>
+
+    <!-- Strings for the log activity -->
+    <string name="string_car_info">example-data </string>
 
 </resources>
