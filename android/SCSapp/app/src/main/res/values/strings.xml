@@ -122,4 +122,10 @@
     <!-- Strings for the log activity -->
     <string name="string_car_info">example-data </string>
 
+
+    <!-- Strings for the Car object -->
+    <string name="car_name"> Example Volvo </string>
+    <string name="car_id">Example Id </string>
+    <string name="car_info">Example info</string>
+
 </resources>

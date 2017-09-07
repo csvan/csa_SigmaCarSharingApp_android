@@ -19,9 +19,9 @@ public class LogActivity extends AppCompatActivity {
 
 
 
-        // TODO Generate data from database and insert it into the views
+        // TODO Generate data from database and insert it into the views via another class
 
-        // TODO Generate info of car
+        // TODO Generate info of car from another class and generate content from CarActivity
         String carinfo = "superfast car";
 
 
