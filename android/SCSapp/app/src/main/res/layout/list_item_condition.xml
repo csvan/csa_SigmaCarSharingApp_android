@@ -6,17 +6,14 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/example_cardview"
+        android:id="@+id/condition_cardview"
         android:layout_width="0dp"
         android:layout_height="495dp"
         android:layout_margin="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
+
         android:layout_marginTop="8dp"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="@+id/car_id"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
@@ -52,84 +49,19 @@
 
             <ImageView
                 android:id="@+id/thumbnail"
-                android:layout_width="371dp"
-                android:layout_height="78dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/volvo"
+                android:src="@drawable/conditionreport"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/car_id"
-                android:layout_width="155dp"
-                android:layout_height="26dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="118dp"
-                android:paddingBottom="2dip"
-                android:text="@string/car_id"
-                android:textColor="@color/colorAccent"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintLeft_toLeftOf="@+id/title"
-                app:layout_constraintHorizontal_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0" />
 
-            <TextView
-                android:id="@+id/car_name"
-                android:layout_width="185dp"
-                android:layout_height="38dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="40dp"
-                android:paddingBottom="1dip"
-                android:paddingTop="4dip"
-                android:text="@string/car_name"
-                android:textColor="@color/cardview_light_background"
-
-                android:textColorLink="@color/cardview_shadow_end_color"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_constraintLeft_creator="1"
-                tools:layout_constraintTop_creator="1"
-                android:layout_marginStart="8dp" />
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="183dp"
-                android:layout_height="32dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="86dp"
-                android:drawableLeft="@drawable/ic_info_black_24dp"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:text="@string/title_activity_confirm_booking"
-                android:textColor="#757575"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/car_info"
-                android:layout_width="159dp"
-                android:layout_height="67dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginRight="16dp"
-                android:text="@string/car_info"
-                android:textColor="#5d5d5d"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="@+id/thumbnail"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp"
-                app:layout_constraintVertical_bias="0.185" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 

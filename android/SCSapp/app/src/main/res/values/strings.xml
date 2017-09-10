@@ -124,8 +124,14 @@
 
 
     <!-- Strings for the Car object -->
-    <string name="car_name"> Example Volvo </string>
-    <string name="car_id">Example Id </string>
-    <string name="car_info">Example info</string>
+    <string name="car_name"> Volvo V70 </string>
+    <string name="car_id">#1094 </string>
+    <string name="car_info">Example info infoinfoinfoinfoinfoinfoinfo</string>
+
+    <!-- Confirm Booking view -->
+    <string name="confirm_accept_car">Is this the correct car? </string>
+    <string name="confirm_accept_car_report"> Is the status ok? </string>
+    <string name="confirm_enter_starting">Enter the starting miles</string>
+    <string name="accept_car_switch_text">Accept</string>
 
 </resources>
