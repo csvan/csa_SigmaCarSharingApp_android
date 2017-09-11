@@ -16,7 +16,7 @@ public class LogActivity extends AppCompatActivity {
 
     public void onCreate(Bundle saveInstanceState)
     {
-
+        // TODO: 2017-09-11 Moduel + Controller
 
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_log/*list*/);

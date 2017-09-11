@@ -12,17 +12,14 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-/**
- * Created by Niklas on 2017-09-07.
- */
 
-public class Rest {
+public class Server_Connection {
 
-    // TODO Build the connettion to the database
+    // TODO Build the connetion to the database
 
-    private static final String TAG = Rest.class.getSimpleName();
+    private static final String TAG = Server_Connection.class.getSimpleName();
 
-    public Rest() {
+    public Server_Connection() {
     }
 
     /* Didn't get the time to try out a connector but had problem got it to work, will try later thou, fun idea.

@@ -25,6 +25,8 @@ public class UserProfileActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        // TODO Visa vilka aktiva bokningar som finns. Visa CardView som är aktuell, annars visa inget.
+
         // Avaliable text
         TextInputEditText getEmail;
         ImageView getImage;
