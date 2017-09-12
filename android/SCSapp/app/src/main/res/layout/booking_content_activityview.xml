@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="sigma.scsapp.ConfirmBookingActivity"
-    tools:showIn="@layout/activity_confirm_booking">
+    tools:showIn="@layout/booking_confirm_scrollview">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -25,7 +25,7 @@
 
         <include
             android:id="@+id/confirm_car_card"
-            layout="@layout/list_item_car"
+            layout="@layout/list_item_vehicle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 

@@ -1,13 +1,12 @@
 package sigma.scsapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,7 +18,7 @@ public class LogActivity extends AppCompatActivity {
         // TODO: 2017-09-11 Moduel + Controller
 
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.activity_log/*list*/);
+        setContentView(R.layout.log_activityview);
 
         // Get the reference of car
         ListView moviesList=(ListView)findViewById(R.id.list);

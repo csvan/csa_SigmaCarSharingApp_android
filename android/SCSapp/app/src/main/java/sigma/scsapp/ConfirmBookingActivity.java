@@ -8,15 +8,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Switch;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConfirmBookingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scrolling);
+        setContentView(R.layout.booking_confirm_scrollview);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -41,5 +43,16 @@ public class ConfirmBookingActivity extends AppCompatActivity {
                     .setAction("Action", null).show();
             }
         });
+
+    }
+
+    protected List<Booking> getBookings(Long userName) {
+        List<Booking> listOfBooking = new ArrayList<>();
+        // TODO: 2017-09-12 Hämta alla bookings för UserID
+        // TODO: 2017-09-12 If (return null) { print no bookings found };
+
+        return listOfBooking;
+
+
     }
 }

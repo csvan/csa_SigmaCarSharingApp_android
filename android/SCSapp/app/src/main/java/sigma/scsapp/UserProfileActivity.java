@@ -2,20 +2,18 @@ package sigma.scsapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.widget.CardView;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,7 +26,6 @@ public class UserProfileActivity extends AppCompatActivity
         // TODO Visa vilka aktiva bokningar som finns. Visa CardView som är aktuell, annars visa inget.
 
         // Avaliable text
-        TextInputEditText getEmail;
         ImageView getImage;
 
         // Button in the menu
@@ -40,7 +37,7 @@ public class UserProfileActivity extends AppCompatActivity
         CardView user_booking_car;
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.user_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -92,7 +89,7 @@ public class UserProfileActivity extends AppCompatActivity
 
         // Fix the CardView on the car. Make it "stick" to all the classes.
         // TODO Rename the card_view_2 to something else.
-        user_booking_car = (CardView) findViewById( R.id.example_cardview);
+     /*   user_booking_car = (CardView) findViewById( R.id.example_cardview);
         user_booking_car.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,7 +99,7 @@ public class UserProfileActivity extends AppCompatActivity
                    startActivity(new Intent(UserProfileActivity.this,ConfirmBookingActivity.class));
 
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -126,18 +123,18 @@ public class UserProfileActivity extends AppCompatActivity
                 newString= null;
             } else {
 
+                /* TODO: 2017-09-11 Find profile in database and Json it into an object.
+                    Create a profile and insert it into the textviews. Place the textviews whereever we need to find a profile-info.
+                 */
 
-                // Check Database for profile-info together with the inputted Email.
-                Log.i("test", "hi" );
-                // TextView  = (TextView)findViewById(R.id.string_profile_email);
+                Log.i("test", "Setting up profile" );
+                TextView profile_userId  = (TextView)findViewById(R.id.text_profile_name);
+                profile_userId.setText(getIntent().getStringExtra("mUserIdView"));
 
-                // Check database for profile-name
-               // TextView txtView2 = (TextView)findViewById(R.id.text_profile_name);
+                // TextView profile_userName = (TextView)findViewById(R.id.text_profile_name);
+                //profile_userName.setText(getIntent().getStringExtra("profileUserName"));
 
-                // check database for profile-number
-                // TextView txtView3 = (TextView)findViewById(R.id.text_profile_phone);
-
-
+                // TextView profile_userPhone = (TextView)findViewById(R.id.text_profile_phone);
 
                 // Check database for profile-picture
 

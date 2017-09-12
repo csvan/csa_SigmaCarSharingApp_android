@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -17,53 +19,52 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CarActivity extends AppCompatActivity {
+
+// This class will Get students and Parse them with Json.
+public class Parser_Vehicle extends AppCompatActivity {
 
 
     // URL to get contacts JSON
-    private static String url = "";
-
-    ArrayList<HashMap<String, String>> CarList;
-    private String TAG = CarActivity.class.getSimpleName();
+    private static String url = "http://10.0.2.2:8080/studentServlet?format=json&id=all";
+    ArrayList<HashMap<String, String>> VehicleList;
+    private String TAG = Parser_Vehicle.class.getSimpleName();
     private ProgressDialog pDialog;
     private ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO Set to another view with list
-     //   setContentView(R.layout.activity_main3);
+        setContentView(R.layout.login_activityview);
 
-
-        // Create a CarList
-        CarList = new ArrayList<>();
+        // SETUP
+        // Create a userList
+        VehicleList = new ArrayList<>();
 
         // Generate the Listview with layout
-        // TODO setup the list with cars
-      //  lv = (ListView) findViewById(R.id.list);
-        // Create new Listview and call the GetCar method.
-        new GetCar().execute();
+        lv = (ListView) findViewById(R.id.list);
+
+        // Create new Listview and call the GetVehicle method.
+        new GetVehicle().execute();
 
 
 
-        /* Depening on what Student id you click, you will send the student ID with "posit"
-        into the Main2Activity (courses) that checks the student ID for his/her courses.
+        /* Depening on what Car id you click, you will send the car ID with "posit"
+        into the Main2Activity (courses) that checks the car ID for it's info.
          */
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e(TAG, "You clicked on student with id: " + (position + 1));
-                // TODO Click Car to get car information
-               // Intent intent = new Intent(CarActivity.this, CarInfoActivity.class);
+                Log.e(TAG, "You clicked on car with id: " + (position + 1));
+                // TODO Generate and create the User_Model class with information about the car etc. This will show all the info for the car.
+           //     Intent intent = new Intent(Parser_Vehicle.this, Car_info.class);
 
                 // post save the ID of student instead of the "position" from the array.
                 int post = (position + 1);
                 String postString = String.valueOf(post);
 
-                // Sending the Student ID as postString into the the next activity
-                // TODO Fix so Clicked Car will show Car Info instead
-                //intent.putExtra(EXTRA_MESSAGE, postString);
-                //startActivity(intent);
+                // Sending the vehicle id as postString into the the next activity
+              //  intent.putExtra(EXTRA_MESSAGE, postString);
+              //  startActivity(intent);
             }
         });
 
@@ -71,13 +72,13 @@ public class CarActivity extends AppCompatActivity {
 
 
     // AsyncTask to deal with the datafetching etc.
-    private class GetCar extends AsyncTask<Void, Void, Void> {
+    private class GetVehicle extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             // Visar processdialog för main activity!
-            pDialog = new ProgressDialog(CarActivity.this);
+            pDialog = new ProgressDialog(Parser_Vehicle.this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -87,10 +88,10 @@ public class CarActivity extends AppCompatActivity {
         // create a method that return the data from database and parse it to json.
         @Override
         protected Void doInBackground(Void... arg0) {
-            Server_Connection RESTServerConnection = new Server_Connection();
+            Server_Connection ServerCon = new Server_Connection();
 
             // Making a request to url and getting response
-            String jsonStr = RESTServerConnection.requestURL(url);
+            String jsonStr = ServerCon.requestURL(url);
             Log.e(TAG, "Response from url: " + jsonStr);
 
             if (jsonStr != null) {
@@ -98,25 +99,27 @@ public class CarActivity extends AppCompatActivity {
                     JSONObject jsonObj = new JSONObject(jsonStr);
 
                     // Request JSON object/array/list
-                    JSONArray student = jsonObj.getJSONArray("students");
-
-                    // loop all students
-                    for (int i = 0; i < student.length(); i++) {
-                        JSONObject stud = student.getJSONObject(i);
-
-                        String id = stud.getString("CarID");
-                        String name = stud.getString("CarName");
+                    JSONArray vehicle = jsonObj.getJSONArray("vehicle");
 
 
-                        // For each students, put it into a hashmap.
-                        HashMap<String, String> studentHashMap = new HashMap<>();
+                    // loop all vehicles
+                    for (int i = 0; i < vehicle.length(); i++) {
+                        JSONObject vehicles = vehicle.getJSONObject(i);
+
+                        // TODO Change vehiclesname and vehiclesid into the correct JSon title from the DB
+                        String id = vehicles.getString("vehicleId");
+                        String name = vehicles.getString("vehicleName");
+
+
+                        // For each vehicle, put it into a hashmap.
+                        HashMap<String, String> VehicleHashMap = new HashMap<>();
 
                         // adding each child node to HashMap key => value
-                        studentHashMap.put("CarID", id);
-                        studentHashMap.put("CarName", name);
+                        VehicleHashMap.put("vehicleId", id);
+                        VehicleHashMap.put("vehicleName", name);
 
                         // adding the Hashmap into an Arraylist (studentlist)
-                        CarList.add(studentHashMap);
+                        VehicleList.add(VehicleHashMap);
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -159,11 +162,11 @@ public class CarActivity extends AppCompatActivity {
             }
 
             // Updating parsed JSON data into ListView
-           /* ListAdapter adapter = new SimpleAdapter(CarActivity.this, CarList, R.layout.list_item,
+            ListAdapter adapter = new SimpleAdapter(Parser_Vehicle.this, VehicleList, R.layout.list_item_vehicle,
                     new String[]{"CarName", "CarID"},
                     new int[]{R.id.CarName, R.id.CarID});
 
-            lv.setAdapter(adapter);*/
+            lv.setAdapter(adapter);
         }
 
     }

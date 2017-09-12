@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">SCSapp</string>
+    <string name="app_name">Sigma CarSharingApp</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">User ID</string>
+    <string name="prompt_userId">User name</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This user ID is invalid</string>
+    <string name="error_invalid_userId">This user ID is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
@@ -107,7 +107,7 @@
     <!-- Strings for UserProfile activity -->
     <string name="string_profile_name"> Your name here </string>
     <string name="string_profile_phone"> supercool phone# </string>
-    <string name="string_profile_email"> robu </string>
+    <string name="string_profile_userId">  </string>
 
     <!-- Strings for Booking Activity -->
     <string name="string_bookingcard_title_example"> Volvo Awesome</string>
@@ -126,12 +126,12 @@
     <!-- Strings for the Car object -->
     <string name="car_name"> Volvo V70 </string>
     <string name="car_id">#1094 </string>
-    <string name="car_info">Example info infoinfoinfoinfoinfoinfoinfo</string>
+    <string name="car_info">Example info </string>
 
     <!-- Confirm Booking view -->
     <string name="confirm_accept_car">Is this the correct car? </string>
     <string name="confirm_accept_car_report"> Is the status ok? </string>
     <string name="confirm_enter_starting">Enter the starting miles</string>
-    <string name="accept_car_switch_text">Accept</string>
+    <string name="confirm_car_switch_text">Accept</string>
 
 </resources>
