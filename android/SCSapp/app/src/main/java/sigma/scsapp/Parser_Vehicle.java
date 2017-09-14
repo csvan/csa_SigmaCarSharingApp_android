@@ -25,7 +25,7 @@ public class Parser_Vehicle extends AppCompatActivity {
 
 
     // URL to get contacts JSON
-    private static String url = "http://10.0.2.2:8080/studentServlet?format=json&id=all";
+    public static String url = "http://echo.jsontest.com/vechName/volvo/one/two";
     ArrayList<HashMap<String, String>> VehicleList;
     private String TAG = Parser_Vehicle.class.getSimpleName();
     private ProgressDialog pDialog;
@@ -34,14 +34,16 @@ public class Parser_Vehicle extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activityview);
+        setContentView(R.layout.user_list_of_booking);
+        Log.i("Tag", "Starting Parser-vech activity");
 
         // SETUP
         // Create a userList
         VehicleList = new ArrayList<>();
 
         // Generate the Listview with layout
-        lv = (ListView) findViewById(R.id.list);
+        // Using the layout User_list_of_booking and Res listofBooking.
+        lv = (ListView) findViewById(R.id.LV_listOfBooking);
 
         // Create new Listview and call the GetVehicle method.
         new GetVehicle().execute();
@@ -89,7 +91,7 @@ public class Parser_Vehicle extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... arg0) {
             Server_Connection ServerCon = new Server_Connection();
-
+            Log.e(TAG, "Response before json on URL:" + url);
             // Making a request to url and getting response
             String jsonStr = ServerCon.requestURL(url);
             Log.e(TAG, "Response from url: " + jsonStr);
@@ -98,8 +100,10 @@ public class Parser_Vehicle extends AppCompatActivity {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
 
+
                     // Request JSON object/array/list
-                    JSONArray vehicle = jsonObj.getJSONArray("vehicle");
+                    JSONArray vehicle = jsonObj.getJSONArray("one");
+                    Log.i(TAG, "value in -one- " + vehicle);
 
 
                     // loop all vehicles
@@ -107,16 +111,16 @@ public class Parser_Vehicle extends AppCompatActivity {
                         JSONObject vehicles = vehicle.getJSONObject(i);
 
                         // TODO Change vehiclesname and vehiclesid into the correct JSon title from the DB
-                        String id = vehicles.getString("vehicleId");
-                        String name = vehicles.getString("vehicleName");
+                       // String id = vehicles.getString("vehicleId");
+                        String name = vehicles.getString("vechName");
 
 
                         // For each vehicle, put it into a hashmap.
                         HashMap<String, String> VehicleHashMap = new HashMap<>();
 
                         // adding each child node to HashMap key => value
-                        VehicleHashMap.put("vehicleId", id);
-                        VehicleHashMap.put("vehicleName", name);
+                      //  VehicleHashMap.put("vehicleId", id);
+                        VehicleHashMap.put("vechName", name);
 
                         // adding the Hashmap into an Arraylist (studentlist)
                         VehicleList.add(VehicleHashMap);
@@ -160,11 +164,12 @@ public class Parser_Vehicle extends AppCompatActivity {
             if (pDialog.isShowing()) {
                 pDialog.dismiss();
             }
-
+// TODO: 2017-09-12 Depening on what the server got for CarName/CarID VechName/VechId
             // Updating parsed JSON data into ListView
+            // Inser the info into the list_item_vehicle and put it into the Log_activity
             ListAdapter adapter = new SimpleAdapter(Parser_Vehicle.this, VehicleList, R.layout.list_item_vehicle,
-                    new String[]{"CarName", "CarID"},
-                    new int[]{R.id.CarName, R.id.CarID});
+                    new String[]{"vechName"},
+                    new int[]{R.id.tv_vech_name});
 
             lv.setAdapter(adapter);
         }

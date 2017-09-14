@@ -52,6 +52,7 @@ public class Server_Connection {
         {
             // 1 Save URL
             URL url = new URL(reqUrl);
+            Log.i(TAG, "requesting URL from: " + reqUrl + "1");
             // 2 Create connection
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             // 3 call "connection"
@@ -60,6 +61,7 @@ public class Server_Connection {
             // 4 read stuff from bufferedInputstream
             InputStream in = new BufferedInputStream(conn.getInputStream());
             response = convertStreamToString(in);
+
 
         }
         // Error
@@ -79,6 +81,8 @@ public class Server_Connection {
         {
             Log.e(TAG, "Exception: " + e.getMessage());
         }
+        Log.i(TAG, "requesting response from URL: " + response + "2");
+
         return response;
     }
 

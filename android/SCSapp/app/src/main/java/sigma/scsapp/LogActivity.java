@@ -18,10 +18,10 @@ public class LogActivity extends AppCompatActivity {
         // TODO: 2017-09-11 Moduel + Controller
 
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.log_activityview);
+        setContentView(R.layout.log_list);
 
         // Get the reference of car
-        ListView moviesList=(ListView)findViewById(R.id.list);
+        ListView moviesList=(ListView)findViewById(R.id.LV_list);
 
         car = new ArrayList<String>();
 

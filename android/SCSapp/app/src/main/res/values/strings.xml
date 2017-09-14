@@ -133,5 +133,7 @@
     <string name="confirm_accept_car_report"> Is the status ok? </string>
     <string name="confirm_enter_starting">Enter the starting miles</string>
     <string name="confirm_car_switch_text">Accept</string>
+    <string name="title_parser_vehicle">title_parser_vehicle</string>
+    <string name="title_parser_user">title_parser_user</string>
 
 </resources>

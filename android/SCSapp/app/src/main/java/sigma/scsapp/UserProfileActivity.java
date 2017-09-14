@@ -1,5 +1,6 @@
 package sigma.scsapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,13 +10,28 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class UserProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,10 +44,13 @@ public class UserProfileActivity extends AppCompatActivity
         // Avaliable text
         ImageView getImage;
 
+
         // Button in the menu
         Button booking;
         Button log;
         Button map;
+        Button bt_acceptBooking;
+
 
         // Card for current car
         CardView user_booking_car;
@@ -49,6 +68,8 @@ public class UserProfileActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });*/
+
+
 
         // Listener to the booking button
         booking = (Button) findViewById(R.id.button_booking);
@@ -75,6 +96,63 @@ public class UserProfileActivity extends AppCompatActivity
             }
         });
 
+
+
+
+
+
+
+        // TEST TEST  TEST TEST  TEST TEST  TEST TEST  TEST TEST  TEST TEST
+        ArrayList<HashMap<String, String>> cars;
+        cars = new ArrayList<>();
+
+        final HashMap<String, String> carHashMap = new HashMap<>();
+        // adding each child node to HashMap key => value
+        carHashMap.put("vechName", "Volvo");
+        carHashMap.put("vechName", "Volvo v70");
+        carHashMap.put("vechId", "#02");
+        carHashMap.put("vechId", "#05");
+        // adding the Hashmap into an Arraylist (studentlist)
+        cars.add(carHashMap);
+
+        ListAdapter adapter = new SimpleAdapter(UserProfileActivity.this, cars, R.layout.list_item_vehicle,
+                new String[]{"vechName"},
+                new int[]{R.id.tv_vech_name});
+
+        ListView listofBooking = (ListView) findViewById(R.id.LV_listOfBooking);
+        listofBooking.setAdapter(adapter);
+
+        View myLayout = findViewById( R.id.LV_listOfBooking ); // root View id from that link
+        ListView myView = myLayout.findViewById( R.id.tv_vech_name ); // id of a view contained in the included file
+
+        myView = (ListView) findViewById(R.id.LV_listOfBooking);
+
+        myView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("Tag for Listview", "You clicked on student with id: " + (position + 1));
+                // post save the ID of student instead of the "position" from the array.
+                int post = (position + 1);
+                String postString = String.valueOf(post);
+            }
+        });
+
+
+
+        //  TEST TEST  TEST TEST  TEST TEST  TEST TEST  TEST TEST  TEST TEST
+
+        bt_acceptBooking = (Button) findViewById(R.id.bt_accept_booking);
+        bt_acceptBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("Tag", "You pressed accept your booking ------------------ ");
+                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //       .setAction("Action", null).show();
+                startActivity(new Intent(UserProfileActivity.this,Parser_Vehicle.class));
+
+            }
+        });
+
         map = (Button) findViewById(R.id.button_map);
         map.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,14 +167,28 @@ public class UserProfileActivity extends AppCompatActivity
 
         // Fix the CardView on the car. Make it "stick" to all the classes.
         // TODO Rename the card_view_2 to something else.
-     /*   user_booking_car = (CardView) findViewById( R.id.example_cardview);
-        user_booking_car.setOnClickListener(new View.OnClickListener() {
+
+        Button listOfBooking;
+        listOfBooking = (Button) findViewById(R.id.bt_listOfBooking);
+        listOfBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("Tag", "You pressed your List of Bookings ------------------ ");
+                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //       .setAction("Action", null).show();
+                   startActivity(new Intent(UserProfileActivity.this,Parser_Vehicle.class));
+
+            }
+        });
+
+
+              /*  LV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("Tag", "You pressed your current booking ------------------ ");
                 // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //       .setAction("Action", null).show();
-                   startActivity(new Intent(UserProfileActivity.this,ConfirmBookingActivity.class));
+                   startActivity(new Intent(UserProfileActivity.this,Parser_Vehicle.class));
 
             }
         });*/

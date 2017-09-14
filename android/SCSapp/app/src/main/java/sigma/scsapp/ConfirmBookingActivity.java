@@ -10,15 +10,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
 
+import com.davemorrissey.labs.subscaleview.ImageSource;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.R.attr.id;
 
 public class ConfirmBookingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.booking_confirm_scrollview);
+        setContentView(R.layout.user_list_of_booking);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -35,7 +40,8 @@ public class ConfirmBookingActivity extends AppCompatActivity {
         });
 
         final Switch accept_car_switch;
-        accept_car_switch = (Switch) findViewById(R.id.accept_car_switch);
+       /* INSERT A SWITCH TO ACCEPT CAR
+       accept_car_switch = (Switch) findViewById(R.id.accept_car_switch);
         accept_car_switch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,6 +49,14 @@ public class ConfirmBookingActivity extends AppCompatActivity {
                     .setAction("Action", null).show();
             }
         });
+*/
+        SubsamplingScaleImageView imageView = (SubsamplingScaleImageView)findViewById(R.id.SSImageView);
+        imageView.setImage(ImageSource.resource(R.drawable.conditionreport));
+/* ... or ...
+        imageView.setImage(ImageSource.asset("map.png"))
+// ... or ...
+        imageView.setImage(ImageSource.uri("/sdcard/DCIM/DSCM00123.JPG"));*/
+
 
     }
 

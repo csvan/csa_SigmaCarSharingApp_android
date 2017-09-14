@@ -23,16 +23,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/confirm_car_card"
-            layout="@layout/list_item_vehicle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            >
-
-        </include>
-
 
         <Switch
             android:id="@+id/accept_car_switch"
@@ -40,15 +30,6 @@
             android:layout_height="match_parent"
             android:elevation="@dimen/nav_header_height"
             android:text="Accept" />
-
-        <include
-            android:id="@+id/accept_car_condition"
-            layout="@layout/list_item_condition"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            >
-
-        </include>
 
 
     </LinearLayout>

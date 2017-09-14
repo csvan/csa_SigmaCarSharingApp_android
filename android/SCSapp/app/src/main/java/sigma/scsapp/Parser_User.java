@@ -29,7 +29,7 @@ public class Parser_User extends AppCompatActivity {
 
 
     // URL to get contacts JSON
-    private static String url = "http://10.0.2.2:8080/studentServlet?format=json&id=all";
+    private static String url = "http://http://0.0.0.0:8000/testdb.json";
 
     ArrayList<HashMap<String, String>> userList;
     private String TAG = Parser_User.class.getSimpleName();
@@ -47,7 +47,7 @@ public class Parser_User extends AppCompatActivity {
         // Create a User
         userList = new ArrayList<>();
         // Generate the Listview with layout
-        lv = (ListView) findViewById(R.id.list);
+        lv = (ListView) findViewById(R.id.LV_list);
         // Create new Listview and call the GetCar method.
         new GetCar().execute();
 
@@ -159,7 +159,7 @@ public class Parser_User extends AppCompatActivity {
             }
 
             // Updating parsed JSON data into ListView
-            ListAdapter adapter = new SimpleAdapter(Parser_User.this, userList, R.layout.login_activityview,
+            ListAdapter adapter = new SimpleAdapter(Parser_User.this, userList, R.layout.list_item_vehicle,
                     new String[]{"userName"},
                     new int[]{R.id.userName});
 

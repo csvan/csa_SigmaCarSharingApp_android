@@ -6,17 +6,11 @@
     android:layout_height="match_parent"
     tools:context="sigma.scsapp.LogActivity">
 
-    <TextView
-        android:id="@+id/tv_log"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Past bookings" />
-
     <ListView
-            android:id="@+id/list"
+            android:id="@+id/LV_list"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_log">
+        >
 
         </ListView>
 
