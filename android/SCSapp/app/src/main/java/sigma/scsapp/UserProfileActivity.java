@@ -1,12 +1,14 @@
 package sigma.scsapp;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,20 +39,24 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 public class UserProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private boolean accepted = true;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         // TODO Visa vilka aktiva bokningar som finns. Visa CardView som är aktuell, annars visa inget.
 
         // Avaliable text
-        ImageView getImage;
-
 
         // Button in the menu
         Button booking;
         Button log;
         Button map;
         Button bt_acceptBooking;
+
 
 
         // Card for current car
@@ -101,8 +108,9 @@ public class UserProfileActivity extends AppCompatActivity
 
 
 
+// TODO: 2017-09-14 REMOVE WHEN DATABASE IS ONLINE
 
-        // TEST TEST  TEST TEST  TEST TEST  TEST TEST  TEST TEST  TEST TEST
+
         ArrayList<HashMap<String, String>> cars;
         cars = new ArrayList<>();
 
@@ -110,36 +118,74 @@ public class UserProfileActivity extends AppCompatActivity
         // adding each child node to HashMap key => value
         carHashMap.put("vechName", "Volvo");
         carHashMap.put("vechName", "Volvo v70");
-        carHashMap.put("vechId", "#02");
-        carHashMap.put("vechId", "#05");
+        carHashMap.put("vechName", "Saav 95");
+
         // adding the Hashmap into an Arraylist (studentlist)
         cars.add(carHashMap);
 
-        ListAdapter adapter = new SimpleAdapter(UserProfileActivity.this, cars, R.layout.list_item_vehicle,
+
+ //       View myLayout = findViewById( R.id.LV_listOfBooking ); // root View id from that link
+   //     ListView myView = myLayout.findViewById( R.id.TV_vech_name ); // id of a view contained in the included file
+        final ListAdapter adapter = new SimpleAdapter(UserProfileActivity.this, cars, R.layout.list_item_vehicle,
                 new String[]{"vechName"},
-                new int[]{R.id.tv_vech_name});
+                new int[]{R.id.TV_vech_name});
 
         ListView listofBooking = (ListView) findViewById(R.id.LV_listOfBooking);
         listofBooking.setAdapter(adapter);
 
-        View myLayout = findViewById( R.id.LV_listOfBooking ); // root View id from that link
-        ListView myView = myLayout.findViewById( R.id.tv_vech_name ); // id of a view contained in the included file
 
-        myView = (ListView) findViewById(R.id.LV_listOfBooking);
+// TODO: 2017-09-14 ^^^^^REMOVE WHEN DATABASE IS ONLINE
 
-        myView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        // Below handels the List of all the current bookings.
+       listofBooking.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("Tag for Listview", "You clicked on student with id: " + (position + 1));
+
+                Log.e("Tag for Listview", "You clicked on car with id: " + (position + 1));
                 // post save the ID of student instead of the "position" from the array.
                 int post = (position + 1);
-                String postString = String.valueOf(post);
+
+
+                // Return the Value from Position (+1) and place it into the AlertDialog.
+                HashMap<String, Object> obj = (HashMap<String, Object>) adapter.getItem(position);
+                final String name = (String) obj.get("vechName");
+                final TextView active_booking = (TextView) findViewById(R.id.TV_vech_name);
+                Log.d("Yourtag", name);
+
+                // When pressed on Booked Vehicle, the Alert Dialog will pop up to confirm booking.
+                AlertDialog.Builder builder = new AlertDialog.Builder(UserProfileActivity.this);
+                builder.setMessage("Accept this booking: " + name)
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                Log.i("tag", "Accepted");
+                                active_booking.setBackgroundColor(getResources().getColor(R.color.sigmaColorCyan));
+                                active_booking.setTextColor(getResources().getColor(R.color.white));
+                                active_booking.setText(name + " is ready! Click to start driving ");
+                            }
+                            boolean accepted = true;
+
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+
+                            }
+
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
 
 
 
-        //  TEST TEST  TEST TEST  TEST TEST  TEST TEST  TEST TEST  TEST TEST
+
 
         bt_acceptBooking = (Button) findViewById(R.id.bt_accept_booking);
         bt_acceptBooking.setOnClickListener(new View.OnClickListener() {
@@ -305,6 +351,7 @@ public class UserProfileActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 
 }

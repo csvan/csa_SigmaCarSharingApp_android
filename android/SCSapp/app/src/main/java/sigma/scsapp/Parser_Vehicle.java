@@ -169,7 +169,7 @@ public class Parser_Vehicle extends AppCompatActivity {
             // Inser the info into the list_item_vehicle and put it into the Log_activity
             ListAdapter adapter = new SimpleAdapter(Parser_Vehicle.this, VehicleList, R.layout.list_item_vehicle,
                     new String[]{"vechName"},
-                    new int[]{R.id.tv_vech_name});
+                    new int[]{R.id.TV_vech_name});
 
             lv.setAdapter(adapter);
         }
