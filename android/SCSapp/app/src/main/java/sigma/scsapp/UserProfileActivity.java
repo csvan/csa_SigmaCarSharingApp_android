@@ -187,7 +187,8 @@ public class UserProfileActivity extends AppCompatActivity
 
 
 
-        bt_acceptBooking = (Button) findViewById(R.id.bt_accept_booking);
+       /* THIS IS THE OLD TEST BUTTON FOR ACCEPT BOOKING
+       bt_acceptBooking = (Button) findViewById(R.id.bt_accept_booking);
         bt_acceptBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -197,7 +198,7 @@ public class UserProfileActivity extends AppCompatActivity
                 startActivity(new Intent(UserProfileActivity.this,Parser_Vehicle.class));
 
             }
-        });
+        });*/
 
         map = (Button) findViewById(R.id.button_map);
         map.setOnClickListener(new View.OnClickListener() {
@@ -214,6 +215,7 @@ public class UserProfileActivity extends AppCompatActivity
         // Fix the CardView on the car. Make it "stick" to all the classes.
         // TODO Rename the card_view_2 to something else.
 
+        /* THIS IS AN OLD TESTBUTTON FOR LIST ALL BOOKINGS
         Button listOfBooking;
         listOfBooking = (Button) findViewById(R.id.bt_listOfBooking);
         listOfBooking.setOnClickListener(new View.OnClickListener() {
@@ -225,7 +227,7 @@ public class UserProfileActivity extends AppCompatActivity
                    startActivity(new Intent(UserProfileActivity.this,Parser_Vehicle.class));
 
             }
-        });
+        });*/
 
 
               /*  LV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -267,7 +269,7 @@ public class UserProfileActivity extends AppCompatActivity
 
                 Log.i("test", "Setting up profile" );
                 TextView profile_userId  = (TextView)findViewById(R.id.text_profile_name);
-                profile_userId.setText(getIntent().getStringExtra("mUserIdView"));
+                profile_userId.setText(getIntent().getStringExtra("userName"));
 
                 // TextView profile_userName = (TextView)findViewById(R.id.text_profile_name);
                 //profile_userName.setText(getIntent().getStringExtra("profileUserName"));
@@ -338,7 +340,7 @@ public class UserProfileActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_manage) {
             // go back to profile-view
-          //  startActivity(new Intent(UserProfileActivity.this,AdminActivity.class));
+            startActivity(new Intent(UserProfileActivity.this,AdminActivity.class));
 
 
         } else if (id == R.id.nav_share) {

@@ -35,48 +35,35 @@
 
         <!-- MainActivity, might not even need this -->
 
+
         <!-- Scrolling with the terms of agreement -->
+
 
         <!-- UserProfileActivity, for showing profile etc -->
         <activity
             android:name=".UserProfileActivity"
             android:label="@string/title_activity_driver"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <!-- AdminActivity, showing of amin-stuff -->
         <activity
             android:name=".AdminActivity"
-            android:label="@string/title_activity_admin">
-
-        </activity>
+            android:label="@string/title_activity_admin"></activity>
 
         <!-- LogActivity, where all the good stuff is located -->
-        <activity android:name=".LogActivity">
-
-        </activity>
-
+        <activity android:name=".LogActivity"></activity>
         <activity
             android:name=".ConfirmBookingActivity"
             android:label="@string/title_activity_confirm_booking"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Parser_Vehicle"
             android:label="@string/title_parser_vehicle"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Parser_User"
             android:label="@string/title_parser_user"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
