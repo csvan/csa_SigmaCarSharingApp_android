@@ -5,7 +5,7 @@
     <!-- Strings related to login -->
     <string name="prompt_userId">User name</string>
     <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_userId">This user ID is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -15,27 +15,67 @@
         completions."
     </string>
 
-    <!-- Strings for the Terms of Aggrement -->
-    <string name="title_activity_scrolling">ScrollingActivity</string>
-    <string name="large_text">
-        "You need to accept the terms: \n\n"
-        1) Always drink coffee \n
-        2) Never surrender \n
-        3) always ":q" to quite vim \n
-    </string>
+
+    <!--
+    Strings for UserProfile activity
+    -->
+
+    <string name="profile_name">  </string>
+    <string name="profile_phone"> </string>
+    <string name="profile_userId"> </string>
+    <string name="profile_booking"> </string>
+
+
+    <!--
+    Strings for Booking Activity
+     -->
+    <string name="booking_title">Booking</string>
+    <string name="booking_btn_home">Home</string>
+    <string name="booking_noti">Notifications</string>
+    <string name="booking_confirm">confirm booking</string>
+
+    <!--
+    Strings for the log activity
+    -->
+    <string name="string_car_info">example-data </string>
+
+
+    <!--
+     Strings for the Car object
+     -->
+    <string name="car_name"> Volvo V70 </string>
+    <string name="car_id">#1094 </string>
+    <string name="car_info">Example info </string>
+
+    <!--
+     Confirm Booking view
+     -->
+    <string name="confirm_accept_car">Is this the correct car? </string>
+    <string name="confirm_accept_car_report"> Is the status ok? </string>
+    <string name="confirm_enter_starting">Enter the starting miles</string>
+    <string name="confirm_car_switch_text">Accept</string>
+    <string name="title_parser_vehicle">title_parser_vehicle</string>
+    <string name="title_parser_user">title_parser_user</string>
+    <string name="PopUpWindow">PopUpWindow</string>
 
 
     <!-- UserProfileActivity strings -->
     <string name="action_settings">Settings</string>
-    <string name="title_activity_driver">DriverActivity</string>
+    <string name="title_activity_user">User View</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_admin">admin_activity</string>
+    <string name="title_activity_admin">Admin View</string>
 
 
     <!-- Strings related to Settings -->
     <!-- Example General settings -->
+
+    <string name="title_home"> Home </string>
+    <string name="title_dashboard"> Dashboard</string>
+    <string name="title_notifications">Notifications </string>
+
+
     <string name="pref_header_general">General</string>
 
     <string name="pref_title_social_recommendations">Enable social recommendations</string>
@@ -102,39 +142,5 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-
-
-    <!-- Strings for UserProfile activity -->
-    <string name="string_profile_name"> Your name here </string>
-    <string name="string_profile_phone"> supercool phone# </string>
-    <string name="string_profile_userId">  </string>
-
-    <!-- Strings for Booking Activity -->
-    <string name="string_bookingcard_title_example"> Volvo Awesome</string>
-    <string name="string_bookingcard_text_example"> This volvo is so safe, you want to crash it</string>
-    <string name="string_bookingcard_subtext_example"> stats for the car</string>
-    <string name="title_activity_report">ReportActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_activity_confirm_booking">confirm booking</string>
-
-    <!-- Strings for the log activity -->
-    <string name="string_car_info">example-data </string>
-
-
-    <!-- Strings for the Car object -->
-    <string name="car_name"> Volvo V70 </string>
-    <string name="car_id">#1094 </string>
-    <string name="car_info">Example info </string>
-
-    <!-- Confirm Booking view -->
-    <string name="confirm_accept_car">Is this the correct car? </string>
-    <string name="confirm_accept_car_report"> Is the status ok? </string>
-    <string name="confirm_enter_starting">Enter the starting miles</string>
-    <string name="confirm_car_switch_text">Accept</string>
-    <string name="title_parser_vehicle">title_parser_vehicle</string>
-    <string name="title_parser_user">title_parser_user</string>
-    <string name="PopUpWindow">PopUpWindow</string>
 
 </resources>

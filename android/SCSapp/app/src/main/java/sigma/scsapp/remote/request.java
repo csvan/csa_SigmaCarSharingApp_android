@@ -1,4 +1,4 @@
-package sigma.scsapp;
+package sigma.scsapp.remote;
 
 import android.util.Log;
 
@@ -13,13 +13,13 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 
-public class Server_Connection {
+public class request {
 
     // TODO Build the connetion to the database
 
-    private static final String TAG = Server_Connection.class.getSimpleName();
+    private static final String TAG = request.class.getSimpleName();
 
-    public Server_Connection() {
+    public request() {
     }
 
     /* Didn't get the time to try out a connector but had problem got it to work, will try later thou, fun idea.

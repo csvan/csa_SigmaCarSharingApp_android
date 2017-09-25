@@ -1,4 +1,4 @@
-package sigma.scsapp;
+package sigma.scsapp.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -18,6 +18,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import sigma.scsapp.R;
 
 /**
  * A login screen that offers login via userId/password.

@@ -1,6 +1,5 @@
-package sigma.scsapp;
+package sigma.scsapp.activities;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,29 +11,22 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
+import sigma.scsapp.R;
+import sigma.scsapp.booking.BookingActivity;
 
 public class UserProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -59,8 +51,6 @@ public class UserProfileActivity extends AppCompatActivity
 
 
 
-        // Card for current car
-        CardView user_booking_car;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_drawer);
@@ -86,6 +76,7 @@ public class UserProfileActivity extends AppCompatActivity
                 Log.i("Tag", "You pressed booking ------------------ ");
                 // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //       .setAction("Action", null).show();
+                startActivity(new Intent(UserProfileActivity.this, BookingActivity.class));
 
             }
         });
@@ -118,7 +109,7 @@ public class UserProfileActivity extends AppCompatActivity
         // adding each child node to HashMap key => value
         carHashMap.put("vechName", "Volvo");
         carHashMap.put("vechName", "Volvo v70");
-        carHashMap.put("vechName", "Saav 95");
+        carHashMap.put("vechName", "Saab 95");
 
         // adding the Hashmap into an Arraylist (studentlist)
         cars.add(carHashMap);

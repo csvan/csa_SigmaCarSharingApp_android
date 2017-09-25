@@ -23,15 +23,9 @@
 
         <!-- LoginActivity, can't do anything without it -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <!-- MainActivity, might not even need this -->
 
@@ -41,29 +35,41 @@
 
         <!-- UserProfileActivity, for showing profile etc -->
         <activity
-            android:name=".UserProfileActivity"
-            android:label="@string/title_activity_driver"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".activities.UserProfileActivity"
+            android:label="@string/title_activity_user"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- AdminActivity, showing of amin-stuff -->
         <activity
-            android:name=".AdminActivity"
-            android:label="@string/title_activity_admin"></activity>
+            android:name=".activities.AdminActivity"
+            android:label="@string/title_activity_admin" />
+
+        <!-- BookingActivity, where you actually book the car -->
+        <activity
+            android:name=".booking.BookingActivity"
+            android:label="Booking View">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <!-- LogActivity, where all the good stuff is located -->
-        <activity android:name=".LogActivity"></activity>
+        <activity android:name=".activities.LogActivity" />
         <activity
-            android:name=".ConfirmBookingActivity"
-            android:label="@string/title_activity_confirm_booking"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".controllers.Controller_Confirm_Booking"
+            android:label="@string/title_activity_user"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Parser_Vehicle"
+            android:name=".dbhelpers.Parser_Vehicle"
             android:label="@string/title_parser_vehicle"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Parser_User"
+            android:name=".dbhelpers.Parser_User"
             android:label="@string/title_parser_user"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".booking.BookingForm"></activity>
     </application>
 
 </manifest>

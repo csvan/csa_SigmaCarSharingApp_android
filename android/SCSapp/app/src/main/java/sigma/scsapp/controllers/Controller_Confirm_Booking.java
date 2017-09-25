@@ -1,9 +1,8 @@
-package sigma.scsapp;
+package sigma.scsapp.controllers;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,14 +15,16 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.R.attr.id;
+import sigma.scsapp.activities.UserProfileActivity;
+import sigma.scsapp.model.Booking;
+import sigma.scsapp.R;
 
-public class ConfirmBookingActivity extends AppCompatActivity {
+public class Controller_Confirm_Booking extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_list_of_booking);
+        setContentView(R.layout.user_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -34,12 +35,16 @@ public class ConfirmBookingActivity extends AppCompatActivity {
                 Log.i("Accepted terms", "You accept the terms of coffee");
                 // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //       .setAction("Action", null).show();
-                startActivity(new Intent(ConfirmBookingActivity.this,UserProfileActivity.class));
+                startActivity(new Intent(Controller_Confirm_Booking.this,UserProfileActivity.class));
 
             }
         });
 
-        final Switch accept_car_switch;
+        /*final Switch accept_car_switch;
+
+
+
+
        /* INSERT A SWITCH TO ACCEPT CAR
        accept_car_switch = (Switch) findViewById(R.id.accept_car_switch);
         accept_car_switch.setOnClickListener(new View.OnClickListener() {

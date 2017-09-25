@@ -1,4 +1,4 @@
-package sigma.scsapp;
+package sigma.scsapp.utility;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

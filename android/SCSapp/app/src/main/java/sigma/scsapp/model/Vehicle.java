@@ -1,4 +1,4 @@
-package sigma.scsapp;
+package sigma.scsapp.model;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package sigma.scsapp;
+package sigma.scsapp.dbhelpers;
 
 
 import android.app.ProgressDialog;
@@ -20,6 +20,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import sigma.scsapp.activities.LogActivity;
+import sigma.scsapp.R;
+import sigma.scsapp.remote.request;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
@@ -92,7 +96,7 @@ public class Parser_User extends AppCompatActivity {
         // create a method that return the data from database and parse it to json.
         @Override
         protected Void doInBackground(Void... arg0) {
-            Server_Connection ServerCon = new Server_Connection();
+            request ServerCon = new request();
 
             // Making a request to url and getting response
             String jsonStr = ServerCon.requestURL(url);

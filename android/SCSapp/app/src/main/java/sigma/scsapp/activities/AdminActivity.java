@@ -1,4 +1,4 @@
-package sigma.scsapp;
+package sigma.scsapp.activities;
 
 
 import android.annotation.TargetApi;
@@ -21,6 +21,9 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 import java.util.List;
+
+import sigma.scsapp.utility.AppCompatPreferenceActivity;
+import sigma.scsapp.R;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On

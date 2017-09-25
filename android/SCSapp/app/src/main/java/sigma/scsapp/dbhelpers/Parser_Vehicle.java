@@ -1,4 +1,4 @@
-package sigma.scsapp;
+package sigma.scsapp.dbhelpers;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -19,6 +19,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import sigma.scsapp.R;
+import sigma.scsapp.remote.request;
+
 
 // This class will Get students and Parse them with Json.
 public class Parser_Vehicle extends AppCompatActivity {
@@ -34,7 +37,7 @@ public class Parser_Vehicle extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_list_of_booking);
+        setContentView(R.layout.user_list);
         Log.i("Tag", "Starting Parser-vech activity");
 
         // SETUP
@@ -90,7 +93,7 @@ public class Parser_Vehicle extends AppCompatActivity {
         // create a method that return the data from database and parse it to json.
         @Override
         protected Void doInBackground(Void... arg0) {
-            Server_Connection ServerCon = new Server_Connection();
+            request ServerCon = new request();
             Log.e(TAG, "Response before json on URL:" + url);
             // Making a request to url and getting response
             String jsonStr = ServerCon.requestURL(url);

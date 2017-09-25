@@ -1,4 +1,4 @@
-package sigma.scsapp;
+package sigma.scsapp.model;
 
 /**
  * Created by Niklas on 2017-09-12.
