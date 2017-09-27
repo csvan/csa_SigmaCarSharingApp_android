@@ -9,13 +9,12 @@ import android.widget.DatePicker;
 
 import java.util.Calendar;
 
-import static android.support.v7.appcompat.R.id.time;
-
 /**
  * Created by Niklas on 2017-09-21.
  */
 
-public  class DatePickerFragment extends DialogFragment
+public class DatePickerFragment
+        extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
     @Override
@@ -27,17 +26,14 @@ public  class DatePickerFragment extends DialogFragment
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         // Create a new instance of DatePickerDialog and return it
-        return new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener)getActivity(), year, month, day);
+        return new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener) getActivity(), year, month, day);
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-    Log.i("tag for Date", "onDateSet activated in DatePickerFragment, should be in Bookingform?");
+        Log.i("tag for Date", "onDateSet activated in DatePickerFragment, should be in Bookingform?");
 
         // TODO: 2017-09-21 #1 Convert into object 
         // TODO: 2017-09-21 #2 Return object into json
         // TODO: 2017-09-21 #3 send json to the DB
-
-
-
     }
 }

@@ -1,27 +1,22 @@
 package sigma.scsapp.booking;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import sigma.scsapp.R;
-import sigma.scsapp.model.Booking;
-
-import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import sigma.scsapp.R;
 
 
 public class BookingActivity extends Activity {
@@ -31,7 +26,6 @@ public class BookingActivity extends Activity {
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     ArrayList<String> car;
-
 
 
     @Override
@@ -47,49 +41,36 @@ public class BookingActivity extends Activity {
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 
-
         // setting list adapter
         expListView.setAdapter(listAdapter);
 
+        ListView carlist = (ListView) findViewById(R.id.booking_listOfCars);
+        car = new ArrayList<String>();
+        // TODO replace data with array of data from JSON
+        car.add("Volvo v70");
+        car.add("Volvo 6100");
+        car.add("Bubblan 19");
 
+        // Create The Adapter with passing ArrayList as 3rd parameter
+        ArrayAdapter<String> arrayAdapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, car);
+        // Set The Adapter
+        carlist.setAdapter(arrayAdapter);
 
+        // register onClickListener to handle click events on each item
+        carlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            // argument position gives the index of item which is clicked
+            public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
+                String selectedcar = car.get(position);
+                Log.i("Car TAG", "You have selected " + selectedcar);
 
-
-
-
-
-            ListView carlist=(ListView)findViewById(R.id.booking_listOfCars);
-             car = new ArrayList<String>();
-            // TODO replace data with array of data from JSON
-            car.add("Volvo v70");
-            car.add("Volvo 6100");
-            car.add("Bubblan 19");
-
-
-
-            // Create The Adapter with passing ArrayList as 3rd parameter
-            ArrayAdapter<String> arrayAdapter =
-                    new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, car);
-            // Set The Adapter
-            carlist.setAdapter(arrayAdapter);
-
-            // register onClickListener to handle click events on each item
-            carlist.setOnItemClickListener(new AdapterView.OnItemClickListener()
-            {
-                // argument position gives the index of item which is clicked
-                public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3)
-                {
-                    String selectedcar= car.get(position);
-                    Log.i("Car TAG", "You have selected " + selectedcar);
-
-                    Intent booking_form = new Intent();
-                    startActivity(new Intent(BookingActivity.this, BookingForm.class));
-                    booking_form.putExtra("carname", selectedcar);
-                    // TODO: 2017-09-21 request a timer for completion of the booking.
-                }
-            });
-        }
-
+                Intent booking_form = new Intent();
+                startActivity(new Intent(BookingActivity.this, BookingForm.class));
+                booking_form.putExtra("carname", selectedcar);
+                // TODO: 2017-09-21 request a timer for completion of the booking.
+            }
+        });
+    }
 
     /*
      * Preparing the list data
@@ -164,12 +145,8 @@ public class BookingActivity extends Activity {
         });
 
 
-        }
-
-
-
-
-
-
     }
+
+
+}
 
