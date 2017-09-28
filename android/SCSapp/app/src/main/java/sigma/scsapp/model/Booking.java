@@ -1,9 +1,6 @@
 package sigma.scsapp.model;
 
 import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -13,18 +10,21 @@ import java.util.List;
 
 public class Booking {
 
-    private long bookingId;
+    private long id;
     private long userId;
     private String reg;
-    private Date time_of_booking;
-    // private Date starting_date;
-    private Date starting_date;
-    private Time starting_time;
-    private Date ending_date;
-    private Time ending_time;
+    private Date timeOfBooking;
+    // private Date startingDate;
+    private Date startingDate;
+    private Date startingTime;
+    private Date endingDate;
+    private Date endingTime;
     private String errand;
     private String destination;
     private String purpose;
+    private Boolean isConfirmed;
+    private User user;
+    private Vehicle vehicle;
 
     private List<Booking> listOfBookings;
 
@@ -32,102 +32,159 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(long userId, String reg, Time time_of_booking, Date starting_date, Time starting_time, String errand, String destination, String purpose) {
+    public Booking(long userId, String reg, Time timeOfBooking, Date startingDate, Time startingTime, String errand, String destination, String purpose) {
         this.userId = userId;
         this.reg = reg;
-        this.time_of_booking = time_of_booking;
-        this.starting_date = starting_date;
-        this.starting_time = starting_time;
+        this.timeOfBooking = timeOfBooking;
+        this.startingDate = startingDate;
+        this.startingTime = startingTime;
         this.errand = errand;
         this.destination = destination;
         this.purpose = purpose;
     }
 
-    public long getBookingId() {
-        return bookingId;
-    }
+    public long getId()
+        {
+        return id;
+        }
 
-    public long getUserId() {
+    public long getUserId()
+        {
         return userId;
-    }
+        }
 
-    public String getReg() {
+    public void setUserId(long userId)
+        {
+        this.userId = userId;
+        }
+
+    public String getReg()
+        {
         return reg;
-    }
+        }
 
-    public void setReg(String reg) {
+    public void setReg(String reg)
+        {
         this.reg = reg;
-    }
+        }
 
-    public Date getTime_of_booking() {
-        return time_of_booking;
-    }
+    public Date getTimeOfBooking()
+        {
+        return timeOfBooking;
+        }
 
-    public void setTime_of_booking(Date time_of_booking) {
-        this.time_of_booking = time_of_booking;
-    }
+    public void setTimeOfBooking(Date timeOfBooking)
+        {
+        this.timeOfBooking = timeOfBooking;
+        }
 
-    public Date getStarting_date() {
-        return starting_date;
-    }
+    public Date getStartingDate()
+        {
+        return startingDate;
+        }
 
-    public void setStarting_date(Date starting_date) {
-        this.starting_date = starting_date;
-    }
+    public void setStartingDate(Date startingDate)
+        {
+        this.startingDate = startingDate;
+        }
 
-    public Time getStarting_time() {
-        return starting_time;
-    }
+    public Date getStartingTime()
+        {
+        return startingTime;
+        }
 
-    public void setStarting_time(Time starting_time) {
-        this.starting_time = starting_time;
-    }
+    public void setStartingTime(Date startingTime)
+        {
+        this.startingTime = startingTime;
+        }
 
-    public Date getEnding_date() {
-        return ending_date;
-    }
+    public Date getEndingDate()
+        {
+        return endingDate;
+        }
 
-    public void setEnding_date(Date ending_date) {
-        this.ending_date = ending_date;
-    }
+    public void setEndingDate(Date endingDate)
+        {
+        this.endingDate = endingDate;
+        }
 
-    public Time getEnding_time() {
-        return ending_time;
-    }
+    public Date getEndingTime()
+        {
+        return endingTime;
+        }
 
-    public void setEnding_time(Time ending_time) {
-        this.ending_time = ending_time;
-    }
+    public void setEndingTime(Date endingTime)
+        {
+        this.endingTime = endingTime;
+        }
 
-    public String getErrand() {
+    public String getErrand()
+        {
         return errand;
-    }
+        }
 
-    public void setErrand(String errand) {
+    public void setErrand(String errand)
+        {
         this.errand = errand;
-    }
+        }
 
-    public String getDestination() {
+    public String getDestination()
+        {
         return destination;
-    }
+        }
 
-    public void setDestination(String destination) {
+    public void setDestination(String destination)
+        {
         this.destination = destination;
-    }
+        }
 
-    public String getPurpose() {
+    public String getPurpose()
+        {
         return purpose;
-    }
+        }
 
-    public void setPurpose(String purpose) {
+    public void setPurpose(String purpose)
+        {
         this.purpose = purpose;
-    }
+        }
 
-    public List<Booking> getListOfBookings() {
+    public Boolean getConfirmed()
+        {
+        return isConfirmed;
+        }
+
+    public void setConfirmed(Boolean confirmed)
+        {
+        isConfirmed = confirmed;
+        }
+
+    public User getUser()
+        {
+        return user;
+        }
+
+    public void setUser(User user)
+        {
+        this.user = user;
+        }
+
+    public Vehicle getVehicle()
+        {
+        return vehicle;
+        }
+
+    public void setVehicle(Vehicle vehicle)
+        {
+        this.vehicle = vehicle;
+        }
+
+    public List<Booking> getListOfBookings()
+        {
         return listOfBookings;
-    }
+        }
 
-    public void setListOfBookings(List<Booking> listOfBookings) {
+    public void setListOfBookings(List<Booking> listOfBookings)
+        {
         this.listOfBookings = listOfBookings;
-    }
+        }
 }
