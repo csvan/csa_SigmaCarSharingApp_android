@@ -23,11 +23,14 @@ public class Booking {
     private String destination;
     private String purpose;
     private Boolean isConfirmed;
-    private User user;
     private Vehicle vehicle;
 
-    private List<Booking> listOfBookings;
+    public void setUser(List<User> user)
+        {
+        this.user = user;
+        }
 
+    private List<User> user;
 
     public Booking() {
     }
@@ -158,15 +161,6 @@ public class Booking {
         isConfirmed = confirmed;
         }
 
-    public User getUser()
-        {
-        return user;
-        }
-
-    public void setUser(User user)
-        {
-        this.user = user;
-        }
 
     public Vehicle getVehicle()
         {
@@ -178,13 +172,4 @@ public class Booking {
         this.vehicle = vehicle;
         }
 
-    public List<Booking> getListOfBookings()
-        {
-        return listOfBookings;
-        }
-
-    public void setListOfBookings(List<Booking> listOfBookings)
-        {
-        this.listOfBookings = listOfBookings;
-        }
-}
+    }
