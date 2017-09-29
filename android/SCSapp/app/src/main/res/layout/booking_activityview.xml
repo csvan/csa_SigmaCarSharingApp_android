@@ -30,11 +30,11 @@
         android:ems="10"
         android:inputType="text"
         android:text="Select region"
-        app:layout_constraintBottom_toTopOf="@+id/ex_ListView"
-        app:layout_constraintLeft_toLeftOf="@+id/ex_ListView" />
+        app:layout_constraintBottom_toTopOf="@+id/exvListView"
+        app:layout_constraintLeft_toLeftOf="@+id/exvListView" />
 
     <ExpandableListView
-        android:id="@+id/ex_ListView"
+        android:id="@+id/exvListView"
         android:layout_width="270dp"
         android:layout_height="230dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -49,7 +49,7 @@
         app:layout_constraintHorizontal_bias="0.387" />
 
     <ListView
-        android:id="@+id/booking_listOfCars"
+        android:id="@+id/lvBookingListOfCars"
         android:layout_width="292dp"
         android:layout_height="291dp"
         android:layout_marginLeft="8dp"

@@ -48,11 +48,12 @@
         <activity
             android:name=".booking.BookingActivity"
             android:label="Booking View">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <!-- LogActivity, where all the good stuff is located -->

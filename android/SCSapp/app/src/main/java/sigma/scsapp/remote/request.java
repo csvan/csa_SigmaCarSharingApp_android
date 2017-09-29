@@ -22,27 +22,6 @@ public class request {
     public request() {
     }
 
-    /* Didn't get the time to try out a connector but had problem got it to work, will try later thou, fun idea.
-    public boolean testConn() throws Exception {
-        TextView IsConnected;
-        String Httpurl = "http://10.0.2.2:8080/studentServlet?format=json&id=all";
-        if{
-
-
-            try {
-                URL url = new URL(Httpurl);
-                HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-                urlConn.connect();
-
-                assertEquals(HttpURLConnection.HTTP_OK, urlConn.getResponseCode());
-            } catch (IOException e) {
-                System.err.println("Error creating HTTP connection");
-                e.printStackTrace();
-                throw e;
-            }
-        }
-    }*/
-
 
     // Make a request.
     public String requestURL(String reqUrl)

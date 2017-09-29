@@ -3,11 +3,17 @@ package sigma.scsapp.booking;
 import android.content.Intent;
 import android.os.Bundle;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import sigma.scsapp.R;
-import sigma.scsapp.model.Booking;
 
 import android.app.Activity;
 import android.util.Log;
@@ -15,13 +21,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 
 public class BookingActivity extends Activity {
@@ -33,32 +35,22 @@ public class BookingActivity extends Activity {
     ArrayList<String> car;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.booking_activityview);
 
         // get the listview
-        expListView = (ExpandableListView) findViewById(R.id.ex_ListView);
+        expListView = (ExpandableListView) findViewById(R.id.exvListView);
 
         // preparing list data
         prepareListData();
-
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-
-
         // setting list adapter
         expListView.setAdapter(listAdapter);
 
 
-
-
-
-
-
-
-            ListView carlist=(ListView)findViewById(R.id.booking_listOfCars);
+    ListView carlist=(ListView)findViewById(R.id.lvBookingListOfCars);
              car = new ArrayList<String>();
             // TODO replace data with array of data from JSON
             car.add("Volvo v70");
@@ -110,9 +102,6 @@ public class BookingActivity extends Activity {
         locations.add("Stockholm");
         locations.add("Malmö");
         locations.add("Jonkoping");
-        locations.add("Oslo");
-        locations.add("London");
-        locations.add("Berlin");
 
         // Can add more children with the same method. List<String> cars.
         // This can create a new list that shows up AFTER you checked location.
@@ -126,6 +115,7 @@ public class BookingActivity extends Activity {
         // Listview on child click listener
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
+
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
@@ -133,6 +123,10 @@ public class BookingActivity extends Activity {
                 // getCarsfor(childPosition);
                 String postString = String.valueOf(position);
                 TextView selectedRegion = (TextView) findViewById(R.id.tv_bookingactivity_selected_region);
+
+
+
+                // For Debugging purpose
                 selectedRegion.setText(postString);
                 Log.e("Child click", "You clicked on vanue with name: " + (postString));
 
@@ -146,6 +140,7 @@ public class BookingActivity extends Activity {
                                 listDataHeader.get(groupPosition)).get(
                                 childPosition), Toast.LENGTH_SHORT)
                         .show();
+                // DEBUGG
                 return false;
             }
         });

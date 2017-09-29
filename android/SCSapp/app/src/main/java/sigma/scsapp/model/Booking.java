@@ -26,8 +26,18 @@ public class Booking {
     private String destination;
     private String purpose;
 
-    private List<Booking> listOfBookings;
 
+    public List<User> getUser()
+        {
+        return user;
+        }
+
+    public void setUser(List<User> user)
+        {
+        this.user = user;
+        }
+
+    private List<User> user;
 
     public Booking() {
     }
@@ -123,11 +133,5 @@ public class Booking {
         this.purpose = purpose;
     }
 
-    public List<Booking> getListOfBookings() {
-        return listOfBookings;
-    }
 
-    public void setListOfBookings(List<Booking> listOfBookings) {
-        this.listOfBookings = listOfBookings;
-    }
 }
