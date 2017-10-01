@@ -48,6 +48,8 @@
             >
             <!--android:background="@drawable/rounded_bg"-->
 
+
+
             <RatingBar
                 android:id="@+id/rbMovie"
                 android:layout_width="wrap_content"
