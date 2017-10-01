@@ -57,7 +57,7 @@ import sigma.scsapp.booking.*;
 
 public class BookingForm extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    private final String URL_TO_HIT = "https://jsonparsingdemo-cec5b.firebaseapp.com/jsonData/moviesData.txt";
+    private final String URL_TO_HIT = "https://10.0.2.2:8000/servertext.txt";
     private TextView tvData;
     private ListView lvBookings;
     private ProgressDialog dialog;

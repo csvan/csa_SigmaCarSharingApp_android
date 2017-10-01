@@ -1,5 +1,7 @@
 package sigma.scsapp.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Time;
 import java.util.Date;
 import java.util.List;
@@ -10,27 +12,44 @@ import java.util.List;
 
 public class Booking {
 
+    @SerializedName("id")
     private long id;
     private long userId;
+    @SerializedName("reg")
     private String reg;
+    @SerializedName("timeOfBooking")
     private Date timeOfBooking;
     // private Date startingDate;
+    @SerializedName("startingDate")
     private Date startingDate;
+    @SerializedName("startingTime")
     private Date startingTime;
+    @SerializedName("endingDate")
     private Date endingDate;
+    @SerializedName("endingTime")
     private Date endingTime;
+    @SerializedName("errand")
     private String errand;
+    @SerializedName("destination")
     private String destination;
+    @SerializedName("purpose")
     private String purpose;
+    @SerializedName("confirmed")
     private Boolean isConfirmed;
+    @SerializedName("vehicle")
     private Vehicle vehicle;
 
-    public void setUser(List<User> user)
+    private List<User> userlist;
+
+    public List<User> getUserlist()
         {
-        this.user = user;
+        return userlist;
         }
 
-    private List<User> user;
+    public void setUserlist(List<User> userlist)
+        {
+        this.userlist = userlist;
+        }
 
     public Booking() {
     }
@@ -49,6 +68,11 @@ public class Booking {
     public long getId()
         {
         return id;
+        }
+
+    public void setId(long id)
+        {
+        this.id = id;
         }
 
     public long getUserId()
@@ -161,7 +185,6 @@ public class Booking {
         isConfirmed = confirmed;
         }
 
-
     public Vehicle getVehicle()
         {
         return vehicle;
@@ -172,4 +195,5 @@ public class Booking {
         this.vehicle = vehicle;
         }
 
-    }
+
+}
