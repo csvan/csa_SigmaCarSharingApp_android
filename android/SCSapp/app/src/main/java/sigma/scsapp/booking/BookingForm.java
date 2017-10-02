@@ -57,7 +57,7 @@ import sigma.scsapp.booking.*;
 
 public class BookingForm extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    private final String URL_TO_HIT = "https://jsonparsingdemo-cec5b.firebaseapp.com/jsonData/moviesData.txt";
+    private final String URL_TO_HIT = "http://10.0.2.2:8000/servertest.txt";
     private TextView tvData;
     private ListView lvBookings;
     private ProgressDialog dialog;
@@ -111,20 +111,21 @@ public class BookingForm extends FragmentActivity implements DatePickerDialog.On
 
             try {
             URL url = new URL(params[0]);
-            Log.i("JSONTask on Background","...Url: " +url);
             connection = (HttpURLConnection) url.openConnection();
             connection.connect();
+
             Log.i("JSONTask", "Still trying to connect ... ");
             InputStream stream = connection.getInputStream();
             reader = new BufferedReader(new InputStreamReader(stream));
+
             StringBuffer buffer = new StringBuffer();
             String line ="";
+
             while ((line = reader.readLine()) != null){
             buffer.append(line);
             }
 
             String finalJson = buffer.toString();
-            Log.i("JSONTask", "Result from URL connection: " + finalJson);
 
             JSONObject parentObject = new JSONObject(finalJson);
             // Hämtar "bookings"
@@ -137,7 +138,7 @@ public class BookingForm extends FragmentActivity implements DatePickerDialog.On
             JSONObject finalObject = parentArray.getJSONObject(i);
 
             // Gson take FromJson, the finalObject into String and "parse" it with Booking.class.
-            Booking booking = gson.fromJson(finalObject.toString(), Booking.class); // a single line json parsing using Gson
+            Booking booking = gson.fromJson(finalJson, Booking.class); // a single line json parsing using Gson
 
             // adding the final object in the list
             BookingList.add(booking);
