@@ -58,7 +58,7 @@ import sigma.scsapp.model.Booking2;
 public class BookingForm extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener
     {
 
-        private final String URL_TO_HIT = "https://10.0.2.2:8000/servertext.txt";
+        private final String URL_TO_HIT = "http://10.0.2.2:8000/servertest.txt";
         private TextView tvData;
         private ListView lvBookings;
         private ProgressDialog dialog;
@@ -117,48 +117,51 @@ public class BookingForm extends FragmentActivity implements DatePickerDialog.On
                         {
                        URL url = new URL(params[0]);
                         Log.i("JSONTask on Background", "...Url: " + url);
-                       // connection = (HttpURLConnection) url.openConnection();
-                        //connection.connect();
+                        connection = (HttpURLConnection) url.openConnection();
+                        connection.connect();
                         Log.i("JSONTask", "Still trying to connect ... ");
-            /*
-            InputStream stream = connection.getInputStream();
-            reader = new BufferedReader(new InputStreamReader(stream));
-            StringBuffer buffer = new StringBuffer();
-            String line ="";
-            while ((line = reader.readLine()) != null){
-            buffer.append(line);
-            }
 
-            String finalJson = buffer.toString();
-            Log.i("JSONTask", "Result from URL connection: " + finalJson);
+                        InputStream stream = connection.getInputStream();
+                        reader = new BufferedReader(new InputStreamReader(stream));
+                        StringBuffer buffer = new StringBuffer();
+                        String line ="";
+                        while ((line = reader.readLine()) != null){
+                        buffer.append(line);
+                        }
 
-            JSONObject parentObject = new JSONObject(finalJson);
-            // Hämtar "bookings"
-            JSONArray parentArray = parentObject.getJSONArray("bookings");
-            Log.i("JSONTask","Trying to fetch Array from Object with param: "+ parentArray); */
-                        String test = new String("{       \"id\": 1,\n" +
-                                "        \"timeOfBooking\": \"2017-09-21 11:18\",\n" +
-                                "        \"startingDate\": \"2017-09-20\",\n" +
-                                "        \"startingTime\": \"08:00:00\",\n" +
-                                "        \"endingDate\": \"2017-09-17\",\n" +
-                                "        \"endingTime\": \"13:00:00\",\n" +
-                                "        \"errand\": \"Volvo Cars\",\n" +
-                                "        \"destination\": \"Lindholmen\",\n" +
-                                "        \"purpose\": \"Project briefing\",\n" +
-                                "        \"user\": \"nikgus\"\n" +
-                                "}");
-                        Log.i("tag for string"," new stirng "+ test);
-                        List<Booking2> BookingList = new ArrayList<>();
+                        String finalJson = buffer.toString();
+                        Log.i("JSONTask", "Result from URL connection: " + finalJson);
 
-                        Gson gson = new Gson();
-/*            for(int i=0; i<parentArray.length(); i++) {
-            JSONObject finalObject = parentArray.getJSONObject(i);*/
+                        JSONObject parentObject = new JSONObject(finalJson);
+                        // Hämtar "bookings"
+                        JSONArray parentArray = parentObject.getJSONArray("bookings");
+                        String finalArray = parentArray.toString();
+                        Log.i("JSONTask","Trying to fetch Array from Object with param: "+ parentArray);
+                                    String test = new String("{       \"id\": 1,\n" +
+                                            "        \"timeOfBooking\": \"2017-09-21 11:18\",\n" +
+                                            "        \"startingDate\": \"2017-09-20\",\n" +
+                                            "        \"startingTime\": \"08:00:00\",\n" +
+                                            "        \"endingDate\": \"2017-09-17\",\n" +
+                                            "        \"endingTime\": \"13:00:00\",\n" +
+                                            "        \"errand\": \"Volvo Cars\",\n" +
+                                            "        \"destination\": \"Lindholmen\",\n" +
+                                            "        \"purpose\": \"Project briefing\",\n" +
+                                            "        \"user\": \"nikgus\"\n" +
+                                            "}");
+                                    Log.i("tag for string"," new stirng "+ test);
+                                    List<Booking2> BookingList = new ArrayList<>();
 
-                        // Gson take FromJson, the finalObject into String and "parse" it with Booking.class.
-                        Booking2 booking = gson.fromJson(test, Booking2.class); // a single line json parsing using Gson
+                                    Gson gson = new Gson();
+            /*            for(int i=0; i<parentArray.length(); i++) {
+                        JSONObject finalObject = parentArray.getJSONObject(i);*/
 
-                        // adding the final object in the list
-                        BookingList.add(booking);
+
+                                    // Gson take FromJson, the finalObject into String and "parse" it with Booking.class.
+                                    Booking2 booking = new Booking2(gson.fromJson(finalArray, Booking2.class)); // a single line json parsing using Gson
+
+                                    System.out.println(gson.fromJson(test, Booking2.class).toString());
+                                    // adding the final object in the list
+                                   // BookingList.add(booking);
 
                     Log.i("JSONTask", "Returning the List from JSONtask");
                     return BookingList;
@@ -173,7 +176,10 @@ public class BookingForm extends FragmentActivity implements DatePickerDialog.On
 
                 {
                 e.printStackTrace();
-                } finally
+                } catch (JSONException e)
+                        {
+                        e.printStackTrace();
+                        } finally
 
                 {
                 if (connection != null)
