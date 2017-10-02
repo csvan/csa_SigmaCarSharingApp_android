@@ -62,5 +62,8 @@ public class LogActivity extends AppCompatActivity {
                 Log.i("Car TAG", "You have selected " + selectedcar);
             }
         });
+
+
+
     }
 }

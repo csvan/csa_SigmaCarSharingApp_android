@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -129,22 +130,31 @@ public class BookingForm extends FragmentActivity implements DatePickerDialog.On
 
             JSONObject parentObject = new JSONObject(finalJson);
             // Hämtar "bookings"
-            JSONArray parentArray = parentObject.getJSONArray("bookings");
-            Log.i("JSONTask","Trying to fetch Array from Object with param: "+ parentArray);
+           // JSONArray parentArray = parentObject.getJSONArray("bookings");
+
+            Log.i("JSONTask","Trying to fetch Array from Object with param: "+ parentObject);
+            Log.i("tag", " dsadsa" + finalJson);
             List<Booking> BookingList = new ArrayList<>();
 
+            Booking bookingclass = new Booking();
             Gson gson = new Gson();
-            for(int i=0; i<parentArray.length(); i++) {
-            JSONObject finalObject = parentArray.getJSONObject(i);
+            String bookingjson = gson.toJson(bookingclass);
+
+            //for(int i=0; i<parentArray.length(); i++) {
+            //JSONObject finalObject = parentArray.getJSONObject(i);
 
             // Gson take FromJson, the finalObject into String and "parse" it with Booking.class.
-            Booking booking = gson.fromJson(finalJson, Booking.class); // a single line json parsing using Gson
+            Booking booking = gson.fromJson(bookingjson, Booking.class); // a single line json parsing using Gson
 
             // adding the final object in the list
             BookingList.add(booking);
-            }
+
             Log.i("JSONTask","Returning the List from JSONtask");
             return BookingList;
+
+
+
+
 
             } catch (MalformedURLException e) {
             e.printStackTrace();
