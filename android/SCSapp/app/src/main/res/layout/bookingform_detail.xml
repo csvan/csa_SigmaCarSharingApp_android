@@ -72,25 +72,25 @@
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
-                android:id="@+id/tvDate"
+                android:id="@+id/tvStartDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Year"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:text="StartDate"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
 
             <TextView
                 android:id="@+id/tvStartTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Duration"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:text="StartTime"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
 
             <TextView
                 android:id="@+id/tvPurpose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Director"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:text="Purpose"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
 
 
             <TextView
