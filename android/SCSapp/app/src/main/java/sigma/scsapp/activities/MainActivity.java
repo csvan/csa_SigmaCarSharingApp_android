@@ -44,6 +44,7 @@ import sigma.scsapp.booking.BookingForm;
 import sigma.scsapp.booking.DetailActivity;
 import sigma.scsapp.booking.TimePickerFragment;
 import sigma.scsapp.model.Booking;
+import sigma.scsapp.model.BookingString;
 
 /**
  * Created by Niklas on 2017-10-03.
@@ -88,7 +89,7 @@ public class MainActivity extends ActionBarActivity
             }
 
 
-        public class JSONTask extends AsyncTask<String, String, List<Booking>>
+        public class JSONTask extends AsyncTask<String, String, List<BookingString>>
             {
 
                 @Override
@@ -100,7 +101,7 @@ public class MainActivity extends ActionBarActivity
                     }
 
                 @Override
-                protected List<Booking> doInBackground(String... params)
+                protected List<BookingString> doInBackground(String... params)
                     {
                     HttpURLConnection connection = null;
                     BufferedReader reader = null;
@@ -130,7 +131,7 @@ public class MainActivity extends ActionBarActivity
                         JSONArray parentArray = parentObject.getJSONArray("bookings");
 
                         Log.i("JSONTask", "Trying to fetch Array from Object with param: " + parentArray);
-                        List<Booking> bookingList = new ArrayList<>();
+                        List<BookingString> bookingList = new ArrayList<>();
 
                         Gson gson = new Gson();
                         for (int i = 0; i < parentArray.length(); i++)
@@ -138,7 +139,7 @@ public class MainActivity extends ActionBarActivity
                             long id = 1;
                             JSONObject finalobject = parentArray.getJSONObject(i);
                             //Booking bookingtest = new Booking(id, "köpa käk", "destination", "purpose", true );
-                            Booking bookingGson = gson.fromJson(finalobject.toString(), Booking.class); // a single line json parsing using Gson
+                            BookingString bookingGson = gson.fromJson(finalobject.toString(), BookingString.class); // a single line json parsing using Gson
                             bookingList.add(bookingGson);
                             Log.i("JSONTask", "Returning the List from JSONtask");
 
@@ -174,10 +175,10 @@ public class MainActivity extends ActionBarActivity
                     }
 
                 @Override
-                protected void onPostExecute(final List<Booking> result)
+                protected void onPostExecute(final List<BookingString> result)
                     {
                     super.onPostExecute(result);
-                    Log.i("OnPostExecute", " Trying to finish up with Row into the List");
+                    Log.i("OnPostExecute", " Trying to finish up with Row into the List with result: " + result);
                     dialog.dismiss();
                     if (result != null)
                         {
@@ -190,7 +191,7 @@ public class MainActivity extends ActionBarActivity
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                                     {
-                                    Booking booking = result.get(position); // getting the model
+                                    BookingString booking = result.get(position); // getting the model
                                     Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                                     Log.i("OnPost in OnItemClick", "Trying to send the Gson.toJson into PutExtra");
                                     intent.putExtra("bookingkey", new Gson().toJson(booking)); // converting model json into string type and sending it via intent
@@ -208,14 +209,16 @@ public class MainActivity extends ActionBarActivity
         public class BookingAdapter extends ArrayAdapter
             {
 
-                private List<Booking> bookingList;
+
+                private List<BookingString> bookingList;
                 private int resource;
                 private LayoutInflater inflater;
 
-                public BookingAdapter(Context context, int resource, List<Booking> objects)
+                public BookingAdapter(Context context, int resource, List<BookingString> objects)
                     {
                     super(context, resource, objects);
                     bookingList = objects;
+                    Log.i("BookingAdapter", "bookingList got info: " + bookingList);
                     this.resource = resource;
                     inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
                     }
@@ -224,58 +227,27 @@ public class MainActivity extends ActionBarActivity
                 public View getView(int position, View convertView, ViewGroup parent)
                     {
                     Log.i("BookingAdapter", "Starting the BookingAdapter");
-
                     ViewHolder holder = null;
                     if (convertView == null)
                         {
                         holder = new ViewHolder();
                         convertView = inflater.inflate(resource, null);
-                        holder.tvId.setText("Id" + bookingList.get(position).getId());
-                        holder.tvTimeOfBooking.setText("Time of booking" + bookingList.get(position).getTimeOfBooking());
-                        holder.tvStartDate.setText("StartDate: " + bookingList.get(position).getStartingDate());
-                        holder.tvStartTime.setText("Start Time: " + bookingList.get(position).getStartingTime());
-                        holder.tvEndDate.setText("EndDate:" + bookingList.get(position).getEndingDate());
-                        holder.tvEndTime.setText("End Time: " + bookingList.get(position).getEndingTime());
-                        holder.tvIsConfirmed.setText("Is confirmed? : " + bookingList.get(position).getIsConfirmed());
-                        holder.tvErrand.setText("Errand " + bookingList.get(position).getErrand());
-                        holder.tvDestination.setText(" Destination : " + bookingList.get(position).getDestination());
-                        holder.tvPurpose.setText("Purpose:" + bookingList.get(position).getPurpose());
+                        holder.tvId = (TextView) convertView.findViewById(R.id.tvId);
+                        holder.tvTimeOfBooking = (TextView) convertView.findViewById(R.id.tvTimeOfBooking);
+                        holder.tvStartDate = (TextView) convertView.findViewById(R.id.tvStartDate);
+                        holder.tvStartTime = (TextView) convertView.findViewById(R.id.tvStartTime);
+                        holder.tvEndDate = (TextView) convertView.findViewById(R.id.tvEndDate);
+                        holder.tvEndTime = (TextView) convertView.findViewById(R.id.tvEndTime);
+                        holder.tvIsConfirmed = (TextView) convertView.findViewById(R.id.tvIsConfirmed);
+                        holder.tvErrand = (TextView) convertView.findViewById(R.id.tvErrand);
+                        holder.tvDestination = (TextView) convertView.findViewById(R.id.tvDestination);
+                        holder.tvPurpose = (TextView) convertView.findViewById(R.id.tvPurpose);
                         convertView.setTag(holder);
 
                         } else
                         {
                         holder = (ViewHolder) convertView.getTag();
                         }
-
-                    //final ProgressBar progressBar = (ProgressBar)convertView.findViewById(R.id.progressBar);
-
-                    // Then later, when you want to display image
-            /*final ViewHolder finalHolder = holder;
-            ImageLoader.getInstance().displayImage(bookingList.get(position).getImage(), holder.ivBookingImage, new ImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String imageUri, View view) {
-                progressBar.setVisibility(View.VISIBLE);
-                finalHolder.ivBookingImage.setVisibility(View.INVISIBLE);
-                }
-
-                @Override
-                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-                progressBar.setVisibility(View.GONE);
-                finalHolder.ivBookingImage.setVisibility(View.INVISIBLE);
-                }
-
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                progressBar.setVisibility(View.GONE);
-                finalHolder.ivBookingImage.setVisibility(View.VISIBLE);
-                }
-
-                @Override
-                public void onLoadingCancelled(String imageUri, View view) {
-                progressBar.setVisibility(View.GONE);
-                finalHolder.ivBookingImage.setVisibility(View.INVISIBLE);
-                }
-            });*/
                     holder.tvId.setText("Id" + bookingList.get(position).getId());
                     holder.tvTimeOfBooking.setText("Time of booking" + bookingList.get(position).getTimeOfBooking());
                     holder.tvStartDate.setText("StartDate: " + bookingList.get(position).getStartingDate());
@@ -287,19 +259,9 @@ public class MainActivity extends ActionBarActivity
                     holder.tvDestination.setText(" Destination : " + bookingList.get(position).getDestination());
                     holder.tvPurpose.setText("Purpose:" + bookingList.get(position).getPurpose());
 
-                    // rating bar
-                    //holder.rbMovieRating.setRating(bookingList.get(position).getRating()/2);
-
-           /* StringBuffer stringBuffer = new StringBuffer();
-            for(Booking. cast : bookingList.get(position).getCastList()){
-            stringBuffer.append(cast.getName() + ", ");
-            }
-
-            holder.tvStartTime.setText("Cast:" + stringBuffer);
-            holder.tvEndTime.setText(bookingList.get(position).getStory());*/
                     return convertView;
-                    }
 
+                    }
 
                 class ViewHolder
                     {
@@ -313,13 +275,8 @@ public class MainActivity extends ActionBarActivity
                         private TextView tvErrand;
                         private TextView tvDestination;
                         private TextView tvPurpose;
-
-
                     }
-
             }
-
-
         @Override
         public boolean onCreateOptionsMenu(Menu menu)
             {
