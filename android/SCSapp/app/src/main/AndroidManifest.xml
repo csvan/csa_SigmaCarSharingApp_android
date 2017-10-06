@@ -38,10 +38,7 @@
             android:label="Main activity"
             android:theme="@style/AppTheme.NoActionBar">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
 
         </activity>
 
@@ -53,7 +50,14 @@
         <activity
             android:name=".activities.UserProfileActivity"
             android:label="@string/title_activity_user"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            </activity>
+
 
         <!-- AdminActivity, showing of amin-stuff -->
         <activity
@@ -68,7 +72,11 @@
         </activity>
 
         <!-- LogActivity, where all the good stuff is located -->
-        <activity android:name=".activities.LogActivity" />
+        <activity android:name=".activities.LogActivity">
+
+
+        </activity>
+
         <activity
             android:name=".controllers.Controller_Confirm_Booking"
             android:label="@string/title_activity_user"
@@ -84,6 +92,7 @@
         <activity android:name=".booking.BookingForm">
 
         </activity>
+
 
     </application>
 

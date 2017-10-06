@@ -54,23 +54,23 @@ public class DetailActivity extends AppCompatActivity {
     // getting the model from MainActivity send via extras
     Booking booking = new Gson().fromJson(bundleJsonFromBookingKey, Booking.class);
 
-    tvId.setText(booking.getId() + "");
+   // tvId.setText(booking.getId() + "");
     tvTimeOfBooking.setText(booking.getTimeOfBooking() + "");
-    tvStartDate.setText("Date from: " + booking.getStartingDate());
-    tvStartTime.setText("Time from:" + booking.getStartingTime());
-    tvEndDate.setText(" to "+ booking.getEndingDate());
-    tvEndTime.setText("to " + booking.getEndingTime() +".");
-    tvIsConfirmed.setText("is confirmed?" + booking.getIsConfirmed());
-    tvErrand.setText(" errand" + booking.getErrand());
-    tvDestination.setText("destination " + booking.getDestination());
-    tvPurpose.setText("Purpose:" + booking.getPurpose());
+    tvStartDate.setText(booking.getStartingDate()+ "");
+    tvStartTime.setText(booking.getStartingTime()+ "");
+    tvEndDate.setText(booking.getEndingDate()+ "");
+    tvEndTime.setText(booking.getEndingTime() +"");
+    tvIsConfirmed.setText(booking.getIsConfirmed()+ "");
+    tvErrand.setText(booking.getErrand()+ "");
+    tvDestination.setText(booking.getDestination()+"");
+    tvPurpose.setText(booking.getPurpose()+"");
 
 
     }
 
     }
     private void setUpUIViews() {
-    tvId = (TextView)findViewById(R.id.tvId);
+    // tvId = (TextView)findViewById(R.id.tvId);
     tvTimeOfBooking = (TextView)findViewById(R.id.tvTimeOfBooking);
     tvStartDate = (TextView)findViewById(R.id.tvStartDate);
     tvEndDate = (TextView)findViewById(R.id.tvEndDate);
