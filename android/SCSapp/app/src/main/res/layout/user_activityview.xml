@@ -12,6 +12,18 @@
     tools:layout_editor_absoluteY="81dp"
     tools:showIn="@layout/user_menu">
 
+    <TableRow
+        android:layout_width="385dp"
+        android:layout_height="72dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent">
+        <include layout="@layout/lower_buttons">
+
+        </include>
+    </TableRow>
+
     <LinearLayout
         android:id="@+id/layout_ListView"
         android:layout_width="342dp"
@@ -39,7 +51,9 @@
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="44dp" />
+        android:layout_marginTop="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"/>
 
     <EditText
         android:id="@+id/text_profile_name"
@@ -59,7 +73,9 @@
         android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"/>
 
     <Button
         android:id="@+id/button_booking"
@@ -117,7 +133,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/layout_ListView"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="220dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"/>
 
 
 </android.support.constraint.ConstraintLayout>

@@ -47,7 +47,6 @@ public class UserProfileActivity extends AppCompatActivity
         Button booking;
         Button log;
         Button map;
-        Button bt_acceptBooking;
 
 
 

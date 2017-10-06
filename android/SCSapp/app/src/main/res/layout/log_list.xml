@@ -13,4 +13,8 @@
 
     </ListView>
 
+    <include layout="@layout/lower_buttons">
+
+    </include>
+
 </RelativeLayout>
