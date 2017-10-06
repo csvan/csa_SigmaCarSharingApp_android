@@ -1,10 +1,8 @@
 package sigma.scsapp.activities;
 
 import android.app.ProgressDialog;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,8 +44,7 @@ import sigma.scsapp.booking.BookingActivity;
 import sigma.scsapp.booking.DetailActivity;
 import sigma.scsapp.booking.TimePickerFragment;
 import sigma.scsapp.model.BookingString;
-
-import static android.R.attr.fragment;
+import sigma.scsapp.utility.BottomNavigationViewHelper;
 
 public class LogActivity extends AppCompatActivity //implements BottomNavigationView.OnNavigationItemSelectedListener
     {
@@ -88,6 +84,41 @@ public class LogActivity extends AppCompatActivity //implements BottomNavigation
 
             // To start fetching the data when app start, uncomment below line to start the async task.
             new JSONTask().execute(URL_TO_HIT);
+
+            BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+            BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+            Menu menu = bottomNavigationView.getMenu();
+            MenuItem menuItem = menu.getItem(0);
+            menuItem.setChecked(true);
+
+            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+
+                case R.id.item_log:
+                    Intent intent1 = new Intent(LogActivity.this, LogActivity.class);
+                    startActivity(intent1);
+                    break;
+
+                case R.id.item_booking:
+                    Intent intent2 = new Intent(LogActivity.this, BookingActivity.class);
+                    startActivity(intent2);
+                    break;
+
+                case R.id.item_map:
+                    Intent intent3 = new Intent(LogActivity.this, LogActivity.class);
+                    startActivity(intent3);
+                    break;
+
+                }
+
+
+                return false;
+                }
+            });
+
+
             }
 
         public class JSONTask extends AsyncTask<String, String, List<BookingString>>
