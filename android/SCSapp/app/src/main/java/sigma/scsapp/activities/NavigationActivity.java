@@ -32,4 +32,8 @@ public class NavigationActivity extends AppCompatActivity
         Log.i("Class", "insertt map Activity");
 
         }
+
+        public NavigationActivity(View view){
+
+        };
     }

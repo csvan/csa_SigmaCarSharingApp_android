@@ -64,6 +64,7 @@ public class LogActivity extends AppCompatActivity //implements BottomNavigation
             super.onCreate(savedInstanceState);
             setContentView(R.layout.log_list);
 
+
             dialog = new ProgressDialog(this);
             dialog.setIndeterminate(true);
             dialog.setCancelable(false);
@@ -84,6 +85,7 @@ public class LogActivity extends AppCompatActivity //implements BottomNavigation
 
             // To start fetching the data when app start, uncomment below line to start the async task.
             new JSONTask().execute(URL_TO_HIT);
+
 
             BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
             BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -224,9 +226,9 @@ public class LogActivity extends AppCompatActivity //implements BottomNavigation
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                                     {
                                     BookingString booking = result.get(position); // getting the model
+                                    Toast.makeText(getApplicationContext(), "Will start selected booking activity", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LogActivity.this, DetailActivity.class);
-                                    Log.i("OnPost in OnItemClick", "Trying to send the Gson.toJson into PutExtra");
-                                    intent.putExtra("bookingkey", new Gson().toJson(booking)); // converting model json into string type and sending it via intent
+                                    //intent.putExtra("bookingkey", new Gson().toJson(booking)); // converting model json into string type and sending it via intent
                                     startActivity(intent);
                                     }
                             });

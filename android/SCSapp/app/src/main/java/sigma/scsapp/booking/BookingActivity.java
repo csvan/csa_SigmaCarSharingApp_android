@@ -8,8 +8,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import sigma.scsapp.R;
+import sigma.scsapp.activities.LogActivity;
+import sigma.scsapp.activities.UserProfileActivity;
+import sigma.scsapp.utility.BottomNavigationViewHelper;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -73,6 +80,43 @@ public class BookingActivity extends Activity
                         // TODO: 2017-09-21 request a timer for completion of the booking.
                         }
                 });
+
+            BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+            BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+            Menu menu = bottomNavigationView.getMenu();
+            MenuItem menuItem = menu.getItem(0);
+            menuItem.setChecked(true);
+
+            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
+                {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item)
+                        {
+                        switch (item.getItemId())
+                            {
+
+                            case R.id.item_log:
+                                Intent intent1 = new Intent(BookingActivity.this, LogActivity.class);
+                                startActivity(intent1);
+                                break;
+
+                            case R.id.item_booking:
+                                Intent intent2 = new Intent(BookingActivity.this, BookingActivity.class);
+                                startActivity(intent2);
+                                break;
+
+                            case R.id.item_map:
+                                Intent intent3 = new Intent(BookingActivity.this, LogActivity.class);
+                                startActivity(intent3);
+                                break;
+
+                            }
+
+
+                        return false;
+                        }
+                });
+
             }
 
     /*
