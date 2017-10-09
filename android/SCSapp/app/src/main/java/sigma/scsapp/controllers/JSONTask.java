@@ -35,15 +35,24 @@ import sigma.scsapp.utility.AsyncResponse;
  * Created by Niklas on 2017-10-09.
  */
 
+
+// BookingString ska vara generisk klass eftersom man ska skicka med vilken typ av Model man vill ha en lista utav.
 public class JSONTask extends AsyncTask<String, String, List<BookingString>>
     {
         public AsyncResponse delegate = null;
 
-        private final static String URL_TO_HIT = "";
-        private ProgressDialog dialog;
-        private ListView lvBookings;
-        public Activity activity;
+        // Class T förstår jag inte riktigt hur jag ska kunna "set" till en klass man skickar med.
+        public static String URL_TO_HIT = "http://10.0.2.2/servertest.txt";
+        public String fieldToFind = "bookings";
+        public Class<T>;
 
+        // Det är här jag inte vet hur jag ska göra. Hur ska jag kunna skicka med "BookingString.class" som en parameter och att sedan den används överallt?
+        public JSONTask(String URL_TO_HIT, String fieldToFind, Class <>)
+            {
+            this.URL_TO_HIT = URL_TO_HIT;
+            this.fieldToFind = fieldToFind;
+            this.<T> = <T>;
+            }
 
         @Override
         protected void onPreExecute()
@@ -81,7 +90,7 @@ public class JSONTask extends AsyncTask<String, String, List<BookingString>>
                 Log.i("JSONTask", "FinalJson is now: " + finalJson);
 
                 JSONObject parentObject = new JSONObject(finalJson);
-                JSONArray parentArray = parentObject.getJSONArray("bookings");
+                JSONArray parentArray = parentObject.getJSONArray(fieldToFind);
 
                 Log.i("JSONTask", "Trying to fetch Array from Object with param: " + parentArray);
                 List<BookingString> bookingList = new ArrayList<>();
@@ -91,8 +100,7 @@ public class JSONTask extends AsyncTask<String, String, List<BookingString>>
                     {
                     long id = 1;
                     JSONObject finalobject = parentArray.getJSONObject(i);
-                    //Booking bookingtest = new Booking(id, "köpa käk", "destination", "purpose", true );
-                    BookingString bookingGson = gson.fromJson(finalobject.toString(), BookingString.class); // a single line json parsing using Gson
+                    BookingString bookingGson = gson.fromJson(finalobject.toString(), BookingString.class); //  Här ska BookingString.class vara hämtat från konstruktorn.
                     bookingList.add(bookingGson);
                     Log.i("JSONTask", "Returning the List from JSONtask");
 
@@ -129,9 +137,6 @@ public class JSONTask extends AsyncTask<String, String, List<BookingString>>
             return null;
 
             }
-        public List<BookingString> getJSONArray() {
-        return doInBackground();
-        }
 
         @Override
         protected  void onPostExecute(final List<BookingString> result) {
