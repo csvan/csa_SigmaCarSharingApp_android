@@ -8,4 +8,8 @@
     <color name="white">#ffffffff</color>
     <color name="black">#ff000000</color>
 
+    <!-- new colors, might change -->
+    <color name="colorWhite">#fff</color>
+    <color name="colorGrey">#c3c3c3 </color>
+
 </resources>

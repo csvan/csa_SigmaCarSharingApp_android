@@ -11,14 +11,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -28,7 +26,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import sigma.scsapp.R;
-import sigma.scsapp.booking.BookingActivity;
 import sigma.scsapp.utility.BottomNavigationViewHelper;
 
 public class UserProfileActivity extends AppCompatActivity
@@ -39,68 +36,45 @@ public class UserProfileActivity extends AppCompatActivity
 
 
         @Override
-        protected void onCreate(Bundle savedInstanceState)
-            {
-
-            // TODO Visa vilka aktiva bokningar som finns. Visa CardView som är aktuell, annars visa inget.
-
-            // Avaliable text
-
-            // Button in the menu
-            Button booking;
-            Button log;
-            Button map;
-
+        protected void onCreate(Bundle savedInstanceState) {
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.user_drawer);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
-            BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+            BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
             BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
             Menu menu = bottomNavigationView.getMenu();
             MenuItem menuItem = menu.getItem(0);
             menuItem.setChecked(true);
 
-            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
-                {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item)
-                        {
-                        switch (item.getItemId())
-                            {
+            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
 
-                            case R.id.item_log:
-                                Intent intent1 = new Intent(UserProfileActivity.this, LogActivity.class);
-                                startActivity(intent1);
-                                break;
+                case R.id.ic_books:
+                    Intent intent2 = new Intent(UserProfileActivity.this, BookingActivity.class);
+                    startActivity(intent2);
+                    break;
 
-                            case R.id.item_booking:
-                                Intent intent2 = new Intent(UserProfileActivity.this, BookingActivity.class);
-                                startActivity(intent2);
-                                break;
+                case R.id.ic_center_focus:
+                    // Intent intent3 = new Intent(UserProfileActivity.this, LogActivity.class);
+                    // startActivity(intent3);
+                    break;
 
-                            case R.id.item_map:
-                                Intent intent3 = new Intent(UserProfileActivity.this, LogActivity.class);
-                                startActivity(intent3);
-                                break;
-
-                            }
+                case R.id.ic_backup:
+                    Intent intent4 = new Intent(UserProfileActivity.this, LogActivity.class);
+                    startActivity(intent4);
+                    break;
+                }
 
 
-                        return false;
-                        }
-                });
+                return false;
+                }
+            });
 
 
 // TODO: 2017-09-14 REMOVE WHEN DATABASE IS ONLINE
@@ -184,61 +158,12 @@ public class UserProfileActivity extends AppCompatActivity
                         }
                 });
 
-
-
-
-
-       /* THIS IS THE OLD TEST BUTTON FOR ACCEPT BOOKING
-       bt_acceptBooking = (Button) findViewById(R.id.bt_accept_booking);
-        bt_acceptBooking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("Tag", "You pressed accept your booking ------------------ ");
-                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //       .setAction("Action", null).show();
-                startActivity(new Intent(UserProfileActivity.this,Parser_Vehicle.class));
-
-            }
-        });*/
-
-            // Fix the CardView on the car. Make it "stick" to all the classes.
-            // TODO Rename the card_view_2 to something else.
-
-        /* THIS IS AN OLD TESTBUTTON FOR LIST ALL BOOKINGS
-        Button listOfBooking;
-        listOfBooking = (Button) findViewById(R.id.bt_listOfBooking);
-        listOfBooking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("Tag", "You pressed your List of Bookings ------------------ ");
-                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //       .setAction("Action", null).show();
-                   startActivity(new Intent(UserProfileActivity.this,Parser_Vehicle.class));
-
-            }
-        });*/
-
-
-              /*  LV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("Tag", "You pressed your current booking ------------------ ");
-                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //       .setAction("Action", null).show();
-                   startActivity(new Intent(UserProfileActivity.this,Parser_Vehicle.class));
-
-            }
-        });*/
-
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
             Log.i("Tag", "You pressed the naviagion drawer --------------");
             drawer.setDrawerListener(toggle);
             toggle.syncState();
-
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-            navigationView.setNavigationItemSelectedListener(this);
 
 
             // SET UP PROFILE

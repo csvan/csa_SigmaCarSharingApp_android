@@ -1,4 +1,4 @@
-package sigma.scsapp.booking;
+package sigma.scsapp.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import sigma.scsapp.R;
-import sigma.scsapp.activities.LogActivity;
-import sigma.scsapp.activities.UserProfileActivity;
+import sigma.scsapp.booking.ExpandableListAdapter;
 import sigma.scsapp.utility.BottomNavigationViewHelper;
 
 import android.support.annotation.NonNull;
@@ -42,30 +41,20 @@ public class BookingActivity extends Activity
             super.onCreate(savedInstanceState);
             setContentView(R.layout.booking_activityview);
 
-            // get the listview
             expListView = (ExpandableListView) findViewById(R.id.exvListView);
 
-            // preparing list data
             prepareListData();
             listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 
-            // setting list adapter
             expListView.setAdapter(listAdapter);
 
-            ListView carlist = (ListView) findViewById(R.id.lvBookingListOfCars);
-            car = new ArrayList<String>();
-            // TODO replace data with array of data from JSON
-            car.add("Volvo v70");
-            car.add("Volvo 6100");
-            car.add("Bubblan 19");
 
-            // Create The Adapter with passing ArrayList as 3rd parameter
-            ArrayAdapter<String> arrayAdapter =
-                    new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, car);
-            // Set The Adapter
+
+            ListView carlist = (ListView) findViewById(R.id.lvBookingListOfCars);
+
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, car);
             carlist.setAdapter(arrayAdapter);
 
-            // register onClickListener to handle click events on each item
             carlist.setOnItemClickListener(new AdapterView.OnItemClickListener()
                 {
                     // argument position gives the index of item which is clicked
@@ -75,47 +64,44 @@ public class BookingActivity extends Activity
                         Log.i("Car TAG", "You have selected " + selectedcar);
 
                         Intent booking_form = new Intent();
-                        startActivity(new Intent(BookingActivity.this, BookingForm.class));
+                        startActivity(new Intent(BookingActivity.this, BookingFormActivity.class));
                         booking_form.putExtra("carname", selectedcar);
                         // TODO: 2017-09-21 request a timer for completion of the booking.
                         }
                 });
 
-            BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+
+            // NAV MENU
+            BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
             BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
             Menu menu = bottomNavigationView.getMenu();
-            MenuItem menuItem = menu.getItem(0);
+            MenuItem menuItem = menu.getItem(1);
             menuItem.setChecked(true);
 
-            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
-                {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item)
-                        {
-                        switch (item.getItemId())
-                            {
+            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
 
-                            case R.id.item_log:
-                                Intent intent1 = new Intent(BookingActivity.this, LogActivity.class);
-                                startActivity(intent1);
-                                break;
+                case R.id.ic_books:
+                    // Current
+                    break;
 
-                            case R.id.item_booking:
-                                Intent intent2 = new Intent(BookingActivity.this, BookingActivity.class);
-                                startActivity(intent2);
-                                break;
+                case R.id.ic_center_focus:
+                 //   Intent intent3 = new Intent(BookingActivity.this, MapActivity.class);
+                 //   startActivity(intent3);
+                    break;
 
-                            case R.id.item_map:
-                                Intent intent3 = new Intent(BookingActivity.this, LogActivity.class);
-                                startActivity(intent3);
-                                break;
-
-                            }
+                case R.id.ic_backup:
+                    Intent intent4 = new Intent(BookingActivity.this, LogActivity.class);
+                    startActivity(intent4);
+                    break;
+                }
 
 
-                        return false;
-                        }
-                });
+                return false;
+                }
+            });
 
             }
 
@@ -164,7 +150,7 @@ public class BookingActivity extends Activity
 
                 // For Debugging purpose
                 selectedRegion.setText(postString);
-                Log.e("Child click", "You clicked on vanue with name: " + (postString));
+                Log.e("Child click", "You clicked on site with name: " + (postString));
 
                 expListView.collapseGroup(groupPosition);
 

@@ -40,7 +40,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sigma.scsapp.R;
-import sigma.scsapp.booking.BookingActivity;
 import sigma.scsapp.booking.DetailActivity;
 import sigma.scsapp.booking.TimePickerFragment;
 import sigma.scsapp.model.BookingString;
@@ -87,7 +86,7 @@ public class LogActivity extends AppCompatActivity //implements BottomNavigation
             new JSONTask().execute(URL_TO_HIT);
 
 
-            BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+            BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
             BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
             Menu menu = bottomNavigationView.getMenu();
             MenuItem menuItem = menu.getItem(0);
@@ -98,21 +97,20 @@ public class LogActivity extends AppCompatActivity //implements BottomNavigation
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
 
-                case R.id.item_log:
-                    Intent intent1 = new Intent(LogActivity.this, LogActivity.class);
-                    startActivity(intent1);
-                    break;
-
-                case R.id.item_booking:
+                case R.id.ic_books:
                     Intent intent2 = new Intent(LogActivity.this, BookingActivity.class);
                     startActivity(intent2);
                     break;
 
-                case R.id.item_map:
-                    Intent intent3 = new Intent(LogActivity.this, LogActivity.class);
-                    startActivity(intent3);
+                case R.id.ic_center_focus:
+                   // Intent intent3 = new Intent(LogActivity.this, MapActivity.class);
+                   // startActivity(intent3);
                     break;
 
+                case R.id.ic_backup:
+
+
+                    break;
                 }
 
 

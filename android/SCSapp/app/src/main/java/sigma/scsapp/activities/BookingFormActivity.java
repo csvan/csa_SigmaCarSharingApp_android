@@ -1,4 +1,4 @@
-package sigma.scsapp.booking;
+package sigma.scsapp.activities;
 
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
@@ -57,9 +57,9 @@ import sigma.scsapp.booking.TimePickerFragment;
 import sigma.scsapp.booking.*;
 
 
-public class BookingForm extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class BookingFormActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    public BookingForm()
+    public BookingFormActivity()
         {
         }
 
@@ -92,7 +92,7 @@ public class BookingForm extends FragmentActivity implements DatePickerDialog.On
     @Override
     public void onDateSet(DatePicker view, int y, int m, int d) {
     // Kan skicka in y,m,d i Cal direkt.
-    Log.i("Tag onDateSet ", "OnDateSet activated in the BookingForm");
+    Log.i("Tag onDateSet ", "OnDateSet activated in the BookingFormActivity");
     int year = y;
     int month = m;
     int day = d;
@@ -108,7 +108,7 @@ public class BookingForm extends FragmentActivity implements DatePickerDialog.On
     @Override
     public void onTimeSet(TimePicker view, int i, int i1) {
     // TODO: 2017-09-25 Fixa en if-sats checkpoint för knapparna (starttime och endtime)
-    Log.i("Tag on Booking", "onTimeSet activated in the BookingForm");
+    Log.i("Tag on Booking", "onTimeSet activated in the BookingFormActivity");
     int hour = view.getHour();
     int min = view.getMinute();
     setTime(hour, min);
