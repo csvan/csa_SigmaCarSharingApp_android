@@ -1,4 +1,4 @@
-package sigma.scsapp.booking;
+package sigma.scsapp.fragment;
 
 import android.widget.DatePicker;
 

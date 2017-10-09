@@ -2,59 +2,21 @@ package sigma.scsapp.activities;
 
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
-import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.icu.util.Calendar;
 import android.icu.util.GregorianCalendar;
-import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import sigma.scsapp.R;
-import sigma.scsapp.model.Booking;
-import sigma.scsapp.booking.TimePickerFragment;
-import sigma.scsapp.booking.*;
+import sigma.scsapp.fragment.*;
 
 
 public class BookingFormActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {

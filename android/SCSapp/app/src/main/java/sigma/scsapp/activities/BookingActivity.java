@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import sigma.scsapp.R;
-import sigma.scsapp.booking.ExpandableListAdapter;
+import sigma.scsapp.utility.ExpandableListAdapter;
 import sigma.scsapp.utility.BottomNavigationViewHelper;
 
 import android.support.annotation.NonNull;

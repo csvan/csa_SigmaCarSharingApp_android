@@ -3,7 +3,6 @@ package sigma.scsapp.activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -20,42 +19,32 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import sigma.scsapp.R;
-import sigma.scsapp.booking.DetailActivity;
-import sigma.scsapp.booking.TimePickerFragment;
+import sigma.scsapp.fragment.TimePickerFragment;
+import sigma.scsapp.controllers.JSONTask;
 import sigma.scsapp.model.BookingString;
+import sigma.scsapp.utility.AsyncResponse;
 import sigma.scsapp.utility.BottomNavigationViewHelper;
 
-public class LogActivity extends AppCompatActivity //implements BottomNavigationView.OnNavigationItemSelectedListener
+public class LogActivity extends AppCompatActivity implements AsyncResponse //implements BottomNavigationView.OnNavigationItemSelectedListener
     {
         private final String URL_TO_HIT = "http://10.0.2.2:8000/servertest.json";
         private TextView tvData;
         private ListView lvBookings;
         private ProgressDialog dialog;
         TimePickerFragment timepickerfrag;
+        JSONTask myJsonTask = new JSONTask();
 
 
 
-        // Git error fix - http://stackoverflow.com/questions/16614410/android-studio-checkout-github-error-createprocess-2-windows
+
+                // Git error fix - http://stackoverflow.com/questions/16614410/android-studio-checkout-github-error-createprocess-2-windows
 
         @Override
         protected void onCreate(Bundle savedInstanceState)
@@ -83,7 +72,9 @@ public class LogActivity extends AppCompatActivity //implements BottomNavigation
 
 
             // To start fetching the data when app start, uncomment below line to start the async task.
-            new JSONTask().execute(URL_TO_HIT);
+            Log.i("Tag", "." + new JSONTask().toString());
+            myJsonTask.delegate = this;
+            myJsonTask.execute(URL_TO_HIT);
 
 
             BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
@@ -118,126 +109,62 @@ public class LogActivity extends AppCompatActivity //implements BottomNavigation
                 }
             });
 
-
             }
 
-        public class JSONTask extends AsyncTask<String, String, List<BookingString>>
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu)
             {
+            Log.i("OnCreateOption", "Clickable menu");
 
-                @Override
-                protected void onPreExecute()
-                    {
-                    Log.i("JSONTask", "Start the JSONTask with url: " + URL_TO_HIT);
-                    super.onPreExecute();
-                    dialog.show();
-                    }
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.menu_confirm_booking, menu);
+            return true;
+            }
 
-                @Override
-                protected List<BookingString> doInBackground(String... params)
-                    {
-                    HttpURLConnection connection = null;
-                    BufferedReader reader = null;
-                    Log.i("JSONTask", "Will try connect to URL ...");
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item)
+            {
+            int id = item.getItemId();
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_settings)
+                {
+                new JSONTask().execute(URL_TO_HIT);
+                return true;
+                }
 
-                    try
-                        {
-                        URL url = new URL(params[0]);
-                        connection = (HttpURLConnection) url.openConnection();
-                        connection.connect();
-                        Log.i("JSONTask", "Still trying to connect ... ");
-                        InputStream stream = connection.getInputStream();
-                        reader = new BufferedReader(new InputStreamReader(stream));
-
-                        StringBuffer buffer = new StringBuffer();
-                        String line = "";
-
-                        while ((line = reader.readLine()) != null)
-                            {
-                            buffer.append(line);
-                            }
-
-                        String finalJson = buffer.toString();
-                        Log.i("JSONTask", "FinalJson is now: " + finalJson);
-
-                        JSONObject parentObject = new JSONObject(finalJson);
-                        JSONArray parentArray = parentObject.getJSONArray("bookings");
-
-                        Log.i("JSONTask", "Trying to fetch Array from Object with param: " + parentArray);
-                        List<BookingString> bookingList = new ArrayList<>();
-
-                        Gson gson = new Gson();
-                        for (int i = 0; i < parentArray.length(); i++)
-                            {
-                            long id = 1;
-                            JSONObject finalobject = parentArray.getJSONObject(i);
-                            //Booking bookingtest = new Booking(id, "köpa käk", "destination", "purpose", true );
-                            BookingString bookingGson = gson.fromJson(finalobject.toString(), BookingString.class); // a single line json parsing using Gson
-                            bookingList.add(bookingGson);
-                            Log.i("JSONTask", "Returning the List from JSONtask");
-
-                            }
-                        return bookingList;
-                        } catch (MalformedURLException e)
-                        {
-                        e.printStackTrace();
-                        } catch (IOException e)
-                        {
-                        e.printStackTrace();
-                        } catch (JSONException e)
-                        {
-                        e.printStackTrace();
-                        } finally
-                        {
-                        if (connection != null)
-                            {
-                            connection.disconnect();
-                            }
-                        try
-                            {
-                            if (reader != null)
-                                {
-                                reader.close();
-                                }
-                            } catch (IOException e)
-                            {
-                            e.printStackTrace();
-                            }
-                        }
-                    return null;
-                    }
-
-                @Override
-                protected void onPostExecute(final List<BookingString> result)
-                    {
-                    super.onPostExecute(result);
-                    Log.i("OnPostExecute", " Trying to finish up with Row into the List with result: " + result);
-                    dialog.dismiss();
-                    if (result != null)
-                        {
-                        // the Adapter takes the Row-Layout, inserting the result into it.
-                        BookingAdapter adapter = new BookingAdapter(getApplicationContext(), R.layout.bookingform_row, result);
-                        // the ListView (lvBooking) takes the adapter, in this case the Row (with the result) and add it into the ListView.
-                        lvBookings.setAdapter(adapter);
-                        lvBookings.setOnItemClickListener(new AdapterView.OnItemClickListener()
-                            {  // list item click opens a new detailed activity
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                                    {
-                                    BookingString booking = result.get(position); // getting the model
-                                    Toast.makeText(getApplicationContext(), "Will start selected booking activity", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(LogActivity.this, DetailActivity.class);
-                                    //intent.putExtra("bookingkey", new Gson().toJson(booking)); // converting model json into string type and sending it via intent
-                                    startActivity(intent);
-                                    }
-                            });
-                        } else
-                        {
-                        Toast.makeText(getApplicationContext(), "Not able to fetch data from server, please check url.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+            return super.onOptionsItemSelected(item);
             }
 
 
+        @Override
+        public void processFinish(final List<BookingString> output)
+            {
+                Log.i("Result tag", " Result from JSONTASK: " + output);
+            Log.i("OnPostExecute", " Trying to finish up with Row into the List with result: " + output);
+            dialog.dismiss();
+            if (output != null)
+                {
+                // the Adapter takes the Row-Layout, inserting the result into it.
+                BookingAdapter adapter = new BookingAdapter(LogActivity.this, R.layout.bookingform_row, output);
+                // the ListView (lvBooking) takes the adapter, in this case the Row (with the result) and add it into the ListView.
+                lvBookings.setAdapter(adapter);
+                lvBookings.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                    {  // list item click opens a new detailed activity
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                            {
+                            BookingString booking = output.get(position); // getting the model
+                            Intent intent = new Intent(LogActivity.this, DetailActivity.class);
+                            //intent.putExtra("bookingkey", new Gson().toJson(booking)); // converting model json into string type and sending it via intent
+                            startActivity(intent);
+                            }
+                    });
+                } else
+                {
+                Toast.makeText(LogActivity.this, "Not able to fetch data from server, please check url.", Toast.LENGTH_SHORT).show();
+                }
+
+            }
         public class BookingAdapter extends ArrayAdapter
             {
 
@@ -259,7 +186,7 @@ public class LogActivity extends AppCompatActivity //implements BottomNavigation
                 public View getView(int position, View convertView, ViewGroup parent)
                     {
                     Log.i("BookingAdapter", "Starting the BookingAdapter");
-                    BookingAdapter.ViewHolder holder = null;
+                    ViewHolder holder = null;
                     if (convertView == null)
                         {
                         holder = new ViewHolder();
@@ -309,32 +236,4 @@ public class LogActivity extends AppCompatActivity //implements BottomNavigation
                         private TextView tvPurpose;
                     }
             }
-
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu)
-            {
-            Log.i("OnCreateOption", "Clickable menu");
-
-            // Inflate the menu; this adds items to the action bar if it is present.
-            getMenuInflater().inflate(R.menu.menu_confirm_booking, menu);
-            return true;
-            }
-
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item)
-            {
-            int id = item.getItemId();
-            //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings)
-                {
-                new JSONTask().execute(URL_TO_HIT);
-                return true;
-                }
-
-            return super.onOptionsItemSelected(item);
-            }
-
-
-
-
     }

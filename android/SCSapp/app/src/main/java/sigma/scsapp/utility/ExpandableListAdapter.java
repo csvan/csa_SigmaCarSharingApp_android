@@ -1,4 +1,4 @@
-package sigma.scsapp.booking;
+package sigma.scsapp.utility;
 
 /**
  * Created by Niklas on 2017-09-20.

@@ -27,61 +27,47 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.AppBarOverlay">
         </activity>
-
-
         <activity
             android:name=".activities.UserProfileActivity"
             android:label="@string/title_activity_user"
             android:theme="@style/AppTheme.NoActionBar">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
         </activity>
-
 
         <!-- AdminActivity, showing of amin-stuff -->
         <activity
             android:name=".activities.AdminActivity"
             android:label="@string/title_activity_admin">
         </activity>
-
-
         <activity
             android:name=".activities.BookingActivity"
-            android:label="Booking View"
-            >
+            android:label="Booking View">
         </activity>
-
         <activity android:name=".activities.LogActivity">
         </activity>
-
         <activity
             android:name=".controllers.Controller_Confirm_Booking"
             android:label="@string/title_activity_user"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
         <activity
             android:name=".dbhelpers.Parser_Vehicle"
             android:label="@string/title_parser_vehicle"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
         <activity
             android:name=".dbhelpers.Parser_User"
             android:label="@string/title_parser_user"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity
-            android:name=".activities.BookingFormActivity">
-
+        <activity android:name=".activities.BookingFormActivity">
         </activity>
-
-
+        <activity android:name=".activities.MainActivity">
+        </activity>
     </application>
 
 </manifest>
