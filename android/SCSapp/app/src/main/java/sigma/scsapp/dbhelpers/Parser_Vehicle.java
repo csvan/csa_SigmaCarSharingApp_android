@@ -37,7 +37,7 @@ public class Parser_Vehicle extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_list);
+        setContentView(R.layout.active_booking_list);
         Log.i("Tag", "Starting Parser-vech activity");
 
         // SETUP
@@ -46,7 +46,7 @@ public class Parser_Vehicle extends AppCompatActivity {
 
         // Generate the Listview with layout
         // Using the layout User_list_of_booking and Res listofBooking.
-        lv = (ListView) findViewById(R.id.LV_listOfBooking);
+        lv = (ListView) findViewById(R.id.lv_listOfBooking);
 
         // Create new Listview and call the GetVehicle method.
         new GetVehicle().execute();
@@ -172,7 +172,7 @@ public class Parser_Vehicle extends AppCompatActivity {
             // Inser the info into the list_item_vehicle and put it into the Log_activity
             ListAdapter adapter = new SimpleAdapter(Parser_Vehicle.this, VehicleList, R.layout.list_item_vehicle,
                     new String[]{"vechName"},
-                    new int[]{R.id.TV_vech_name});
+                    new int[]{R.id.tv_item_name});
 
             lv.setAdapter(adapter);
         }

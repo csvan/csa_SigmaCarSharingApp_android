@@ -44,7 +44,7 @@ public class controller_accept_booking extends AppCompatActivity {
             // Return the Value from Position (+1) and place it into the AlertDialog.
             HashMap<String, Object> obj = (HashMap<String, Object>) adapter.getItem(position);
             final String name = (String) obj.get("vechName");
-            final TextView active_booking = (TextView) findViewById(R.id.TV_vech_name);
+            final TextView active_booking = (TextView) findViewById(R.id.tv_item_name);
             Log.d("Yourtag", name);
 
             // When pressed on Booked Vehicle, the Alert Dialog will pop up to confirm booking.

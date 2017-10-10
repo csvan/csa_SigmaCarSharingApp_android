@@ -1,5 +1,6 @@
 package sigma.scsapp.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,35 +14,50 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import sigma.scsapp.R;
+import sigma.scsapp.controllers.JSONTaskVehicle;
+import sigma.scsapp.model.Vehicle;
+import sigma.scsapp.utility.AsyncResponseVehicle;
 import sigma.scsapp.utility.BottomNavigationViewHelper;
 
 public class UserProfileActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener
+        implements NavigationView.OnNavigationItemSelectedListener, AsyncResponseVehicle
     {
-
+        private final String URL_TO_HIT = "http://10.0.2.2:8000/servertestvehicle.json";
         private boolean accepted = true;
+        ListView lvVehicle;
+        JSONTaskVehicle myJsonTask = new JSONTaskVehicle();
 
 
         @Override
-        protected void onCreate(Bundle savedInstanceState) {
+        protected void onCreate(Bundle savedInstanceState)
+            {
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.user_drawer);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
+
+            myJsonTask.delegate = this;
+            myJsonTask.execute(URL_TO_HIT);
 
 
             BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
@@ -50,111 +66,32 @@ public class UserProfileActivity extends AppCompatActivity
             MenuItem menuItem = menu.getItem(0);
             menuItem.setChecked(true);
 
-            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-
-                case R.id.ic_books:
-                    Intent intent2 = new Intent(UserProfileActivity.this, BookingActivity.class);
-                    startActivity(intent2);
-                    break;
-
-                case R.id.ic_center_focus:
-                    // Intent intent3 = new Intent(UserProfileActivity.this, LogActivity.class);
-                    // startActivity(intent3);
-                    break;
-
-                case R.id.ic_backup:
-                    Intent intent4 = new Intent(UserProfileActivity.this, LogActivity.class);
-                    startActivity(intent4);
-                    break;
-                }
-
-
-                return false;
-                }
-            });
-
-
-// TODO: 2017-09-14 REMOVE WHEN DATABASE IS ONLINE
-
-
-            ArrayList<HashMap<String, String>> cars;
-            cars = new ArrayList<>();
-
-            final HashMap<String, String> carHashMap = new HashMap<>();
-            // adding each child node to HashMap key => value
-            carHashMap.put("vechName", "Volvo");
-            carHashMap.put("vechName", "Volvo v70");
-            carHashMap.put("vechName", "Saab 95");
-
-            // adding the Hashmap into an Arraylist (studentlist)
-            cars.add(carHashMap);
-
-
-            //       View myLayout = findViewById( R.id.LV_listOfBooking ); // root View id from that link
-            //     ListView myView = myLayout.findViewById( R.id.TV_vech_name ); // id of a view contained in the included file
-            final ListAdapter adapter = new SimpleAdapter(UserProfileActivity.this, cars, R.layout.list_item_vehicle,
-                    new String[]{"vechName"},
-                    new int[]{R.id.TV_vech_name});
-
-            ListView listofBooking = (ListView) findViewById(R.id.LV_listOfBooking);
-            listofBooking.setAdapter(adapter);
-
-
-// TODO: 2017-09-14 ^^^^^REMOVE WHEN DATABASE IS ONLINE
-
-
-            // Below handels the List of all the current bookings.
-            listofBooking.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
                 {
-
-
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item)
                         {
+                        switch (item.getItemId())
+                            {
 
-                        Log.e("Tag for Listview", "You clicked on car with id: " + (position + 1));
-                        // post save the ID of student instead of the "position" from the array.
-                        int post = (position + 1);
+                            case R.id.ic_books:
+                                Intent intent2 = new Intent(UserProfileActivity.this, BookingActivity.class);
+                                startActivity(intent2);
+                                break;
+
+                            case R.id.ic_center_focus:
+                                // Intent intent3 = new Intent(UserProfileActivity.this, LogActivity.class);
+                                // startActivity(intent3);
+                                break;
+
+                            case R.id.ic_backup:
+                                Intent intent4 = new Intent(UserProfileActivity.this, LogActivity.class);
+                                startActivity(intent4);
+                                break;
+                            }
 
 
-                        // Return the Value from Position (+1) and place it into the AlertDialog.
-                        HashMap<String, Object> obj = (HashMap<String, Object>) adapter.getItem(position);
-                        final String name = (String) obj.get("vechName");
-                        final TextView active_booking = (TextView) findViewById(R.id.TV_vech_name);
-                        Log.d("Yourtag", name);
-
-                        // When pressed on Booked Vehicle, the Alert Dialog will pop up to confirm booking.
-                        AlertDialog.Builder builder = new AlertDialog.Builder(UserProfileActivity.this);
-                        builder.setMessage("Accept this booking: " + name)
-                                .setCancelable(false)
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                                    {
-                                        public void onClick(DialogInterface dialog, int id)
-                                            {
-                                            dialog.cancel();
-                                            Log.i("tag", "Accepted");
-                                            active_booking.setBackgroundColor(getResources().getColor(R.color.sigmaColorCyan));
-                                            active_booking.setTextColor(getResources().getColor(R.color.white));
-                                            active_booking.setText(name + " is ready! Click to start driving ");
-                                            }
-
-                                        boolean accepted = true;
-
-                                    })
-                                .setNegativeButton("No", new DialogInterface.OnClickListener()
-                                    {
-                                        public void onClick(DialogInterface dialog, int id)
-                                            {
-                                            dialog.cancel();
-
-                                            }
-
-                                    });
-                        AlertDialog alert = builder.create();
-                        alert.show();
+                        return false;
                         }
                 });
 
@@ -179,10 +116,6 @@ public class UserProfileActivity extends AppCompatActivity
                     newString = null;
                     } else
                     {
-
-                /* TODO: 2017-09-11 Find profile in database and Json it into an object.
-                    Create a profile and insert it into the textviews. Place the textviews whereever we need to find a profile-info.
-                 */
 
                     Log.i("test", "Setting up profile");
                     TextView profile_userId = (TextView) findViewById(R.id.text_profile_name);
@@ -249,6 +182,38 @@ public class UserProfileActivity extends AppCompatActivity
             return super.onOptionsItemSelected(item);
             }
 
+
+        @Override
+        public void processFinish(final List<Vehicle> output)
+            {
+            Log.i("Result tag", " Result from JSONTASK: " + output);
+            Log.i("OnPostExecute", " Trying to finish up with Row into the List with result: " + output);
+            if (output != null)
+                {
+                // the Adapter takes the Row-Layout, inserting the result into it.
+                VehicleAdapter adapter = new VehicleAdapter(UserProfileActivity.this, R.layout.list_row_vehicle, output);
+                // the ListView (lvBooking) takes the adapter, in this case the Row (with the result) and add it into the ListView.
+                ListView lvVehicle = (ListView) findViewById(R.id.lv_listOfBooking);
+
+                lvVehicle.setAdapter(adapter);
+                lvVehicle.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                    {  // list item click opens a new detailed activity
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                            {
+                            Vehicle booking = output.get(position); // getting the model
+                            Intent intent = new Intent(UserProfileActivity.this, DetailActivity.class);
+                            //intent.putExtra("bookingkey", new Gson().toJson(booking)); // converting model json into string type and sending it via intent
+                            startActivity(intent);
+                            }
+                    });
+                } else
+                {
+                Toast.makeText(UserProfileActivity.this, "Not able to fetch data from server, please check url.", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
         @SuppressWarnings("StatementWithEmptyBody")
         @Override
         public boolean onNavigationItemSelected(MenuItem item)
@@ -280,5 +245,90 @@ public class UserProfileActivity extends AppCompatActivity
             return true;
             }
 
+
+        public class VehicleAdapter extends ArrayAdapter
+            {
+
+
+                private List<Vehicle> bookingList;
+                private int resource;
+                private LayoutInflater inflater;
+
+                public VehicleAdapter(Context context, int resource, List<Vehicle> objects)
+                    {
+                    super(context, resource, objects);
+                    bookingList = objects;
+                    Log.i("VehicleAdapter", "bookingList got info: " + bookingList);
+                    this.resource = resource;
+                    inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                    }
+
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent)
+                    {
+                    Log.i("VehicleAdapter", "Starting the VehicleAdapter");
+                    ViewHolder holder = null;
+                    if (convertView == null)
+                        {
+                        holder = new ViewHolder();
+                        convertView = inflater.inflate(resource, null);
+                        // holder.tvId = (TextView) convertView.findViewById(R.id.tvId);
+                        holder.vehicleId = (TextView) convertView.findViewById(R.id.tvVehicleId);
+                        holder.reg = (TextView) convertView.findViewById(R.id.tvReg);
+                        holder.year = (TextView) convertView.findViewById(R.id.tvYear);
+                        holder.mileage = (TextView) convertView.findViewById(R.id.tvMileage);
+                        holder.body = (TextView) convertView.findViewById(R.id.tvBody);
+                        holder.equipment = (TextView) convertView.findViewById(R.id.tvEquipment);
+                        holder.model = (TextView) convertView.findViewById(R.id.tvModel);
+                        holder.fuel = (TextView) convertView.findViewById(R.id.tvFuel);
+                        holder.site = (TextView) convertView.findViewById(R.id.tvSite);
+                        holder.responsible = (TextView) convertView.findViewById(R.id.tvResponsible);
+                        //  holder.vehicleImage = (ImageView) convertView.findViewById(R.id.tvPurpose);
+                      //  holder.isAvalible = (TextView) convertView.findViewById(R.id.tvIsAvalible);
+                        // TODO: 2017-10-10 fix imagelink
+                      //  holder.vehicleImageLink = (TextView) convertView.findViewById(R.id.tvVehicleImageLink);
+
+                        convertView.setTag(holder);
+
+                        } else
+                        {
+                        holder = (ViewHolder) convertView.getTag();
+                        }
+                    //   holder.tvId.setText("Id" + bookingList.get(position).getId());
+                    holder.vehicleId.setText(bookingList.get(position).getVehicleId());
+                    holder.reg.setText(bookingList.get(position).getReg());
+                    holder.year.setText(bookingList.get(position).getYear());
+                    holder.mileage.setText(bookingList.get(position).getMileage());
+                    holder.body.setText(bookingList.get(position).getBody());
+                    holder.equipment.setText(bookingList.get(position).getEquipment());
+                    holder.model.setText(bookingList.get(position).getModel());
+                    holder.fuel.setText(bookingList.get(position).getFuel());
+                    holder.site.setText(bookingList.get(position).getSite());
+                    holder.responsible.setText(bookingList.get(position).getResponsible());
+                    //holder.vehicleImage.setimage(bookingList.get(position).getVehicleImage());
+                   // holder.vehicleImageLink.setText(bookingList.get(position).getVehicleImageLink());
+
+
+                    return convertView;
+
+                    }
+
+                class ViewHolder
+                    {
+                        private TextView vehicleId;
+                        private TextView reg;
+                        private TextView year;
+                        private TextView mileage;
+                        private TextView body;
+                        private TextView equipment;
+                        private TextView model;
+                        private TextView fuel;
+                        private TextView site;
+                        private TextView responsible;
+                      //  private ImageView vehicleImage;
+                      //  private TextView isAvalible;
+                      //  private TextView vehicleImageLink;
+                    }
+            }
 
     }

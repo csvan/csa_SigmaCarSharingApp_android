@@ -29,10 +29,10 @@ import sigma.scsapp.R;
 import sigma.scsapp.fragment.TimePickerFragment;
 import sigma.scsapp.controllers.JSONTask;
 import sigma.scsapp.model.BookingString;
-import sigma.scsapp.utility.AsyncResponse;
+import sigma.scsapp.utility.AsyncResponseBooking;
 import sigma.scsapp.utility.BottomNavigationViewHelper;
 
-public class LogActivity extends AppCompatActivity implements AsyncResponse //implements BottomNavigationView.OnNavigationItemSelectedListener
+public class LogActivity extends AppCompatActivity implements AsyncResponseBooking //implements BottomNavigationView.OnNavigationItemSelectedListener
     {
         private final String URL_TO_HIT = "http://10.0.2.2:8000/servertest.json";
         private TextView tvData;
@@ -138,13 +138,13 @@ public class LogActivity extends AppCompatActivity implements AsyncResponse //im
         @Override
         public void processFinish(final List<BookingString> output)
             {
-                Log.i("Result tag", " Result from JSONTASK: " + output);
+            Log.i("Result tag", " Result from JSONTASK: " + output);
             Log.i("OnPostExecute", " Trying to finish up with Row into the List with result: " + output);
             dialog.dismiss();
             if (output != null)
                 {
                 // the Adapter takes the Row-Layout, inserting the result into it.
-                BookingAdapter adapter = new BookingAdapter(LogActivity.this, R.layout.bookingform_row, output);
+                BookingAdapter adapter = new BookingAdapter(LogActivity.this, R.layout.list_row_booking, output);
                 // the ListView (lvBooking) takes the adapter, in this case the Row (with the result) and add it into the ListView.
                 lvBookings.setAdapter(adapter);
                 lvBookings.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -176,7 +176,7 @@ public class LogActivity extends AppCompatActivity implements AsyncResponse //im
                     {
                     super(context, resource, objects);
                     bookingList = objects;
-                    Log.i("BookingAdapter", "bookingList got info: " + bookingList);
+                    Log.i("VehicleAdapter", "bookingList got info: " + bookingList);
                     this.resource = resource;
                     inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
                     }
@@ -184,7 +184,7 @@ public class LogActivity extends AppCompatActivity implements AsyncResponse //im
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent)
                     {
-                    Log.i("BookingAdapter", "Starting the BookingAdapter");
+                    Log.i("VehicleAdapter", "Starting the VehicleAdapter");
                     ViewHolder holder = null;
                     if (convertView == null)
                         {

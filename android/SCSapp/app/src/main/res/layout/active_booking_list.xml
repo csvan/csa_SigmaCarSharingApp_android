@@ -7,7 +7,7 @@
     >
 
     <ListView
-        android:id="@+id/LV_listOfBooking"
+        android:id="@+id/lv_listOfBooking"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 

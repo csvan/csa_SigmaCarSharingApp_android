@@ -28,16 +28,16 @@ import java.util.List;
 
 import sigma.scsapp.R;
 import sigma.scsapp.activities.DetailActivity;
-import sigma.scsapp.model.BookingString;
-import sigma.scsapp.utility.AsyncResponseBooking;
+import sigma.scsapp.model.Vehicle;
+import sigma.scsapp.utility.AsyncResponseVehicle;
 
 /**
  * Created by Niklas on 2017-10-09.
  */
 
-public class JSONTask extends AsyncTask<String, String, List<BookingString>>
+public class JSONTaskVehicle extends AsyncTask<String, String, List<Vehicle>>
     {
-        public AsyncResponseBooking delegate = null;
+        public AsyncResponseVehicle delegate = null;
 
         private final static String URL_TO_HIT = "";
         private ProgressDialog dialog;
@@ -54,7 +54,7 @@ public class JSONTask extends AsyncTask<String, String, List<BookingString>>
             }
 
         @Override
-        protected List<BookingString> doInBackground(String... params)
+        protected List<Vehicle> doInBackground(String... params)
             {
             HttpURLConnection connection = null;
             BufferedReader reader = null;
@@ -81,23 +81,22 @@ public class JSONTask extends AsyncTask<String, String, List<BookingString>>
                 Log.i("JSONTask", "FinalJson is now: " + finalJson);
 
                 JSONObject parentObject = new JSONObject(finalJson);
-                JSONArray parentArray = parentObject.getJSONArray("bookings");
+                JSONArray parentArray = parentObject.getJSONArray("vehicle");
 
                 Log.i("JSONTask", "Trying to fetch Array from Object with param: " + parentArray);
-                List<BookingString> bookingList = new ArrayList<>();
+                List<Vehicle> vehicleList = new ArrayList<>();
 
                 Gson gson = new Gson();
                 for (int i = 0; i < parentArray.length(); i++)
                     {
-                    long id = 1;
                     JSONObject finalobject = parentArray.getJSONObject(i);
                     //Booking bookingtest = new Booking(id, "köpa käk", "destination", "purpose", true );
-                    BookingString bookingGson = gson.fromJson(finalobject.toString(), BookingString.class); // a single line json parsing using Gson
-                    bookingList.add(bookingGson);
+                    Vehicle GsonList = gson.fromJson(finalobject.toString(), Vehicle.class); // a single line json parsing using Gson
+                    vehicleList.add(GsonList);
                     Log.i("JSONTask", "Returning the List from JSONtask");
 
                     }
-                return bookingList;
+                return vehicleList;
 
 
                 } catch (MalformedURLException e)
@@ -129,14 +128,14 @@ public class JSONTask extends AsyncTask<String, String, List<BookingString>>
             return null;
 
             }
-        public List<BookingString> getJSONArray() {
+       /* public List<BookingString> getJSONArray() {
         return doInBackground();
         }
 
         @Override
         protected  void onPostExecute(final List<BookingString> result) {
         Log.i("OnPostExec", "result from OnPostExec" + result);
-        delegate.processFinish(result);
+        delegate.processFinish(result);*/
 
         }
-    }
+

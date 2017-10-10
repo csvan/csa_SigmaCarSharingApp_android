@@ -9,10 +9,10 @@ import android.widget.ImageView;
 
 public class Vehicle {
 
-    private Integer vehicleId;
+    private String vehicleId;
     private String reg;
-    private Integer year;
-    private Double mileage;
+    private String year;
+    private String mileage;
     private String body;
     private String equipment;
     private String model;
@@ -30,11 +30,15 @@ public class Vehicle {
     // GETTERS AND SETTERS
 
 
-    public Integer getVehicleId()
+    public String getVehicleId()
         {
         return vehicleId;
         }
 
+    public void setVehicleId(String vehicleId)
+        {
+        this.vehicleId = vehicleId;
+        }
 
     public String getReg()
         {
@@ -46,22 +50,22 @@ public class Vehicle {
         this.reg = reg;
         }
 
-    public Integer getYear()
+    public String getYear()
         {
         return year;
         }
 
-    public void setYear(Integer year)
+    public void setYear(String year)
         {
         this.year = year;
         }
 
-    public Double getMileage()
+    public String getMileage()
         {
         return mileage;
         }
 
-    public void setMileage(Double mileage)
+    public void setMileage(String mileage)
         {
         this.mileage = mileage;
         }

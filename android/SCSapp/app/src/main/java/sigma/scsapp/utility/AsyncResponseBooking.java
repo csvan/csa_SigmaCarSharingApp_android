@@ -9,6 +9,6 @@ import sigma.scsapp.model.BookingString;
  */
 
 
-public interface AsyncResponse {
+public interface AsyncResponseBooking {
     void processFinish(List<BookingString> output);
 }

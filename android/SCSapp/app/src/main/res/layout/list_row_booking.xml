@@ -61,12 +61,12 @@
             android:id="@+id/tv_car"
             android:layout_width="298dp"
             android:layout_height="30dp"
-            android:text="example_car"
-            android:textAppearance="@android:style/TextAppearance.Material.Large"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp"
             android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="@+id/guideline3"/>
+            android:layout_marginTop="8dp"
+            android:text="List of bookings"
+            android:textAppearance="@android:style/TextAppearance.Material.Large"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/tvTimeOfBooking"
