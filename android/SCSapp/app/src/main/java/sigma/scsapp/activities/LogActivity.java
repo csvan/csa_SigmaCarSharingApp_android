@@ -72,7 +72,6 @@ public class LogActivity extends AppCompatActivity implements AsyncResponse //im
 
 
             // To start fetching the data when app start, uncomment below line to start the async task.
-            Log.i("Tag", "." + new JSONTask().toString());
             myJsonTask.delegate = this;
             myJsonTask.execute(URL_TO_HIT);
 

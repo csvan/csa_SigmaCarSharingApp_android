@@ -139,33 +139,4 @@ public class JSONTask extends AsyncTask<String, String, List<BookingString>>
         delegate.processFinish(result);
 
         }
-       /* @Override
-        protected void onPostExecute(final List<BookingString> result)
-            {
-            onPostExecute(result);
-            Log.i("OnPostExecute", " Trying to finish up with Row into the List with result: " + result);
-            dialog.dismiss();
-            if (result != null)
-                {
-                // the Adapter takes the Row-Layout, inserting the result into it.
-                BookingAdapter adapter = new BookingAdapter(activity, R.layout.bookingform_row, result);
-                // the ListView (lvBooking) takes the adapter, in this case the Row (with the result) and add it into the ListView.
-                lvBookings.setAdapter(adapter);
-                lvBookings.setOnItemClickListener(new AdapterView.OnItemClickListener()
-                    {  // list item click opens a new detailed activity
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                            {
-                            BookingString booking = result.get(position); // getting the model
-                            Intent intent = new Intent(activity, DetailActivity.class);
-                            //intent.putExtra("bookingkey", new Gson().toJson(booking)); // converting model json into string type and sending it via intent
-                            startActivity(intent);
-                            }
-                    });
-                } else
-                {
-                Toast.makeText(activity, "Not able to fetch data from server, please check url.", Toast.LENGTH_SHORT).show();
-                }
-
-            }*/
     }
