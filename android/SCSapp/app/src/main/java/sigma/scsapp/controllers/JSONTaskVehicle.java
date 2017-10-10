@@ -128,14 +128,18 @@ public class JSONTaskVehicle extends AsyncTask<String, String, List<Vehicle>>
             return null;
 
             }
-       /* public List<BookingString> getJSONArray() {
-        return doInBackground();
-        }
+
+        public List<Vehicle> getJSONArray()
+            {
+            return doInBackground();
+            }
 
         @Override
-        protected  void onPostExecute(final List<BookingString> result) {
-        Log.i("OnPostExec", "result from OnPostExec" + result);
-        delegate.processFinish(result);*/
+        protected void onPostExecute(final List<Vehicle> result)
+            {
+            Log.i("OnPostExec", "result from OnPostExec" + result);
+            delegate.processFinish(result);
 
-        }
+            }
+    }
 

@@ -19,13 +19,28 @@ public class Vehicle {
     private String fuel;
     private String site;
     private String responsible;
-    private ImageView vehicleImage;
-    private boolean isAvalible;
+    //private ImageView vehicleImage;
+    //private boolean isAvalible;
     private String vehicleImageLink;
 
 
     public Vehicle() {
     }
+
+    public Vehicle(String vehicleId, String reg, String year, String mileage, String body, String equipment, String model, String fuel, String site, String responsible, String vehicleImageLink)
+        {
+        this.vehicleId = vehicleId;
+        this.reg = reg;
+        this.year = year;
+        this.mileage = mileage;
+        this.body = body;
+        this.equipment = equipment;
+        this.model = model;
+        this.fuel = fuel;
+        this.site = site;
+        this.responsible = responsible;
+        this.vehicleImageLink = vehicleImageLink;
+        }
 
     // GETTERS AND SETTERS
 
@@ -130,7 +145,7 @@ public class Vehicle {
         this.responsible = responsible;
         }
 
-    public ImageView getVehicleImage()
+   /* public ImageView getVehicleImage()
         {
         return vehicleImage;
         }
@@ -149,7 +164,7 @@ public class Vehicle {
         {
         isAvalible = avalible;
         }
-
+*/
     public String getVehicleImageLink()
         {
         return vehicleImageLink;

@@ -64,7 +64,7 @@ public class BookingFormActivity extends FragmentActivity implements DatePickerD
 
     private void setDate(final Calendar calendar){
     final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
-    ((TextView) findViewById(R.id.tv_)).setText(dateFormat.format(calendar.getTime()));
+    ((TextView) findViewById(R.id.tv_bookingform_set_date_start)).setText(dateFormat.format(calendar.getTime()));
     }
 
     @Override

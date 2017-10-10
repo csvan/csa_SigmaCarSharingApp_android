@@ -54,11 +54,6 @@
 
         </activity>
         <activity
-            android:name=".controllers.Controller_Confirm_Booking"
-            android:label="@string/title_activity_user"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
             android:name=".dbhelpers.Parser_Vehicle"
             android:label="@string/title_parser_vehicle"
             android:theme="@style/AppTheme.NoActionBar">

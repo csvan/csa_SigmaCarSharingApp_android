@@ -46,7 +46,7 @@ public class Parser_Vehicle extends AppCompatActivity {
 
         // Generate the Listview with layout
         // Using the layout User_list_of_booking and Res listofBooking.
-        lv = (ListView) findViewById(R.id.lv_listOfBooking);
+        lv = (ListView) findViewById(R.id.lv_listOfBookings);
 
         // Create new Listview and call the GetVehicle method.
         new GetVehicle().execute();
