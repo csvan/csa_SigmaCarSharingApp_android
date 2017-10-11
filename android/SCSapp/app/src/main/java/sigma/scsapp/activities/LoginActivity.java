@@ -19,6 +19,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import sigma.scsapp.R;
 
 /**
@@ -214,6 +217,9 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 // Simulate network access.
                 Log.i("Network Tag", "Trying connecting to DB...");
+          /*  URL url = new URL(params[0]);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.connect();*/
 
 
                 Thread.sleep(2000);

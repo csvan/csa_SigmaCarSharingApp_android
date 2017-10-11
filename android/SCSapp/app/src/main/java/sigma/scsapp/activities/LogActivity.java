@@ -191,7 +191,7 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
                         holder = new ViewHolder();
                         convertView = inflater.inflate(resource, null);
                         // holder.tvId = (TextView) convertView.findViewById(R.id.tvId);
-                        holder.tvTimeOfBooking = (TextView) convertView.findViewById(R.id.tvTimeOfBooking);
+                      //  holder.tvTimeOfBooking = (TextView) convertView.findViewById(R.id.tvTimeOfBooking);
                         holder.tvStartDate = (TextView) convertView.findViewById(R.id.tvStartDate);
                         holder.tvStartTime = (TextView) convertView.findViewById(R.id.tvStartTime);
                         holder.tvEndDate = (TextView) convertView.findViewById(R.id.tvEndDate);
@@ -207,7 +207,7 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
                         holder = (ViewHolder) convertView.getTag();
                         }
                     //   holder.tvId.setText("Id" + bookingList.get(position).getId());
-                    holder.tvTimeOfBooking.setText(bookingList.get(position).getTimeOfBooking());
+                   // holder.tvTimeOfBooking.setText(bookingList.get(position).getTimeOfBooking());
                     holder.tvStartDate.setText(bookingList.get(position).getStartingDate());
                     holder.tvStartTime.setText(bookingList.get(position).getStartingTime());
                     holder.tvEndDate.setText(bookingList.get(position).getEndingDate());

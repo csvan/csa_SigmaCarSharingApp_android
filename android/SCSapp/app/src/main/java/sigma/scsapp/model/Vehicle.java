@@ -8,7 +8,6 @@ import android.widget.ImageView;
  */
 
 public class Vehicle {
-
     private String vehicleId;
     private String reg;
     private String year;
@@ -23,9 +22,6 @@ public class Vehicle {
     //private boolean isAvalible;
     private String vehicleImageLink;
 
-
-    public Vehicle() {
-    }
 
     public Vehicle(String vehicleId, String reg, String year, String mileage, String body, String equipment, String model, String fuel, String site, String responsible, String vehicleImageLink)
         {

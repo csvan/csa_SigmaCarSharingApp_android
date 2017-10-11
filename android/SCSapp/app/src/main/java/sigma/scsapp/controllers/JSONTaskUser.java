@@ -22,14 +22,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import sigma.scsapp.model.Vehicle;
+import sigma.scsapp.model.User;
 import sigma.scsapp.utility.AsyncResponseUser;
 
 /**
  * Created by Niklas on 2017-10-09.
  */
 
-public class JSONTaskUser extends AsyncTask<String, String, List<Vehicle>>
+public class JSONTaskUser extends AsyncTask<String, String, List<User>>
     {
         public AsyncResponseUser delegate = null;
 
@@ -48,7 +48,7 @@ public class JSONTaskUser extends AsyncTask<String, String, List<Vehicle>>
             }
 
         @Override
-        protected List<Vehicle> doInBackground(String... params)
+        protected List<User> doInBackground(String... params)
             {
             HttpURLConnection connection = null;
             BufferedReader reader = null;
@@ -75,22 +75,22 @@ public class JSONTaskUser extends AsyncTask<String, String, List<Vehicle>>
                 Log.i("JSONTask", "FinalJson is now: " + finalJson);
 
                 JSONObject parentObject = new JSONObject(finalJson);
-                JSONArray parentArray = parentObject.getJSONArray("vehicle");
+                JSONArray parentArray = parentObject.getJSONArray("user");
 
                 Log.i("JSONTask", "Trying to fetch Array from Object with param: " + parentArray);
-                List<Vehicle> vehicleList = new ArrayList<>();
+                List<User> userList = new ArrayList<>();
 
                 Gson gson = new Gson();
                 for (int i = 0; i < parentArray.length(); i++)
                     {
                     JSONObject finalobject = parentArray.getJSONObject(i);
                     //Booking bookingtest = new Booking(id, "köpa käk", "destination", "purpose", true );
-                    Vehicle GsonList = gson.fromJson(finalobject.toString(), Vehicle.class); // a single line json parsing using Gson
-                    vehicleList.add(GsonList);
+                    User GsonList = gson.fromJson(finalobject.toString(), User.class); // a single line json parsing using Gson
+                    userList.add(GsonList);
                     Log.i("JSONTask", "Returning the List from JSONtask");
 
                     }
-                return vehicleList;
+                return userList;
 
 
                 } catch (MalformedURLException e)

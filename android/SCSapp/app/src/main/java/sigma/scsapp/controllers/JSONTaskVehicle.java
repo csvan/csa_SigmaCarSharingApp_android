@@ -2,13 +2,9 @@ package sigma.scsapp.controllers;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -26,8 +22,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import sigma.scsapp.R;
-import sigma.scsapp.activities.DetailActivity;
 import sigma.scsapp.model.Vehicle;
 import sigma.scsapp.utility.AsyncResponseVehicle;
 

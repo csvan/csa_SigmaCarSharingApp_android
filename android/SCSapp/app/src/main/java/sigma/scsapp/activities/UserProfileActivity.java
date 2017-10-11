@@ -1,7 +1,6 @@
 package sigma.scsapp.activities;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,7 +9,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,14 +20,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import sigma.scsapp.R;
@@ -191,7 +185,7 @@ public class UserProfileActivity extends AppCompatActivity
             if (output != null)
                 {
                 // the Adapter takes the Row-Layout, inserting the result into it.
-                VehicleAdapter adapter = new VehicleAdapter(UserProfileActivity.this, R.layout.list_item_vehicle, output);
+                VehicleAdapter adapter = new VehicleAdapter(UserProfileActivity.this, R.layout.list_row_vehicle, output);
                 // the ListView (lvBooking) takes the adapter, in this case the Row (with the result) and add it into the ListView.
                 ListView lvVehicle = (ListView) findViewById(R.id.lv_listOfCurrentBookings);
 
@@ -276,18 +270,17 @@ public class UserProfileActivity extends AppCompatActivity
                         // holder.tvId = (TextView) convertView.findViewById(R.id.tvId);
                         //holder.vehicleId = (TextView) convertView.findViewById(R.id.tvVehicleId);
                         //holder.reg = (TextView) convertView.findViewById(R.id.tvReg);
-                        holder.year = (TextView) convertView.findViewById(R.id.tv_item_name);
-                       /* holder.mileage = (TextView) convertView.findViewById(R.id.tvMileage);
-                        holder.body = (TextView) convertView.findViewById(R.id.tvBody);
-                        holder.equipment = (TextView) convertView.findViewById(R.id.tvEquipment);
+                      //  holder.year = (TextView) convertView.findViewById(R.id.tv_item_name);
+                       // holder.mileage = (TextView) convertView.findViewById(R.id.tvMileage);
+                       // holder.body = (TextView) convertView.findViewById(R.id.tvBody);
+                       // holder.equipment = (TextView) convertView.findViewById(R.id.tvEquipment);
                         holder.model = (TextView) convertView.findViewById(R.id.tvModel);
-                        holder.fuel = (TextView) convertView.findViewById(R.id.tvFuel);
+                       // holder.fuel = (TextView) convertView.findViewById(R.id.tvFuel);
                         holder.site = (TextView) convertView.findViewById(R.id.tvSite);
-                        holder.responsible = (TextView) convertView.findViewById(R.id.tvResponsible);
-                        holder.vehicleImage = (ImageView) convertView.findViewById(R.id.tvPurpose);
-                        holder.isAvalible = (TextView) convertView.findViewById(R.id.tvIsAvalible);
-                        TODO: 2017-10-10 fix imagelink
-                        holder.vehicleImageLink = (TextView) convertView.findViewById(R.id.tvVehicleImageLink);*/
+                       // holder.responsible = (TextView) convertView.findViewById(R.id.tvResponsible);
+                       // holder.vehicleImage = (ImageView) convertView.findViewById(R.id.tvPurpose);
+                       // holder.isAvalible = (TextView) convertView.findViewById(R.id.tvIsAvalible);
+                       // holder.vehicleImageLink = (TextView) convertView.findViewById(R.id.tvVehicleImageLink);
 
                         convertView.setTag(holder);
 
@@ -298,16 +291,16 @@ public class UserProfileActivity extends AppCompatActivity
                     //   holder.tvId.setText("Id" + bookingList.get(position).getId());
                   //  holder.vehicleId.setText(bookingList.get(position).getVehicleId());
                   //  holder.reg.setText(bookingList.get(position).getReg());
-                    holder.year.setText(bookingList.get(position).getYear());
-                 /* holder.mileage.setText(bookingList.get(position).getMileage());
-                    holder.body.setText(bookingList.get(position).getBody());
-                    holder.equipment.setText(bookingList.get(position).getEquipment());
+                  //  holder.year.setText(bookingList.get(position).getYear());
+                  // holder.mileage.setText(bookingList.get(position).getMileage());
+                   // holder.body.setText(bookingList.get(position).getBody());
+                  //  holder.equipment.setText(bookingList.get(position).getEquipment());
                     holder.model.setText(bookingList.get(position).getModel());
-                    holder.fuel.setText(bookingList.get(position).getFuel());
+                  //  holder.fuel.setText(bookingList.get(position).getFuel());
                     holder.site.setText(bookingList.get(position).getSite());
-                    holder.responsible.setText(bookingList.get(position).getResponsible());
-                    holder.vehicleImage.setimage(bookingList.get(position).getVehicleImage());
-                    holder.vehicleImageLink.setText(bookingList.get(position).getVehicleImageLink());*/
+                   // holder.responsible.setText(bookingList.get(position).getResponsible());
+                   // holder.vehicleImage.setimage(bookingList.get(position).getVehicleImage());
+                   // holder.vehicleImageLink.setText(bookingList.get(position).getVehicleImageLink());
 
 
                     return convertView;

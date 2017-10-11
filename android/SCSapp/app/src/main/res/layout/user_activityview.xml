@@ -45,19 +45,19 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="@+id/layout_ListView"
                 app:layout_constraintRight_toRightOf="parent"
-                />
+                android:layout_marginBottom="-8dp"/>
 
 
             <LinearLayout
                 android:id="@+id/layout_ListView"
                 android:layout_width="342dp"
-                android:layout_height="181dp"
+                android:layout_height="281dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.511"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                >
+                tools:layout_editor_absoluteY="186dp">
 
                 <ListView
                     android:id="@+id/lv_listOfCurrentBookings"
