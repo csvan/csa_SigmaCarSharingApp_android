@@ -42,7 +42,7 @@ public class JSONTaskUser extends AsyncTask<String, String, List<User>>
         @Override
         protected void onPreExecute()
             {
-            Log.i("JSONTask", "Start the JSONTask with url: " + URL_TO_HIT);
+            Log.i("JSONTaskBooking", "Start the JSONTaskBooking with url: " + URL_TO_HIT);
             super.onPreExecute();
 //            dialog.show();
             }
@@ -52,14 +52,14 @@ public class JSONTaskUser extends AsyncTask<String, String, List<User>>
             {
             HttpURLConnection connection = null;
             BufferedReader reader = null;
-            Log.i("JSONTask", "Will try connect to URL ...");
+            Log.i("JSONTaskBooking", "Will try connect to URL ...");
 
             try
                 {
                 URL url = new URL(params[0]);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.connect();
-                Log.i("JSONTask", "Still trying to connect ... ");
+                Log.i("JSONTaskBooking", "Still trying to connect ... ");
                 InputStream stream = connection.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(stream));
 
@@ -72,22 +72,22 @@ public class JSONTaskUser extends AsyncTask<String, String, List<User>>
                     }
 
                 String finalJson = buffer.toString();
-                Log.i("JSONTask", "FinalJson is now: " + finalJson);
+                Log.i("JSONTaskBooking", "FinalJson is now: " + finalJson);
 
                 JSONObject parentObject = new JSONObject(finalJson);
                 JSONArray parentArray = parentObject.getJSONArray("user");
 
-                Log.i("JSONTask", "Trying to fetch Array from Object with param: " + parentArray);
+                Log.i("JSONTaskBooking", "Trying to fetch Array from Object with param: " + parentArray);
                 List<User> userList = new ArrayList<>();
 
                 Gson gson = new Gson();
                 for (int i = 0; i < parentArray.length(); i++)
                     {
                     JSONObject finalobject = parentArray.getJSONObject(i);
-                    //Booking bookingtest = new Booking(id, "köpa käk", "destination", "purpose", true );
+                    //BookingTest bookingtest = new BookingTest(id, "köpa käk", "destination", "purpose", true );
                     User GsonList = gson.fromJson(finalobject.toString(), User.class); // a single line json parsing using Gson
                     userList.add(GsonList);
-                    Log.i("JSONTask", "Returning the List from JSONtask");
+                    Log.i("JSONTaskBooking", "Returning the List from JSONtask");
 
                     }
                 return userList;
@@ -122,14 +122,14 @@ public class JSONTaskUser extends AsyncTask<String, String, List<User>>
             return null;
 
             }
-       /* public List<BookingString> getJSONArray() {
+       /* public List<Booking> getJSONArray() {
         return doInBackground();
         }
 
         @Override
-        protected  void onPostExecute(final List<BookingString> result) {
+        protected  void onPostExecute(final List<Booking> result) {
         Log.i("OnPostExec", "result from OnPostExec" + result);
-        delegate.processFinish(result);*/
+        delegate.processFinishVehicle(result);*/
 
         }
 

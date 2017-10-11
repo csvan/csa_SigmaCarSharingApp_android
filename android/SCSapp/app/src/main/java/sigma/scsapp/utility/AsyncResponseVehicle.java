@@ -10,5 +10,5 @@ import sigma.scsapp.model.Vehicle;
 
 
 public interface AsyncResponseVehicle {
-    void processFinish(List<Vehicle> output);
+    void processFinishVehicle(List<Vehicle> output);
 }

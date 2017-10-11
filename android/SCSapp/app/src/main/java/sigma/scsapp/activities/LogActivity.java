@@ -27,19 +27,19 @@ import java.util.List;
 
 import sigma.scsapp.R;
 import sigma.scsapp.fragment.TimePickerFragment;
-import sigma.scsapp.controllers.JSONTask;
-import sigma.scsapp.model.BookingString;
+import sigma.scsapp.controllers.JSONTaskBooking;
+import sigma.scsapp.model.Booking;
 import sigma.scsapp.utility.AsyncResponseBooking;
 import sigma.scsapp.utility.BottomNavigationViewHelper;
 
 public class LogActivity extends AppCompatActivity implements AsyncResponseBooking //implements BottomNavigationView.OnNavigationItemSelectedListener
     {
-        private final String URL_TO_HIT = "http://10.0.2.2:8000/servertest.json";
+        private final String URL_TO_HIT = "http://10.0.2.2:8000/serveruser.json";
         private TextView tvData;
         private ListView lvBookings;
         private ProgressDialog dialog;
         TimePickerFragment timepickerfrag;
-        JSONTask myJsonTask = new JSONTask();
+        JSONTaskBooking myJsonTask = new JSONTaskBooking();
 
 
 
@@ -127,7 +127,7 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
             //noinspection SimplifiableIfStatement
             if (id == R.id.action_settings)
                 {
-                new JSONTask().execute(URL_TO_HIT);
+                new JSONTaskBooking().execute(URL_TO_HIT);
                 return true;
                 }
 
@@ -136,7 +136,7 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
 
 
         @Override
-        public void processFinish(final List<BookingString> output)
+        public void processFinishBooking(final List<Booking> output)
             {
             Log.i("Result tag", " Result from JSONTASK: " + output);
             Log.i("OnPostExecute", " Trying to finish up with Row into the List with result: " + output);
@@ -152,7 +152,7 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                             {
-                            BookingString booking = output.get(position); // getting the model
+                            Booking booking = output.get(position); // getting the model
                             Intent intent = new Intent(LogActivity.this, DetailActivity.class);
                             //intent.putExtra("bookingkey", new Gson().toJson(booking)); // converting model json into string type and sending it via intent
                             startActivity(intent);
@@ -168,11 +168,11 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
             {
 
 
-                private List<BookingString> bookingList;
+                private List<Booking> bookingList;
                 private int resource;
                 private LayoutInflater inflater;
 
-                public BookingAdapter(Context context, int resource, List<BookingString> objects)
+                public BookingAdapter(Context context, int resource, List<Booking> objects)
                     {
                     super(context, resource, objects);
                     bookingList = objects;

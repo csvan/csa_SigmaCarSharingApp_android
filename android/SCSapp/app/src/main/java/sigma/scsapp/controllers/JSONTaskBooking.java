@@ -2,13 +2,9 @@ package sigma.scsapp.controllers;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -26,16 +22,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import sigma.scsapp.R;
-import sigma.scsapp.activities.DetailActivity;
-import sigma.scsapp.model.BookingString;
+import sigma.scsapp.model.Booking;
 import sigma.scsapp.utility.AsyncResponseBooking;
 
 /**
  * Created by Niklas on 2017-10-09.
  */
 
-public class JSONTask extends AsyncTask<String, String, List<BookingString>>
+public class JSONTaskBooking extends AsyncTask<String, String, List<Booking>>
     {
         public AsyncResponseBooking delegate = null;
 
@@ -48,24 +42,24 @@ public class JSONTask extends AsyncTask<String, String, List<BookingString>>
         @Override
         protected void onPreExecute()
             {
-            Log.i("JSONTask", "Start the JSONTask with url: " + URL_TO_HIT);
+            Log.i("JSONTaskBooking", "Start the JSONTaskBooking with url: " + URL_TO_HIT);
             super.onPreExecute();
 //            dialog.show();
             }
 
         @Override
-        protected List<BookingString> doInBackground(String... params)
+        protected List<Booking> doInBackground(String... params)
             {
             HttpURLConnection connection = null;
             BufferedReader reader = null;
-            Log.i("JSONTask", "Will try connect to URL ...");
+            Log.i("JSONTaskBooking", "Will try connect to URL ...");
 
             try
                 {
                 URL url = new URL(params[0]);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.connect();
-                Log.i("JSONTask", "Still trying to connect ... ");
+                Log.i("JSONTaskBooking", "Still trying to connect ... ");
                 InputStream stream = connection.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(stream));
 
@@ -78,25 +72,26 @@ public class JSONTask extends AsyncTask<String, String, List<BookingString>>
                     }
 
                 String finalJson = buffer.toString();
-                Log.i("JSONTask", "FinalJson is now: " + finalJson);
+                Log.i("JSONTaskBooking", "FinalJson is now: " + finalJson);
 
                 JSONObject parentObject = new JSONObject(finalJson);
-                JSONArray parentArray = parentObject.getJSONArray("bookings");
 
-                Log.i("JSONTask", "Trying to fetch Array from Object with param: " + parentArray);
-                List<BookingString> bookingList = new ArrayList<>();
-
-                Gson gson = new Gson();
-                for (int i = 0; i < parentArray.length(); i++)
+                try
                     {
-                    long id = 1;
-                    JSONObject finalobject = parentArray.getJSONObject(i);
-                    //Booking bookingtest = new Booking(id, "köpa käk", "destination", "purpose", true );
-                    BookingString bookingGson = gson.fromJson(finalobject.toString(), BookingString.class); // a single line json parsing using Gson
-                    bookingList.add(bookingGson);
-                    Log.i("JSONTask", "Returning the List from JSONtask");
+                    JSONArray parentArray = parentObject.getJSONArray("");
+                    List<Booking> bookingList = makeGson(parentArray);
+                    //Log.i("JSONTaskBooking", "Trying to fetch Array from Object with param: " + parentArray);
 
+                    } catch (JSONException e)
+                    {
+                    Log.i("JSONARRAY TRY", "No array found : " + e);
                     }
+
+
+
+                List<Booking> bookingList = new ArrayList<>();
+
+                bookingList.add((makeGsonObject(finalJson)));
                 return bookingList;
 
 
@@ -129,14 +124,53 @@ public class JSONTask extends AsyncTask<String, String, List<BookingString>>
             return null;
 
             }
-        public List<BookingString> getJSONArray() {
-        return doInBackground();
-        }
+
+
+        public List<Booking> getJSONArray()
+            {
+            return doInBackground();
+            }
 
         @Override
-        protected  void onPostExecute(final List<BookingString> result) {
-        Log.i("OnPostExec", "result from OnPostExec" + result);
-        delegate.processFinish(result);
+        protected void onPostExecute(final List<Booking> result)
+            {
+            Log.i("OnPostExec", "result from OnPostExec" + result);
 
-        }
+            delegate.processFinishBooking(result);
+
+            }
+
+        private List<Booking> makeGson(JSONArray parentArray)
+            {
+            List<Booking> bookingList = new ArrayList<>();
+            Gson gson = new Gson();
+            for (int i = 0; i < parentArray.length(); i++)
+                {
+                long id = 1;
+                JSONObject finalobject = null;
+                try
+                    {
+                    finalobject = parentArray.getJSONObject(i);
+                    } catch (JSONException e)
+                    {
+                    e.printStackTrace();
+                    }
+                //BookingTest bookingtest = new BookingTest(id, "köpa käk", "destination", "purpose", true );
+                Booking bookingGson = gson.fromJson(finalobject.toString(), Booking.class); // a single line json parsing using Gson
+                bookingList.add(bookingGson);
+                Log.i("JSONTaskBooking", "Returning the List from JSONtask");
+
+                }
+            return bookingList;
+            }
+
+        private Booking makeGsonObject(String finalJson)
+            {
+            Gson gson = new Gson();
+            Booking bookingGson = gson.fromJson(finalJson, Booking.class); // a single line json parsing using Gson
+            return bookingGson;
+            }
     }
+
+
+

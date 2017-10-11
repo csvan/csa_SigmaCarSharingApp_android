@@ -18,7 +18,7 @@
 
 
     <!--
-    Strings for Booking Activity
+    Strings for BookingTest Activity
      -->
 
     <!--
@@ -31,7 +31,7 @@
      -->
 
     <!--
-     Confirm Booking view
+     Confirm BookingTest view
      -->
     <string name="title_parser_vehicle">title_parser_vehicle</string>
     <string name="title_parser_user">title_parser_user</string>

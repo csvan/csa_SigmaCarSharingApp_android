@@ -60,7 +60,7 @@
                 tools:layout_editor_absoluteY="186dp">
 
                 <ListView
-                    android:id="@+id/lv_listOfCurrentBookings"
+                    android:id="@+id/lv_listOfActiveBookings"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content">
 

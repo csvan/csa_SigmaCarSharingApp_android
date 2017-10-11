@@ -10,5 +10,5 @@ import sigma.scsapp.model.User;
 
 
 public interface AsyncResponseUser {
-    void processFinish(List<User> output);
+    void processFinishUser(List<User> output);
 }

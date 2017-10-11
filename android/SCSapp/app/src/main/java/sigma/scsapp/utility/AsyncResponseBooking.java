@@ -2,7 +2,7 @@ package sigma.scsapp.utility;
 
 import java.util.List;
 
-import sigma.scsapp.model.BookingString;
+import sigma.scsapp.model.Booking;
 
 /**
  * Created by Niklas on 2017-10-09.
@@ -10,5 +10,5 @@ import sigma.scsapp.model.BookingString;
 
 
 public interface AsyncResponseBooking {
-    void processFinish(List<BookingString> output);
+    void processFinishBooking(List<Booking> output);
 }

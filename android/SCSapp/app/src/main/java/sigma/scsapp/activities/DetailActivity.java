@@ -8,15 +8,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
 import sigma.scsapp.R;
-import sigma.scsapp.model.Booking;
+import sigma.scsapp.model.BookingTest;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -52,7 +49,7 @@ public class DetailActivity extends AppCompatActivity {
     String bundleJsonFromBookingKey = bundle.getString("bookingkey");
     Log.i("DetailActivity Log", "Printing out BundleJsonFromBookingKey" + bundleJsonFromBookingKey);
     // getting the model from MainActivity send via extras
-    Booking booking = new Gson().fromJson(bundleJsonFromBookingKey, Booking.class);
+    BookingTest booking = new Gson().fromJson(bundleJsonFromBookingKey, BookingTest.class);
 
    // tvId.setText(booking.getId() + "");
     tvTimeOfBooking.setText(booking.getTimeOfBooking() + "");

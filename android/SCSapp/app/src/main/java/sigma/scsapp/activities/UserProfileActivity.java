@@ -27,31 +27,47 @@ import android.widget.Toast;
 import java.util.List;
 
 import sigma.scsapp.R;
+import sigma.scsapp.controllers.JSONTaskBooking;
 import sigma.scsapp.controllers.JSONTaskVehicle;
+import sigma.scsapp.model.Booking;
+import sigma.scsapp.model.User;
 import sigma.scsapp.model.Vehicle;
+import sigma.scsapp.utility.AsyncResponseBooking;
 import sigma.scsapp.utility.AsyncResponseVehicle;
 import sigma.scsapp.utility.BottomNavigationViewHelper;
 
 public class UserProfileActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, AsyncResponseVehicle
+        implements NavigationView.OnNavigationItemSelectedListener, AsyncResponseVehicle, AsyncResponseBooking
     {
-        private final String URL_TO_HIT = "http://10.0.2.2:8000/servertestvehicle.json";
+        private final String URL_TO_HIT = "http://10.0.2.2:8000/servertest.json";
         private boolean accepted = true;
-        ListView lvVehicle;
-        JSONTaskVehicle myJsonTask = new JSONTaskVehicle();
+        User user = new User();
+        JSONTaskVehicle mJsonTaskVehicle = new JSONTaskVehicle();
+        JSONTaskBooking mJsonTaskBooking = new JSONTaskBooking();
 
 
         @Override
         protected void onCreate(Bundle savedInstanceState)
             {
+            String userId = "2"; //user.getId();
+            String bookingId = null; //
+            String activeBookingsForUser = "users/"+ userId + "/bookings/";
+            String specifikBookingForUser = "users/"+ userId + "/bookings/" + bookingId;
+            String getAllVehicle = "servertestvehicle.json";
+            String getUser = "serveruser.json";
+            String getAllBookings = "servertest.json";
+
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.user_drawer);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
-            myJsonTask.delegate = this;
-            myJsonTask.execute(URL_TO_HIT);
+            //mJsonTaskVehicle.delegate = this;
+            //mJsonTaskVehicle.execute(URL_TO_HIT);
+
+            mJsonTaskBooking.delegate = this;
+            mJsonTaskBooking.execute(URL_TO_HIT);
 
 
             BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
@@ -178,16 +194,16 @@ public class UserProfileActivity extends AppCompatActivity
 
 
         @Override
-        public void processFinish(final List<Vehicle> output)
+        public void processFinishVehicle(final List<Vehicle> output)
             {
             Log.i("Result tag", " Result from JSONTASK: " + output);
             Log.i("OnPostExecute", " Trying to finish up with Row into the List with result: " + output);
             if (output != null)
                 {
                 // the Adapter takes the Row-Layout, inserting the result into it.
-                VehicleAdapter adapter = new VehicleAdapter(UserProfileActivity.this, R.layout.list_row_vehicle, output);
+                VehicleAdapter adapter = new VehicleAdapter(UserProfileActivity.this, R.layout.list_row_active_booking, output);
                 // the ListView (lvBooking) takes the adapter, in this case the Row (with the result) and add it into the ListView.
-                ListView lvVehicle = (ListView) findViewById(R.id.lv_listOfCurrentBookings);
+                ListView lvVehicle = (ListView) findViewById(R.id.lv_listOfActiveBookings);
 
                 lvVehicle.setAdapter(adapter);
                 lvVehicle.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -240,20 +256,52 @@ public class UserProfileActivity extends AppCompatActivity
             return true;
             }
 
+        @Override
+        public void processFinishBooking(final List<Booking> output)
+            {
+            Log.i("Result tag", " Result from JSONTASK: " + output);
+            Log.i("OnPostExecute", " Trying to finish up with Row into the List with result: " + output);
+            if (output != null)
+                {
+                // the Adapter takes the Row-Layout, inserting the result into it.
+                BookingAdapter adapter = new BookingAdapter(UserProfileActivity.this, R.layout.list_row_active_booking, output);
+                // the ListView (lvBooking) takes the adapter, in this case the Row (with the result) and add it into the ListView.
+                ListView lvVehicle = (ListView) findViewById(R.id.lv_listOfActiveBookings);
+
+                lvVehicle.setAdapter(adapter);
+                lvVehicle.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                    {  // list item click opens a new detailed activity
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                            {
+                            Booking booking = output.get(position); // getting the model
+                            Intent intent = new Intent(UserProfileActivity.this, DetailActivity.class);
+                            //intent.putExtra("bookingkey", new Gson().toJson(booking)); // converting model json into string type and sending it via intent
+                            // startActivity(intent);
+                            Toast.makeText(UserProfileActivity.this, "You clicked on your active booking", Toast.LENGTH_SHORT).show();
+                            }
+                    });
+                } else
+                {
+                Toast.makeText(UserProfileActivity.this, "Not able to fetch data from server, please check url.", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
 
         public class VehicleAdapter extends ArrayAdapter
             {
 
 
-                private List<Vehicle> bookingList;
+                private List<Vehicle> vehicleList;
                 private int resource;
                 private LayoutInflater inflater;
 
                 public VehicleAdapter(Context context, int resource, List<Vehicle> objects)
                     {
                     super(context, resource, objects);
-                    bookingList = objects;
-                    Log.i("VehicleAdapter", "bookingList got info: " + bookingList);
+                    vehicleList = objects;
+                    Log.i("VehicleAdapter", "vehicleList got info: " + vehicleList);
                     this.resource = resource;
                     inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
                     }
@@ -275,7 +323,6 @@ public class UserProfileActivity extends AppCompatActivity
                        // holder.body = (TextView) convertView.findViewById(R.id.tvBody);
                        // holder.equipment = (TextView) convertView.findViewById(R.id.tvEquipment);
                         holder.model = (TextView) convertView.findViewById(R.id.tvModel);
-                       // holder.fuel = (TextView) convertView.findViewById(R.id.tvFuel);
                         holder.site = (TextView) convertView.findViewById(R.id.tvSite);
                        // holder.responsible = (TextView) convertView.findViewById(R.id.tvResponsible);
                        // holder.vehicleImage = (ImageView) convertView.findViewById(R.id.tvPurpose);
@@ -288,19 +335,18 @@ public class UserProfileActivity extends AppCompatActivity
                         {
                         holder = (ViewHolder) convertView.getTag();
                         }
-                    //   holder.tvId.setText("Id" + bookingList.get(position).getId());
-                  //  holder.vehicleId.setText(bookingList.get(position).getVehicleId());
-                  //  holder.reg.setText(bookingList.get(position).getReg());
-                  //  holder.year.setText(bookingList.get(position).getYear());
-                  // holder.mileage.setText(bookingList.get(position).getMileage());
-                   // holder.body.setText(bookingList.get(position).getBody());
-                  //  holder.equipment.setText(bookingList.get(position).getEquipment());
-                    holder.model.setText(bookingList.get(position).getModel());
-                  //  holder.fuel.setText(bookingList.get(position).getFuel());
-                    holder.site.setText(bookingList.get(position).getSite());
-                   // holder.responsible.setText(bookingList.get(position).getResponsible());
-                   // holder.vehicleImage.setimage(bookingList.get(position).getVehicleImage());
-                   // holder.vehicleImageLink.setText(bookingList.get(position).getVehicleImageLink());
+                    //   holder.tvId.setText("Id" + vehicleList.get(position).getId());
+                  //  holder.vehicleId.setText(vehicleList.get(position).getVehicleId());
+                  //  holder.reg.setText(vehicleList.get(position).getReg());
+                  //  holder.year.setText(vehicleList.get(position).getYear());
+                  // holder.mileage.setText(vehicleList.get(position).getMileage());
+                   // holder.body.setText(vehicleList.get(position).getBody());
+                  //  holder.equipment.setText(vehicleList.get(position).getEquipment());
+                    holder.model.setText(vehicleList.get(position).getModel());
+                    holder.site.setText(vehicleList.get(position).getSite());
+                   // holder.responsible.setText(vehicleList.get(position).getResponsible());
+                   // holder.vehicleImage.setimage(vehicleList.get(position).getVehicleImage());
+                   // holder.vehicleImageLink.setText(vehicleList.get(position).getVehicleImageLink());
 
 
                     return convertView;
@@ -325,4 +371,67 @@ public class UserProfileActivity extends AppCompatActivity
                     }
             }
 
+        public class BookingAdapter extends ArrayAdapter
+            {
+
+
+                private List<Booking> bookingList;
+                private int resource;
+                private LayoutInflater inflater;
+
+                public BookingAdapter(Context context, int resource, List<Booking> objects)
+                    {
+                    super(context, resource, objects);
+                    bookingList = objects;
+                    this.resource = resource;
+                    inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                    }
+
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent)
+                    {
+                    ViewHolder holder = null;
+                    if (convertView == null)
+                        {
+                        holder = new ViewHolder();
+                        convertView = inflater.inflate(resource, null);
+                        holder.tvStartDate = (TextView) convertView.findViewById(R.id.tvStartDate);
+                        holder.tvStartTime = (TextView) convertView.findViewById(R.id.tvStartTime);
+                        holder.tvEndDate = (TextView) convertView.findViewById(R.id.tvEndDate);
+                        holder.tvEndTime = (TextView) convertView.findViewById(R.id.tvEndTime);
+                        holder.tvErrand = (TextView) convertView.findViewById(R.id.tvErrand);
+                        holder.tvDestination = (TextView) convertView.findViewById(R.id.tvDestination);
+                        holder.tvPurpose = (TextView) convertView.findViewById(R.id.tvPurpose);
+                        convertView.setTag(holder);
+
+                        } else
+                        {
+                        holder = (ViewHolder) convertView.getTag();
+                        }
+                    holder.tvStartDate.setText(bookingList.get(position).getStartingDate());
+                    holder.tvStartTime.setText(bookingList.get(position).getStartingTime());
+                    holder.tvEndDate.setText(bookingList.get(position).getEndingDate());
+                    holder.tvEndTime.setText(bookingList.get(position).getEndingTime());
+                    holder.tvErrand.setText(bookingList.get(position).getErrand());
+                    holder.tvDestination.setText(bookingList.get(position).getDestination());
+                    holder.tvPurpose.setText(bookingList.get(position).getPurpose());
+
+                    return convertView;
+
+                    }
+
+                class ViewHolder
+                    {
+                        private TextView tvId;
+                        private TextView tvTimeOfBooking;
+                        private TextView tvStartDate;
+                        private TextView tvStartTime;
+                        private TextView tvEndDate;
+                        private TextView tvEndTime;
+                        private TextView tvIsConfirmed;
+                        private TextView tvErrand;
+                        private TextView tvDestination;
+                        private TextView tvPurpose;
+                    }
+            }
     }
