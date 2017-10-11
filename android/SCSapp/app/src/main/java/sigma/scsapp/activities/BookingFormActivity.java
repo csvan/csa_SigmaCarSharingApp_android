@@ -70,7 +70,7 @@ public class BookingFormActivity extends FragmentActivity implements DatePickerD
     @Override
     public void onTimeSet(TimePicker view, int i, int i1) {
     // TODO: 2017-09-25 Fixa en if-sats checkpoint för knapparna (starttime och endtime)
-    Log.i("Tag on Booking", "onTimeSet activated in the BookingFormActivity");
+    Log.i("Tag on BookingTest", "onTimeSet activated in the BookingFormActivity");
     int hour = view.getHour();
     int min = view.getMinute();
     setTime(hour, min);

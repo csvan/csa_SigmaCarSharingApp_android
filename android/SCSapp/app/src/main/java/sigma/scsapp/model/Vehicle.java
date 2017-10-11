@@ -8,33 +8,48 @@ import android.widget.ImageView;
  */
 
 public class Vehicle {
-
-    private Integer vehicleId;
+    private String vehicleId;
     private String reg;
-    private Integer year;
-    private Double mileage;
+    private String year;
+    private String mileage;
     private String body;
     private String equipment;
     private String model;
     private String fuel;
     private String site;
     private String responsible;
-    private ImageView vehicleImage;
-    private boolean isAvalible;
+    //private ImageView vehicleImage;
+    //private boolean isAvalible;
     private String vehicleImageLink;
 
 
-    public Vehicle() {
-    }
+    public Vehicle(String vehicleId, String reg, String year, String mileage, String body, String equipment, String model, String fuel, String site, String responsible, String vehicleImageLink)
+        {
+        this.vehicleId = vehicleId;
+        this.reg = reg;
+        this.year = year;
+        this.mileage = mileage;
+        this.body = body;
+        this.equipment = equipment;
+        this.model = model;
+        this.fuel = fuel;
+        this.site = site;
+        this.responsible = responsible;
+        this.vehicleImageLink = vehicleImageLink;
+        }
 
     // GETTERS AND SETTERS
 
 
-    public Integer getVehicleId()
+    public String getVehicleId()
         {
         return vehicleId;
         }
 
+    public void setVehicleId(String vehicleId)
+        {
+        this.vehicleId = vehicleId;
+        }
 
     public String getReg()
         {
@@ -46,22 +61,22 @@ public class Vehicle {
         this.reg = reg;
         }
 
-    public Integer getYear()
+    public String getYear()
         {
         return year;
         }
 
-    public void setYear(Integer year)
+    public void setYear(String year)
         {
         this.year = year;
         }
 
-    public Double getMileage()
+    public String getMileage()
         {
         return mileage;
         }
 
-    public void setMileage(Double mileage)
+    public void setMileage(String mileage)
         {
         this.mileage = mileage;
         }
@@ -126,7 +141,7 @@ public class Vehicle {
         this.responsible = responsible;
         }
 
-    public ImageView getVehicleImage()
+   /* public ImageView getVehicleImage()
         {
         return vehicleImage;
         }
@@ -145,7 +160,7 @@ public class Vehicle {
         {
         isAvalible = avalible;
         }
-
+*/
     public String getVehicleImageLink()
         {
         return vehicleImageLink;

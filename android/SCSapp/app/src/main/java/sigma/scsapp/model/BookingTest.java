@@ -1,32 +1,57 @@
 package sigma.scsapp.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.sql.Time;
+import java.util.Date;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.util.Date;
-
 /**
- * Created by Niklas on 2017-10-03.
+ * Created by Niklas on 2017-09-12.
  */
 
-public class BookingString
+public class BookingTest
     {
 
-        private String id;
-        private String timeOfBooking;
-        private String startingDate;
-        private String startingTime;
-        private String endingDate;
-        private String endingTime;
+
+        private long id;
+        @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
+        private Date timeOfBooking;
+        @JsonFormat(pattern = "YYYY-MM-dd")
+        private Date startingDate;
+        @JsonFormat(pattern = "HH:mm:ss")
+        private Date startingTime;
+        @JsonFormat(pattern = "YYYY-MM-dd")
+        private Date endingDate;
+        @JsonFormat(pattern = "HH:mm:ss")
+        private Date endingTime;
         private String errand;
         private String destination;
         private String purpose;
         private Boolean isConfirmed;
 
-        public BookingString()
+
+
+
+        @SerializedName("users")
+        private List<User> userlist;
+
+
+        public BookingTest()
             {
             }
 
-        public BookingString(String id, String timeOfBooking, String startingDate, String startingTime, String endingDate, String endingTime, String errand, String destination, String purpose, Boolean isConfirmed)
+        public BookingTest(long id, String errand, String destination, String purpose, Boolean isConfirmed)
+            {
+            this.id = id;
+            this.errand = errand;
+            this.destination = destination;
+            this.purpose = purpose;
+            this.isConfirmed = isConfirmed;
+            }
+
+        public BookingTest(long id, Date timeOfBooking, Date startingDate, Date startingTime, Date endingDate, Date endingTime, String errand, String destination, String purpose, Boolean isConfirmed)
             {
             this.id = id;
             this.timeOfBooking = timeOfBooking;
@@ -40,62 +65,68 @@ public class BookingString
             this.isConfirmed = isConfirmed;
             }
 
-        public String getId()
+        public void setUserlist(List<User> userlist)
+            {
+            this.userlist = userlist;
+            }
+
+        public long getId()
             {
             return id;
             }
 
-        public void setId(String id)
+        public void setId(long id)
             {
             this.id = id;
             }
 
-        public String getTimeOfBooking()
+
+        public Date getTimeOfBooking()
             {
             return timeOfBooking;
             }
 
-        public void setTimeOfBooking(String timeOfBooking)
+        public void setTimeOfBooking(Date timeOfBooking)
             {
             this.timeOfBooking = timeOfBooking;
             }
 
-        public String getStartingDate()
+        public Date getStartingDate()
             {
             return startingDate;
             }
 
-        public void setStartingDate(String startingDate)
+        public void setStartingDate(Date startingDate)
             {
             this.startingDate = startingDate;
             }
 
-        public String getStartingTime()
+        public Date getStartingTime()
             {
             return startingTime;
             }
 
-        public void setStartingTime(String startingTime)
+        public void setStartingTime(Date startingTime)
             {
             this.startingTime = startingTime;
             }
 
-        public String getEndingDate()
+        public Date getEndingDate()
             {
             return endingDate;
             }
 
-        public void setEndingDate(String endingDate)
+        public void setEndingDate(Date endingDate)
             {
             this.endingDate = endingDate;
             }
 
-        public String getEndingTime()
+        public Date getEndingTime()
             {
             return endingTime;
             }
 
-        public void setEndingTime(String endingTime)
+        public void setEndingTime(Date endingTime)
             {
             this.endingTime = endingTime;
             }
@@ -130,30 +161,45 @@ public class BookingString
             this.purpose = purpose;
             }
 
+        public Boolean getConfirmed()
+            {
+            return isConfirmed;
+            }
+
+        public void setConfirmed(Boolean confirmed)
+            {
+            isConfirmed = confirmed;
+            }
+
+
+
         public Boolean getIsConfirmed()
             {
             return isConfirmed;
             }
 
-        public void setIsConfirmed(Boolean confirmed)
+        public List<User> getUserlist()
             {
-            isConfirmed = confirmed;
+
+            return userlist;
             }
 
         @Override
         public String toString()
             {
-            return "BookingString{" +
+            return "BookingTest{" +
                     "id=" + id +
-                    ", timeOfBooking='" + timeOfBooking + '\'' +
-                    ", startingDate='" + startingDate + '\'' +
-                    ", startingTime='" + startingTime + '\'' +
-                    ", endingDate='" + endingDate + '\'' +
-                    ", endingTime='" + endingTime + '\'' +
+                    ", timeOfBooking=" + timeOfBooking +
+                    ", startingDate=" + startingDate +
+                    ", startingTime=" + startingTime +
+                    ", endingDate=" + endingDate +
+                    ", endingTime=" + endingTime +
                     ", errand='" + errand + '\'' +
                     ", destination='" + destination + '\'' +
                     ", purpose='" + purpose + '\'' +
                     ", isConfirmed=" + isConfirmed +
+                    ", userlist=" + userlist +
                     '}';
             }
     }
+

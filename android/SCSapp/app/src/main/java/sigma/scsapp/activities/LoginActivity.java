@@ -19,6 +19,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import sigma.scsapp.R;
 
 /**
@@ -38,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             // TODO User with it's information. Confirm true or false
             // Profile login ---  Profile Info
-            "NikGus:hello: Niklas Martin: 0763 373600"
+            "ngn:1234: id:2"
     };
 
 
@@ -153,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() >= 4;
     }
 
     /**
@@ -214,6 +217,9 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 // Simulate network access.
                 Log.i("Network Tag", "Trying connecting to DB...");
+          /*  URL url = new URL(params[0]);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.connect();*/
 
 
                 Thread.sleep(2000);

@@ -7,11 +7,11 @@ package sigma.scsapp.model;
 public class User {
 
     // PROFILE
-    private Long id;
+    private String id;
     private String userName;
-    private Boolean isApproved;
-    private Integer totalBookingsYear;
-    private Double totalDistanceYear;
+    private String isApproved;
+    private String totalBookingsYear;
+    private String totalDistanceYear;
 
     // Password Field
     // Using EditText with "inputtype=textpassword" makes it *****
@@ -20,51 +20,59 @@ public class User {
     public User() {
     }
 
-    public Long getId() {
+    public String getId()
+        {
         return id;
-    }
+        }
 
-    public void setId(Long id) {
+    public void setId(String id)
+        {
         this.id = id;
-    }
+        }
 
-    public String getUserName() {
+    public String getUserName()
+        {
         return userName;
-    }
+        }
 
-    public void setUserName(String userName) {
+    public void setUserName(String userName)
+        {
         this.userName = userName;
-    }
+        }
 
-    public Boolean getIsApproved() {
+    public String getIsApproved()
+        {
         return isApproved;
-    }
+        }
 
-    public void setIsApproved(Boolean isApproved) {
+    public void setIsApproved(String isApproved)
+        {
         this.isApproved = isApproved;
-    }
+        }
 
-    public Integer getTotalBookingsYear() {
+    public String getTotalBookingsYear()
+        {
         return totalBookingsYear;
-    }
+        }
 
-    public void setTotalBookingsYear(Integer totalBookingsYear) {
+    public void setTotalBookingsYear(String totalBookingsYear)
+        {
         this.totalBookingsYear = totalBookingsYear;
-    }
+        }
 
-    public Double getTotalDistanceYear() {
+    public String getTotalDistanceYear()
+        {
         return totalDistanceYear;
-    }
+        }
 
-    public void setTotalDistanceYear(Double totalDistanceYear) {
+    public void setTotalDistanceYear(String totalDistanceYear)
+        {
         this.totalDistanceYear = totalDistanceYear;
-    }
+        }
 
-    public String getPassword() {
+    public String getPassword()
+        {
         return password;
-    }
+        }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

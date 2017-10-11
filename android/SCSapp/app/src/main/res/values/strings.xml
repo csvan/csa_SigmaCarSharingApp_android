@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Sigma CarSharingApp</string>
-    <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
     <string name="prompt_userId">User name</string>
@@ -11,52 +10,31 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
 
 
     <!--
     Strings for UserProfile activity
     -->
 
-    <string name="profile_name">  </string>
-    <string name="profile_phone"> </string>
-    <string name="profile_userId"> </string>
-    <string name="profile_booking"> </string>
-
 
     <!--
-    Strings for Booking Activity
+    Strings for BookingTest Activity
      -->
-    <string name="booking_title">Booking</string>
-    <string name="booking_btn_home">Home</string>
-    <string name="booking_noti">Notifications</string>
-    <string name="booking_confirm">confirm booking</string>
 
     <!--
     Strings for the log activity
     -->
-    <string name="string_car_info">example-data </string>
 
 
     <!--
      Strings for the Car object
      -->
-    <string name="car_name"> Volvo V70 </string>
-    <string name="car_id">#1094 </string>
-    <string name="car_info">Example info </string>
 
     <!--
-     Confirm Booking view
+     Confirm BookingTest view
      -->
-    <string name="confirm_accept_car">Is this the correct car? </string>
-    <string name="confirm_accept_car_report"> Is the status ok? </string>
-    <string name="confirm_enter_starting">Enter the starting miles</string>
-    <string name="confirm_car_switch_text">Accept</string>
     <string name="title_parser_vehicle">title_parser_vehicle</string>
     <string name="title_parser_user">title_parser_user</string>
-    <string name="PopUpWindow">PopUpWindow</string>
 
 
     <!-- UserProfileActivity strings -->
@@ -70,10 +48,6 @@
 
     <!-- Strings related to Settings -->
     <!-- Example General settings -->
-
-    <string name="title_home"> Home </string>
-    <string name="title_dashboard"> Dashboard</string>
-    <string name="title_notifications">Notifications </string>
 
 
     <string name="pref_header_general">General</string>
@@ -118,20 +92,6 @@
         <item>360</item>
         <item>-1</item>
     </string-array>
-
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
-
-    <string-array name="list_preference_entry_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="multi_select_list_preference_default_value"/>
 
     <string name="pref_title_system_sync_settings">System sync settings</string>
 

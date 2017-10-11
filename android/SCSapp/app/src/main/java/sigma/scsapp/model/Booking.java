@@ -1,57 +1,37 @@
 package sigma.scsapp.model;
 
-import com.google.gson.annotations.SerializedName;
+import android.util.Log;
 
-import java.sql.Time;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
+import sigma.scsapp.controllers.JSONTaskBooking;
 
 /**
- * Created by Niklas on 2017-09-12.
+ * Created by Niklas on 2017-10-03.
  */
 
 public class Booking
     {
 
-
-        private long id;
-        @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
-        private Date timeOfBooking;
-        @JsonFormat(pattern = "YYYY-MM-dd")
-        private Date startingDate;
-        @JsonFormat(pattern = "HH:mm:ss")
-        private Date startingTime;
-        @JsonFormat(pattern = "YYYY-MM-dd")
-        private Date endingDate;
-        @JsonFormat(pattern = "HH:mm:ss")
-        private Date endingTime;
+        private String id;
+        private String timeOfBooking;
+        private String startingDate;
+        private String startingTime;
+        private String endingDate;
+        private String endingTime;
         private String errand;
         private String destination;
         private String purpose;
         private Boolean isConfirmed;
-
-
-
-
-        @SerializedName("users")
-        private List<User> userlist;
-
+        private String userId;
+        private String vehicleId;
 
         public Booking()
             {
             }
 
-        public Booking(long id, String errand, String destination, String purpose, Boolean isConfirmed)
-            {
-            this.id = id;
-            this.errand = errand;
-            this.destination = destination;
-            this.purpose = purpose;
-            this.isConfirmed = isConfirmed;
-            }
-
-        public Booking(long id, Date timeOfBooking, Date startingDate, Date startingTime, Date endingDate, Date endingTime, String errand, String destination, String purpose, Boolean isConfirmed)
+        public Booking(String id, String timeOfBooking, String startingDate, String startingTime, String endingDate, String endingTime, String errand, String destination, String purpose, Boolean isConfirmed)
             {
             this.id = id;
             this.timeOfBooking = timeOfBooking;
@@ -65,68 +45,62 @@ public class Booking
             this.isConfirmed = isConfirmed;
             }
 
-        public void setUserlist(List<User> userlist)
-            {
-            this.userlist = userlist;
-            }
-
-        public long getId()
+        public String getId()
             {
             return id;
             }
 
-        public void setId(long id)
+        public void setId(String id)
             {
             this.id = id;
             }
 
-
-        public Date getTimeOfBooking()
+        public String getTimeOfBooking()
             {
             return timeOfBooking;
             }
 
-        public void setTimeOfBooking(Date timeOfBooking)
+        public void setTimeOfBooking(String timeOfBooking)
             {
             this.timeOfBooking = timeOfBooking;
             }
 
-        public Date getStartingDate()
+        public String getStartingDate()
             {
             return startingDate;
             }
 
-        public void setStartingDate(Date startingDate)
+        public void setStartingDate(String startingDate)
             {
             this.startingDate = startingDate;
             }
 
-        public Date getStartingTime()
+        public String getStartingTime()
             {
             return startingTime;
             }
 
-        public void setStartingTime(Date startingTime)
+        public void setStartingTime(String startingTime)
             {
             this.startingTime = startingTime;
             }
 
-        public Date getEndingDate()
+        public String getEndingDate()
             {
             return endingDate;
             }
 
-        public void setEndingDate(Date endingDate)
+        public void setEndingDate(String endingDate)
             {
             this.endingDate = endingDate;
             }
 
-        public Date getEndingTime()
+        public String getEndingTime()
             {
             return endingTime;
             }
 
-        public void setEndingTime(Date endingTime)
+        public void setEndingTime(String endingTime)
             {
             this.endingTime = endingTime;
             }
@@ -161,45 +135,58 @@ public class Booking
             this.purpose = purpose;
             }
 
-        public Boolean getConfirmed()
-            {
-            return isConfirmed;
-            }
-
-        public void setConfirmed(Boolean confirmed)
-            {
-            isConfirmed = confirmed;
-            }
-
-
-
         public Boolean getIsConfirmed()
             {
             return isConfirmed;
             }
 
-        public List<User> getUserlist()
+        public void setIsConfirmed(Boolean confirmed)
             {
-
-            return userlist;
+            isConfirmed = confirmed;
             }
+
+        public String getUserId()
+            {
+            return userId;
+            }
+
+        public void setUserId(String userId)
+            {
+            this.userId = userId;
+            }
+
+        public String getVehicleId()
+            {
+            return vehicleId;
+            }
+
+        public void setVehicleId(String vehicleId)
+            {
+            this.vehicleId = vehicleId;
+            }
+
+       /* public List<Booking> getBookingsFromUser(String userId){
+        JSONTaskBooking jtb = new JSONTaskBooking();
+        jtb.getJSONArray();
+        Log.i("Tag for JSONARray", " "+ jtb.getJSONArray());
+        List<Booking> listOfBookings = new ArrayList<>();
+        return null;*/
+
 
         @Override
         public String toString()
             {
             return "Booking{" +
                     "id=" + id +
-                    ", timeOfBooking=" + timeOfBooking +
-                    ", startingDate=" + startingDate +
-                    ", startingTime=" + startingTime +
-                    ", endingDate=" + endingDate +
-                    ", endingTime=" + endingTime +
+                    ", timeOfBooking='" + timeOfBooking + '\'' +
+                    ", startingDate='" + startingDate + '\'' +
+                    ", startingTime='" + startingTime + '\'' +
+                    ", endingDate='" + endingDate + '\'' +
+                    ", endingTime='" + endingTime + '\'' +
                     ", errand='" + errand + '\'' +
                     ", destination='" + destination + '\'' +
                     ", purpose='" + purpose + '\'' +
                     ", isConfirmed=" + isConfirmed +
-                    ", userlist=" + userlist +
                     '}';
             }
     }
-
