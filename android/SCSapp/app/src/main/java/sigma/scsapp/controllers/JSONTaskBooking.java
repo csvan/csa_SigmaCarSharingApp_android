@@ -52,7 +52,6 @@ public class JSONTaskBooking extends AsyncTask<String, String, List<Booking>>
             {
             HttpURLConnection connection = null;
             BufferedReader reader = null;
-            Log.i("JSONTaskBooking", "Will try connect to URL ...");
 
             try
                 {
@@ -75,24 +74,23 @@ public class JSONTaskBooking extends AsyncTask<String, String, List<Booking>>
                 Log.i("JSONTaskBooking", "FinalJson is now: " + finalJson);
 
                 JSONObject parentObject = new JSONObject(finalJson);
-
+// TODO: 2017-10-11  Fixa så att Vehicle syns i Result i tagg 
                 try
                     {
+                    List<Booking> list;
                     JSONArray parentArray = parentObject.getJSONArray("");
-                    List<Booking> bookingList = makeGson(parentArray);
-                    //Log.i("JSONTaskBooking", "Trying to fetch Array from Object with param: " + parentArray);
-
+                    list = makeGsonArray(parentArray);
+                    Log.i("JSONARRAY TRY Booking", "trying prase array");
+                    return list;
                     } catch (JSONException e)
                     {
-                    Log.i("JSONARRAY TRY", "No array found : " + e);
+                    Log.i("JSONARRAY TRY booking", "No array found : " + e);
+                    Log.i("JSONARRAY TRY booking", "trying prase object");
+                    List<Booking> list = new ArrayList<>();
+                    list.add((makeGsonObject(finalJson)));
+                    return list;
+
                     }
-
-
-
-                List<Booking> bookingList = new ArrayList<>();
-
-                bookingList.add((makeGsonObject(finalJson)));
-                return bookingList;
 
 
                 } catch (MalformedURLException e)
@@ -126,27 +124,21 @@ public class JSONTaskBooking extends AsyncTask<String, String, List<Booking>>
             }
 
 
-        public List<Booking> getJSONArray()
-            {
-            return doInBackground();
-            }
-
         @Override
         protected void onPostExecute(final List<Booking> result)
             {
-            Log.i("OnPostExec", "result from OnPostExec" + result);
+            Log.i("OnPostExec Booking ", "result from OnPostExec" + result);
 
             delegate.processFinishBooking(result);
 
             }
 
-        private List<Booking> makeGson(JSONArray parentArray)
+        private List<Booking> makeGsonArray(JSONArray parentArray)
             {
-            List<Booking> bookingList = new ArrayList<>();
+            List<Booking> list = new ArrayList<>();
             Gson gson = new Gson();
             for (int i = 0; i < parentArray.length(); i++)
                 {
-                long id = 1;
                 JSONObject finalobject = null;
                 try
                     {
@@ -155,19 +147,18 @@ public class JSONTaskBooking extends AsyncTask<String, String, List<Booking>>
                     {
                     e.printStackTrace();
                     }
-                //BookingTest bookingtest = new BookingTest(id, "köpa käk", "destination", "purpose", true );
-                Booking bookingGson = gson.fromJson(finalobject.toString(), Booking.class); // a single line json parsing using Gson
-                bookingList.add(bookingGson);
+                Booking bookingGson = gson.fromJson(finalobject.toString(), Booking.class);
+                list.add(bookingGson);
                 Log.i("JSONTaskBooking", "Returning the List from JSONtask");
 
                 }
-            return bookingList;
+            return list;
             }
 
         private Booking makeGsonObject(String finalJson)
             {
             Gson gson = new Gson();
-            Booking bookingGson = gson.fromJson(finalJson, Booking.class); // a single line json parsing using Gson
+            Booking bookingGson = gson.fromJson(finalJson, Booking.class);
             return bookingGson;
             }
     }

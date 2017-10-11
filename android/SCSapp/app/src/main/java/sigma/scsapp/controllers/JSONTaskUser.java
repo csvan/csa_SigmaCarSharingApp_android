@@ -122,7 +122,7 @@ public class JSONTaskUser extends AsyncTask<String, String, List<User>>
             return null;
 
             }
-       /* public List<Booking> getJSONArray() {
+       /* public List<Booking> makeGsonArray() {
         return doInBackground();
         }
 

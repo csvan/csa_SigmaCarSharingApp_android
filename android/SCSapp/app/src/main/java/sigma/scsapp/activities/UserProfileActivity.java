@@ -39,7 +39,7 @@ import sigma.scsapp.utility.BottomNavigationViewHelper;
 public class UserProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, AsyncResponseVehicle, AsyncResponseBooking
     {
-        private final String URL_TO_HIT = "http://10.0.2.2:8000/servertest.json";
+        private final String URL_TO_HIT = "http://10.0.2.2:8000/";
         private boolean accepted = true;
         User user = new User();
         JSONTaskVehicle mJsonTaskVehicle = new JSONTaskVehicle();
@@ -63,11 +63,11 @@ public class UserProfileActivity extends AppCompatActivity
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
-            //mJsonTaskVehicle.delegate = this;
-            //mJsonTaskVehicle.execute(URL_TO_HIT);
+            mJsonTaskVehicle.delegate = this;
+            mJsonTaskVehicle.execute(URL_TO_HIT+getAllVehicle);
 
             mJsonTaskBooking.delegate = this;
-            mJsonTaskBooking.execute(URL_TO_HIT);
+            mJsonTaskBooking.execute(URL_TO_HIT+getAllBookings);
 
 
             BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
@@ -196,8 +196,8 @@ public class UserProfileActivity extends AppCompatActivity
         @Override
         public void processFinishVehicle(final List<Vehicle> output)
             {
-            Log.i("Result tag", " Result from JSONTASK: " + output);
-            Log.i("OnPostExecute", " Trying to finish up with Row into the List with result: " + output);
+            Log.i("Result tag Vech", " Result from JSONTASKVehicle: " + output);
+            Log.i("OnPostExecute Vehicle", " Trying to finish up with Row into the List with result: " + output);
             if (output != null)
                 {
                 // the Adapter takes the Row-Layout, inserting the result into it.
@@ -225,42 +225,12 @@ public class UserProfileActivity extends AppCompatActivity
 
             }
 
-        @SuppressWarnings("StatementWithEmptyBody")
-        @Override
-        public boolean onNavigationItemSelected(MenuItem item)
-            {
-            // Handle navigation view item clicks here.
-            int id = item.getItemId();
-
-            if (id == R.id.nav_camera)
-                {
-                // TODO Add camera posiblities, read: http://www.codepool.biz/take-a-photo-from-android-camera-and-upload-it-to-a-remote-php-server.html for example
-
-                // Handle the camera action
-                } else if (id == R.id.nav_manage)
-                {
-                // go back to profile-view
-                startActivity(new Intent(UserProfileActivity.this, AdminActivity.class));
-
-
-                } else if (id == R.id.nav_share)
-                {
-
-                } else if (id == R.id.toolbar)
-                {
-                startActivity(new Intent(UserProfileActivity.this, UserProfileActivity.class));
-                }
-
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
-            }
 
         @Override
         public void processFinishBooking(final List<Booking> output)
             {
-            Log.i("Result tag", " Result from JSONTASK: " + output);
-            Log.i("OnPostExecute", " Trying to finish up with Row into the List with result: " + output);
+            Log.i("Result tag Booking", " Result from JSONTASK: " + output);
+            Log.i("OnPostExecute Booking", " Trying to finish up with Row into the List with result: " + output);
             if (output != null)
                 {
                 // the Adapter takes the Row-Layout, inserting the result into it.
@@ -433,5 +403,36 @@ public class UserProfileActivity extends AppCompatActivity
                         private TextView tvDestination;
                         private TextView tvPurpose;
                     }
+            }
+
+        @SuppressWarnings("StatementWithEmptyBody")
+        @Override
+        public boolean onNavigationItemSelected(MenuItem item)
+            {
+            // Handle navigation view item clicks here.
+            int id = item.getItemId();
+
+            if (id == R.id.nav_camera)
+                {
+                // TODO Add camera posiblities, read: http://www.codepool.biz/take-a-photo-from-android-camera-and-upload-it-to-a-remote-php-server.html for example
+
+                // Handle the camera action
+                } else if (id == R.id.nav_manage)
+                {
+                // go back to profile-view
+                startActivity(new Intent(UserProfileActivity.this, AdminActivity.class));
+
+
+                } else if (id == R.id.nav_share)
+                {
+
+                } else if (id == R.id.toolbar)
+                {
+                startActivity(new Intent(UserProfileActivity.this, UserProfileActivity.class));
+                }
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
             }
     }
