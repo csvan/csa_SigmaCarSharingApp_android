@@ -19,9 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import sigma.scsapp.R;
 
 /**
@@ -45,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     };
 
 
-
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -65,10 +61,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_activityview);
 
 
-
         // Set up the login form.
         userName = (AutoCompleteTextView) findViewById(R.id.userName);
-      //  populateAutoComplete();
+        //  populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -93,8 +88,6 @@ public class LoginActivity extends AppCompatActivity {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
-
-
 
 
     /**
@@ -254,8 +247,8 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i("Success stories", "Success with login -------------");
 
                 // Sending the Email into the Driver profile setting
-                startActivity(new Intent(LoginActivity.this,UserProfileActivity.class)
-                        .putExtra("userName", profileUserId)
+                startActivity(new Intent(LoginActivity.this, UserProfileActivity.class)
+                                .putExtra("userName", profileUserId)
                        /* .putExtra("user_name", profileUserName)
                         .putExtra("user_phone", profileUserPhone) */
                 );

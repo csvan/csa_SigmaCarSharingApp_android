@@ -20,59 +20,48 @@ public class User {
     public User() {
     }
 
-    public String getId()
-        {
+    public String getId() {
         return id;
-        }
+    }
 
-    public void setId(String id)
-        {
+    public void setId(String id) {
         this.id = id;
-        }
+    }
 
-    public String getUserName()
-        {
+    public String getUserName() {
         return userName;
-        }
+    }
 
-    public void setUserName(String userName)
-        {
+    public void setUserName(String userName) {
         this.userName = userName;
-        }
+    }
 
-    public String getIsApproved()
-        {
+    public String getIsApproved() {
         return isApproved;
-        }
+    }
 
-    public void setIsApproved(String isApproved)
-        {
+    public void setIsApproved(String isApproved) {
         this.isApproved = isApproved;
-        }
+    }
 
-    public String getTotalBookingsYear()
-        {
+    public String getTotalBookingsYear() {
         return totalBookingsYear;
-        }
+    }
 
-    public void setTotalBookingsYear(String totalBookingsYear)
-        {
+    public void setTotalBookingsYear(String totalBookingsYear) {
         this.totalBookingsYear = totalBookingsYear;
-        }
+    }
 
-    public String getTotalDistanceYear()
-        {
+    public String getTotalDistanceYear() {
         return totalDistanceYear;
-        }
+    }
 
-    public void setTotalDistanceYear(String totalDistanceYear)
-        {
+    public void setTotalDistanceYear(String totalDistanceYear) {
         this.totalDistanceYear = totalDistanceYear;
-        }
+    }
 
-    public String getPassword()
-        {
+    public String getPassword() {
         return password;
-        }
+    }
 
 }

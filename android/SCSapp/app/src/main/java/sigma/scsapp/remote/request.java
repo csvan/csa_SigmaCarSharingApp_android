@@ -22,13 +22,10 @@ public class request {
     public request() {
     }
 
-
     // Make a request.
-    public String requestURL(String reqUrl)
-    {
+    public String requestURL(String reqUrl) {
         String response = null;
-        try
-        {
+        try {
             // 1 Save URL
             URL url = new URL(reqUrl);
             Log.i(TAG, "requesting URL from: " + reqUrl + "1");
@@ -44,20 +41,13 @@ public class request {
 
         }
         // Error
-        catch (MalformedURLException e)
-        {
+        catch (MalformedURLException e) {
             Log.e(TAG, "MalformedURLException: " + e.getMessage());
-        }
-        catch (ProtocolException e)
-        {
+        } catch (ProtocolException e) {
             Log.e(TAG, "ProtocolException: " + e.getMessage());
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             Log.e(TAG, "IOException: " + e.getMessage());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Log.e(TAG, "Exception: " + e.getMessage());
         }
         Log.i(TAG, "requesting response from URL: " + response + "2");
@@ -73,22 +63,16 @@ public class request {
         StringBuilder sb = new StringBuilder();
         String line;
 
-        try
-        {
+        try {
             // 3 for each line read and add it.
-            while ((line = reader.readLine()) != null)
-            {
+            while ((line = reader.readLine()) != null) {
                 sb.append(line).append('\n');
             }
 
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally
-        {
-            try
-            {
+        } finally {
+            try {
                 is.close();
             } catch (IOException e) {
                 e.printStackTrace();
