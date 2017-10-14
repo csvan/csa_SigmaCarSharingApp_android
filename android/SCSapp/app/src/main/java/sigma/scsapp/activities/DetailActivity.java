@@ -61,10 +61,7 @@ public class DetailActivity extends AppCompatActivity {
             tvErrand.setText(booking.getErrand() + "");
             tvDestination.setText(booking.getDestination() + "");
             tvPurpose.setText(booking.getPurpose() + "");
-
-
         }
-
     }
 
     private void setUpUIViews() {

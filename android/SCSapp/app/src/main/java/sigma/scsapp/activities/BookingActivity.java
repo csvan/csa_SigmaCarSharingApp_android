@@ -33,27 +33,18 @@ public class BookingActivity extends Activity {
 
     ArrayList<String> car;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.booking_activityview);
 
-        expListView = (ExpandableListView) findViewById(R.id.exvListView);
+        expListView = findViewById(R.id.exvListView);
         prepareListData();
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(listAdapter);
 
-
-
-
-
-            /*
-             * Avilable car list
-             */
-
-        ListView carlist = (ListView) findViewById(R.id.lvBookingListOfCars);
+        ListView carlist = findViewById(R.id.lvBookingListOfCars);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, car);
         carlist.setAdapter(arrayAdapter);
         carlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,15 +56,11 @@ public class BookingActivity extends Activity {
                 Intent booking_form = new Intent();
                 startActivity(new Intent(BookingActivity.this, BookingFormActivity.class));
                 booking_form.putExtra("carname", selectedcar);
-                // TODO: 2017-09-21 request a timer for completion of the booking.
+                // TODO: 2017-09-21 Request a timer for completion of the booking.
             }
         });
 
-
-            /*
-             * NAV MENU
-             */
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(1);
@@ -98,12 +85,9 @@ public class BookingActivity extends Activity {
                         startActivity(intent4);
                         break;
                 }
-
-
                 return false;
             }
         });
-
     }
 
     /*
@@ -121,9 +105,7 @@ public class BookingActivity extends Activity {
         locations.add("Malmö");
         locations.add("Jonkoping");
 
-
         listDataChild.put(listDataHeader.get(0), locations);
-
 
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
@@ -133,8 +115,7 @@ public class BookingActivity extends Activity {
                                         int groupPosition, int childPosition, long id) {
                 int position = (childPosition + 1);
                 String postString = String.valueOf(position);
-                TextView selectedRegion = (TextView) findViewById(R.id.tv_bookingactivity_selected_region);
-
+                TextView selectedRegion = findViewById(R.id.tv_bookingactivity_selected_region);
 
                 selectedRegion.setText(postString);
                 Log.e("Child click", "You clicked on site with name: " + (postString));
@@ -162,10 +143,6 @@ public class BookingActivity extends Activity {
                         Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
-
-
 }
 

@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +66,7 @@ public class JSONTaskBooking extends AsyncTask<String, String, List<Booking>> {
             Log.i("JSONTaskBooking", "FinalJson is now: " + finalJson);
 
             JSONObject parentObject = new JSONObject(finalJson);
-// TODO: 2017-10-11  Fixa så att Vehicle syns i Result i tagg 
+            // TODO: 2017-10-11  Fixa så att Vehicle syns i Result i tagg
             try {
                 List<Booking> list;
                 JSONArray parentArray = parentObject.getJSONArray("");
@@ -80,15 +79,8 @@ public class JSONTaskBooking extends AsyncTask<String, String, List<Booking>> {
                 List<Booking> list = new ArrayList<>();
                 list.add((makeGsonObject(finalJson)));
                 return list;
-
             }
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         } finally {
             if (connection != null) {
@@ -103,16 +95,12 @@ public class JSONTaskBooking extends AsyncTask<String, String, List<Booking>> {
             }
         }
         return null;
-
     }
-
 
     @Override
     protected void onPostExecute(final List<Booking> result) {
         Log.i("OnPostExec Booking ", "result from OnPostExec" + result);
-
         delegate.processFinishBooking(result);
-
     }
 
     private List<Booking> makeGsonArray(JSONArray parentArray) {
@@ -139,6 +127,3 @@ public class JSONTaskBooking extends AsyncTask<String, String, List<Booking>> {
         return bookingGson;
     }
 }
-
-
-

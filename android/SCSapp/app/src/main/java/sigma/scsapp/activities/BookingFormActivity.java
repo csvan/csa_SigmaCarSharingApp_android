@@ -52,15 +52,11 @@ public class BookingFormActivity extends FragmentActivity implements DatePickerD
         newFragment.show(getFragmentManager(), "datePickerEnd");
     }
 
-
     @Override
     public void onDateSet(DatePicker view, int y, int m, int d) {
         // Kan skicka in y,m,d i Cal direkt.
         Log.i("Tag onDateSet ", "OnDateSet activated in the BookingFormActivity");
-        int year = y;
-        int month = m;
-        int day = d;
-        Calendar cal = new GregorianCalendar(year, month, day);
+        Calendar cal = new GregorianCalendar(y, m, d);
         setDate(cal);
     }
 
@@ -81,9 +77,7 @@ public class BookingFormActivity extends FragmentActivity implements DatePickerD
 
     public void setTime(int hour, int min) {
         final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
-        int hour2 = hour;
-        int min2 = min;
-        ((TextView) findViewById(R.id.tv_bookingform_set_time_start)).setText(hour2 + " : " + min2);
+        ((TextView) findViewById(R.id.tv_bookingform_set_time_start)).setText(hour + " : " + min);
     }
 
 }

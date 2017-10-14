@@ -11,8 +11,6 @@ import java.util.List;
  */
 
 public class BookingTest {
-
-
     private long id;
     @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     private Date timeOfBooking;
@@ -29,10 +27,8 @@ public class BookingTest {
     private String purpose;
     private Boolean isConfirmed;
 
-
     @SerializedName("users")
     private List<User> userlist;
-
 
     public BookingTest() {
     }

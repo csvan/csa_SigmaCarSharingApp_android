@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import sigma.scsapp.R;
-import sigma.scsapp.remote.request;
+import sigma.scsapp.remote.Request;
 
 
 // This class will Get students and Parse them with Json.
@@ -93,9 +93,9 @@ public class Parser_Vehicle extends AppCompatActivity {
         // create a method that return the data from database and parse it to json.
         @Override
         protected Void doInBackground(Void... arg0) {
-            request ServerCon = new request();
+            Request ServerCon = new Request();
             Log.e(TAG, "Response before json on URL:" + url);
-            // Making a request to url and getting response
+            // Making a Request to url and getting Response
             String jsonStr = ServerCon.requestURL(url);
             Log.e(TAG, "Response from url: " + jsonStr);
 

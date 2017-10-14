@@ -21,9 +21,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import sigma.scsapp.activities.LogActivity;
 import sigma.scsapp.R;
-import sigma.scsapp.remote.request;
+import sigma.scsapp.activities.LogActivity;
+import sigma.scsapp.remote.Request;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
@@ -96,9 +96,9 @@ public class Parser_User extends AppCompatActivity {
         // create a method that return the data from database and parse it to json.
         @Override
         protected Void doInBackground(Void... arg0) {
-            request ServerCon = new request();
+            Request ServerCon = new Request();
 
-            // Making a request to url and getting response
+            // Making a Request to url and getting Response
             String jsonStr = ServerCon.requestURL(url);
             Log.e(TAG, "Response from url: " + jsonStr);
 

@@ -48,7 +48,6 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_list);
 
-
         dialog = new ProgressDialog(this);
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
@@ -59,18 +58,18 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 .build();
+
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .defaultDisplayImageOptions(defaultOptions)
                 .build();
+
         ImageLoader.getInstance().init(config); // Do it on Application start
 
         lvBookings = (ListView) findViewById(R.id.LV_list);
 
-
         // To start fetching the data when app start, uncomment below line to start the async task.
         myJsonTask.delegate = this;
         myJsonTask.execute(URL_TO_HIT);
-
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -94,16 +93,11 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
                         break;
 
                     case R.id.ic_backup:
-
-
                         break;
                 }
-
-
                 return false;
             }
         });
-
     }
 
     @Override
@@ -123,10 +117,8 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
             new JSONTaskBooking().execute(URL_TO_HIT);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public void processFinishBooking(final List<Booking> output) {
@@ -150,12 +142,9 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
         } else {
             Toast.makeText(LogActivity.this, "Not able to fetch data from server, please check url.", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     public class BookingAdapter extends ArrayAdapter {
-
-
         private List<Booking> bookingList;
         private int resource;
         private LayoutInflater inflater;
@@ -177,14 +166,14 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
                 convertView = inflater.inflate(resource, null);
                 // holder.tvId = (TextView) convertView.findViewById(R.id.tvId);
                 //  holder.tvTimeOfBooking = (TextView) convertView.findViewById(R.id.tvTimeOfBooking);
-                holder.tvStartDate = (TextView) convertView.findViewById(R.id.tvStartDate);
-                holder.tvStartTime = (TextView) convertView.findViewById(R.id.tvStartTime);
-                holder.tvEndDate = (TextView) convertView.findViewById(R.id.tvEndDate);
-                holder.tvEndTime = (TextView) convertView.findViewById(R.id.tvEndTime);
+                holder.tvStartDate = convertView.findViewById(R.id.tvStartDate);
+                holder.tvStartTime = convertView.findViewById(R.id.tvStartTime);
+                holder.tvEndDate = convertView.findViewById(R.id.tvEndDate);
+                holder.tvEndTime = convertView.findViewById(R.id.tvEndTime);
                 //  holder.tvIsConfirmed = (TextView) convertView.findViewById(R.id.tvIsConfirmed);
-                holder.tvErrand = (TextView) convertView.findViewById(R.id.tvErrand);
-                holder.tvDestination = (TextView) convertView.findViewById(R.id.tvDestination);
-                holder.tvPurpose = (TextView) convertView.findViewById(R.id.tvPurpose);
+                holder.tvErrand = convertView.findViewById(R.id.tvErrand);
+                holder.tvDestination = convertView.findViewById(R.id.tvDestination);
+                holder.tvPurpose = convertView.findViewById(R.id.tvPurpose);
                 convertView.setTag(holder);
 
             } else {
@@ -202,7 +191,6 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
             holder.tvPurpose.setText(bookingList.get(position).getPurpose());
 
             return convertView;
-
         }
 
         class ViewHolder {

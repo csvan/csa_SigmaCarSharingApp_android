@@ -5,7 +5,6 @@ package sigma.scsapp.model;
  */
 
 public class User {
-
     // PROFILE
     private String id;
     private String userName;
@@ -63,5 +62,4 @@ public class User {
     public String getPassword() {
         return password;
     }
-
 }

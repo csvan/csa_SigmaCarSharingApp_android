@@ -13,16 +13,16 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 
-public class request {
+public class Request {
 
     // TODO Build the connetion to the database
 
-    private static final String TAG = request.class.getSimpleName();
+    private static final String TAG = Request.class.getSimpleName();
 
-    public request() {
+    public Request() {
     }
 
-    // Make a request.
+    // Make a Request.
     public String requestURL(String reqUrl) {
         String response = null;
         try {
@@ -50,7 +50,7 @@ public class request {
         } catch (Exception e) {
             Log.e(TAG, "Exception: " + e.getMessage());
         }
-        Log.i(TAG, "requesting response from URL: " + response + "2");
+        Log.i(TAG, "requesting Response from URL: " + response + "2");
 
         return response;
     }

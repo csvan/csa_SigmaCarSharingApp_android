@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,14 +78,8 @@ public class JSONTaskVehicle extends AsyncTask<String, String, List<Vehicle>> {
                 List<Vehicle> list = new ArrayList<>();
                 list.add((makeGsonObject(finalJson)));
                 return list;
-
             }
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         } finally {
             if (connection != null) {

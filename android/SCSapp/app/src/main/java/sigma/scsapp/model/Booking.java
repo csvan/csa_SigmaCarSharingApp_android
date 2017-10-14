@@ -131,14 +131,6 @@ public class Booking {
         this.vehicleId = vehicleId;
     }
 
-       /* public List<Booking> getBookingsFromUser(String userId){
-        JSONTaskBooking jtb = new JSONTaskBooking();
-        jtb.getJSONArray();
-        Log.i("Tag for JSONARray", " "+ jtb.getJSONArray());
-        List<Booking> listOfBookings = new ArrayList<>();
-        return null;*/
-
-
     @Override
     public String toString() {
         return "Booking{" +

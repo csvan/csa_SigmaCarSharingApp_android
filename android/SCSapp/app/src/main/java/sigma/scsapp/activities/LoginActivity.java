@@ -27,7 +27,7 @@ import sigma.scsapp.R;
 public class LoginActivity extends AppCompatActivity {
 
     /**
-     * Id to identity READ_CONTACTS permission request.
+     * Id to identity READ_CONTACTS permission Request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
@@ -40,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
             // Profile login ---  Profile Info
             "ngn:1234: id:2"
     };
-
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -59,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activityview);
-
 
         // Set up the login form.
         userName = (AutoCompleteTextView) findViewById(R.id.userName);
@@ -88,7 +86,6 @@ public class LoginActivity extends AppCompatActivity {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
-
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -220,12 +217,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (pieces[0].equals(profileUserId)) {
                     Log.i("Database Tag", "This user exist in our Database");
 
-
                     // Account exists, return true if the password matches.
                     return pieces[1].equals(profilePassword);
                 } else if (!pieces[0].equals(profileUserId)) {
                     Log.i("Database Tag", "This user does not exist in our Database");
-
                 }
             }
             return false;
@@ -249,7 +244,6 @@ public class LoginActivity extends AppCompatActivity {
                 // Finish will exit the app.
                 finish();
             } else {
-
                 Log.i("Findings", "Incorrect password");
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
@@ -261,7 +255,6 @@ public class LoginActivity extends AppCompatActivity {
             mAuthTask = null;
             showProgress(false);
         }
-
     }
 }
 

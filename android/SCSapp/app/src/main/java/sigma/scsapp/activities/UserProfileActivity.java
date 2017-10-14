@@ -54,7 +54,6 @@ public class UserProfileActivity extends AppCompatActivity
         String getUser = "serveruser.json";
         String getAllBookings = "servertest.json";
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -65,7 +64,6 @@ public class UserProfileActivity extends AppCompatActivity
 
         mJsonTaskBooking.delegate = this;
         mJsonTaskBooking.execute(URL_TO_HIT + getAllBookings);
-
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
