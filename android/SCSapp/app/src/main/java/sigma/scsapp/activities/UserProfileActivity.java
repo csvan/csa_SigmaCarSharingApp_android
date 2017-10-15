@@ -38,7 +38,7 @@ import sigma.scsapp.utility.BottomNavigationViewHelper;
 
 public class UserProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, AsyncResponseVehicle, AsyncResponseBooking {
-    private final String URL_TO_HIT = "http://10.0.2.2:8000/";
+    private final String URL_TO_HIT = "http://10.0.2.2:8181/";
     User user = new User();
     JSONTaskVehicle mJsonTaskVehicle = new JSONTaskVehicle();
     JSONTaskBooking mJsonTaskBooking = new JSONTaskBooking();
@@ -77,8 +77,8 @@ public class UserProfileActivity extends AppCompatActivity
                 switch (item.getItemId()) {
 
                     case R.id.ic_books:
-                        Intent intent2 = new Intent(UserProfileActivity.this, BookingActivity.class);
-                        startActivity(intent2);
+                        Intent bookingIntent = new Intent(UserProfileActivity.this, BookingActivity.class);
+                        startActivity(bookingIntent);
                         break;
 
                     case R.id.ic_center_focus:
@@ -87,12 +87,10 @@ public class UserProfileActivity extends AppCompatActivity
                         break;
 
                     case R.id.ic_backup:
-                        Intent intent4 = new Intent(UserProfileActivity.this, LogActivity.class);
-                        startActivity(intent4);
+                        Intent userProfileIntent = new Intent(UserProfileActivity.this, LogActivity.class);
+                        startActivity(userProfileIntent);
                         break;
                 }
-
-
                 return false;
             }
         });
@@ -103,7 +101,6 @@ public class UserProfileActivity extends AppCompatActivity
         Log.i("Tag", "You pressed the naviagion drawer --------------");
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
 
         // SET UP PROFILE
         String newString;

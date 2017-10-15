@@ -39,7 +39,7 @@ public class JSONTaskVehicle extends AsyncTask<String, String, List<Vehicle>> {
     protected void onPreExecute() {
         Log.i("JSONTaskVehicle", "Start the JSONTaskVehciel with url: " + URL_TO_HIT);
         super.onPreExecute();
-//            dialog.show();
+        // dialog.show();
     }
 
     @Override
@@ -48,6 +48,7 @@ public class JSONTaskVehicle extends AsyncTask<String, String, List<Vehicle>> {
         BufferedReader reader = null;
 
         try {
+            Log.i("JSONTaskVehicle", "Connecting to: " + params[0]);
             URL url = new URL(params[0]);
             connection = (HttpURLConnection) url.openConnection();
             connection.connect();
@@ -55,7 +56,7 @@ public class JSONTaskVehicle extends AsyncTask<String, String, List<Vehicle>> {
             InputStream stream = connection.getInputStream();
             reader = new BufferedReader(new InputStreamReader(stream));
 
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             String line = "";
 
             while ((line = reader.readLine()) != null) {
@@ -94,17 +95,13 @@ public class JSONTaskVehicle extends AsyncTask<String, String, List<Vehicle>> {
             }
         }
         return null;
-
     }
-
 
     @Override
     protected void onPostExecute(final List<Vehicle> result) {
         Log.i("OnPostExec Vehicle", "result from OnPostExec" + result);
         delegate.processFinishVehicle(result);
-
     }
-
 
     private List<Vehicle> makeGsonArray(JSONArray parentArray) {
         List<Vehicle> list = new ArrayList<>();
@@ -119,11 +116,9 @@ public class JSONTaskVehicle extends AsyncTask<String, String, List<Vehicle>> {
             Vehicle bookingGson = gson.fromJson(finalobject.toString(), Vehicle.class);
             list.add(bookingGson);
             Log.i("JSONTaskVehcile", "Returning the List from JSONtask");
-
         }
         return list;
     }
-
 
     private Vehicle makeGsonObject(String finalJson) {
         Gson gson = new Gson();
