@@ -19,6 +19,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sigma.scsapp.R;
@@ -26,6 +27,7 @@ import sigma.scsapp.adapters.BookingAdapter;
 import sigma.scsapp.controllers.JSONTaskBooking;
 import sigma.scsapp.fragment.TimePickerFragment;
 import sigma.scsapp.model.Booking;
+import sigma.scsapp.model.Vehicle;
 import sigma.scsapp.utility.AsyncResponseBooking;
 import sigma.scsapp.utility.BottomNavigationViewHelper;
 
@@ -33,7 +35,7 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
 {
     private final String URL_TO_HIT = "http://10.0.2.2:8181/serveruser.json";
     TimePickerFragment timepickerfrag;
-    JSONTaskBooking myJsonTask = new JSONTaskBooking();
+    JSONTaskBooking jsonTaskBooking = new JSONTaskBooking();
     private TextView tvData;
     private ListView lvBookings;
     private ProgressDialog dialog;
@@ -65,8 +67,8 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
         lvBookings = (ListView) findViewById(R.id.LV_list);
 
         // To start fetching the data when app start, uncomment below line to start the async task.
-        myJsonTask.delegate = this;
-        myJsonTask.execute(URL_TO_HIT);
+        jsonTaskBooking.delegate = this;
+        jsonTaskBooking.execute(URL_TO_HIT);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -124,7 +126,7 @@ public class LogActivity extends AppCompatActivity implements AsyncResponseBooki
         dialog.dismiss();
         if (output != null) {
             // the Adapter takes the Row-Layout, inserting the result into it.
-            BookingAdapter adapter = new BookingAdapter(this, LogActivity.this, R.layout.list_row_booking, output);
+            BookingAdapter adapter = new BookingAdapter(this, LogActivity.this, R.layout.list_row_booking, output, new ArrayList<Vehicle>());
             // the ListView (lvBooking) takes the adapter, in this case the Row (with the result) and add it into the ListView.
             lvBookings.setAdapter(adapter);
             lvBookings.setOnItemClickListener(new AdapterView.OnItemClickListener() {  // list item click opens a new detailed activity

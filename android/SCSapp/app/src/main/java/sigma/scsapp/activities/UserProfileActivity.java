@@ -23,7 +23,6 @@ import java.util.List;
 
 import sigma.scsapp.R;
 import sigma.scsapp.adapters.BookingAdapter;
-import sigma.scsapp.adapters.VehicleAdapter;
 import sigma.scsapp.controllers.JSONTaskBooking;
 import sigma.scsapp.controllers.JSONTaskVehicle;
 import sigma.scsapp.model.Booking;
@@ -40,6 +39,9 @@ public class UserProfileActivity extends AppCompatActivity
     JSONTaskVehicle mJsonTaskVehicle = new JSONTaskVehicle();
     JSONTaskBooking mJsonTaskBooking = new JSONTaskBooking();
     private boolean accepted = true;
+
+    private List<Booking> bookings;
+    private List<Vehicle> vehicles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,53 +171,43 @@ public class UserProfileActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void processFinishVehicle(final List<Vehicle> output) {
-        Log.i("Result tag Vech", " Result from JSONTASKVehicle: " + output);
-        Log.i("OnPostExecute Vehicle", " Trying to finish up with Row into the List with result: " + output);
-        if (output != null) {
+    private void updateListView() {
+        if (this.vehicles != null && this.bookings != null) {
             // the Adapter takes the Row-Layout, inserting the result into it.
-            VehicleAdapter adapter = new VehicleAdapter(this, UserProfileActivity.this, R.layout.list_row_active_booking, output);
+            BookingAdapter adapter = new BookingAdapter(this, UserProfileActivity.this, R.layout.list_row_active_booking, bookings, vehicles);
             // the ListView (lvBooking) takes the adapter, in this case the Row (with the result) and add it into the ListView.
             ListView lvVehicle = (ListView) findViewById(R.id.lv_listOfActiveBookings);
             lvVehicle.setAdapter(adapter);
             lvVehicle.setOnItemClickListener(new AdapterView.OnItemClickListener() {  // list item click opens a new detailed activity
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Vehicle booking = output.get(position); // getting the model
+                    Booking booking = bookings.get(position); // getting the model
                     Intent intent = new Intent(UserProfileActivity.this, DetailActivity.class);
                     //intent.putExtra("bookingkey", new Gson().toJson(booking)); // converting model json into string type and sending it via intent
                     // startActivity(intent);
                     Toast.makeText(UserProfileActivity.this, "You clicked on your active booking", Toast.LENGTH_SHORT).show();
                 }
             });
+        }
+    }
+
+    @Override
+    public void processFinishVehicle(final List<Vehicle> output) {
+        if (output != null) {
+            this.vehicles = output;
+            this.updateListView();
         } else {
-            Toast.makeText(UserProfileActivity.this, "Not able to fetch data from server, please check url.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserProfileActivity.this, "Not able to fetch vehicle data from server.", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void processFinishBooking(final List<Booking> output) {
-        Log.i("Result tag Booking", " Result from JSONTASK: " + output);
-        Log.i("OnPostExecute Booking", " Trying to finish up with Row into the List with result: " + output);
         if (output != null) {
-            // the Adapter takes the Row-Layout, inserting the result into it.
-            BookingAdapter adapter = new BookingAdapter(this, UserProfileActivity.this, R.layout.list_row_active_booking, output);
-            // the ListView (lvBooking) takes the adapter, in this case the Row (with the result) and add it into the ListView.
-            ListView lvVehicle = (ListView) findViewById(R.id.lv_listOfActiveBookings);
-            lvVehicle.setAdapter(adapter);
-            lvVehicle.setOnItemClickListener(new AdapterView.OnItemClickListener() {  // list item click opens a new detailed activity
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Booking booking = output.get(position); // getting the model
-                    Intent intent = new Intent(UserProfileActivity.this, DetailActivity.class);
-                    //intent.putExtra("bookingkey", new Gson().toJson(booking)); // converting model json into string type and sending it via intent
-                    // startActivity(intent);
-                    Toast.makeText(UserProfileActivity.this, "You clicked on your active booking", Toast.LENGTH_SHORT).show();
-                }
-            });
+            this.bookings = output;
+            this.updateListView();
         } else {
-            Toast.makeText(UserProfileActivity.this, "Not able to fetch data from server, please check url.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserProfileActivity.this, "Not able to fetch booking data from server.", Toast.LENGTH_SHORT).show();
         }
     }
 
